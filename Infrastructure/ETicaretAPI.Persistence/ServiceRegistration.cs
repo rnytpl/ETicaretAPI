@@ -31,9 +31,11 @@ namespace ETicaretAPI.Persistence
             ConfigurationManager configurationManager = new();
 
             configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/ETicaretAPI.API"));
+
             configurationManager.AddJsonFile("appsettings.json");
 
             services.AddDbContext<ETicaretAPIDbDontext>(options => options.UseNpgsql(configurationManager.GetConnectionString("PostgreSQL")));
+
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();

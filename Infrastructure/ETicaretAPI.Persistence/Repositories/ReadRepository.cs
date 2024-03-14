@@ -34,9 +34,8 @@ namespace ETicaretAPI.Persistence.Repositories
         public DbSet<T> Table => _context.Set<T>();
         public IQueryable<T> GetAll(bool tracking = true)
         {
-            Console.WriteLine(typeof(Table));
 
-            var query = Table.AsQueryable();
+            var query = Table.OrderBy(t => t.CreatedTime).AsQueryable();
 
             if (!tracking)
                 query = query.AsNoTracking();

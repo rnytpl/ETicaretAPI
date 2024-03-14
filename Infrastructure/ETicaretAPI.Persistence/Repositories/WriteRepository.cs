@@ -53,7 +53,9 @@ namespace ETicaretAPI.Persistence.Repositories
 
         public async Task<bool> RemoveAsync(string id)
         {
+            Console.WriteLine("Delete function called");
             T model = await Table.FirstOrDefaultAsync(d => d.Id == Guid.Parse(id));
+            Console.WriteLine(model);
 
             return Remove(model);
 
