@@ -22,6 +22,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Defaults to wwwroot, serves files from that path/directory
+app.UseStaticFiles();
+
 app.UseCors();
 
 app.UseHttpsRedirection();

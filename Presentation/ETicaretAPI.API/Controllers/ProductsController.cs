@@ -20,22 +20,22 @@ namespace ETicaretAPI.API.Controllers
         // Referencing services to be injected in IoC
         readonly private IProductWriteRepository _productWriteRepository;
         readonly private IProductReadRepository _productReadRepository;
+        readonly private IWebHostEnvironment _webHostEnvironment;
 
-        readonly private IOrderWriteRepository _orderWriteRepository;
-        readonly private ICustomerWriteRepository _customerWriteRepository;
         // Referencing FluentValidation service
         readonly private IValidator<VM_Create_Product> _createProductValidator;
         readonly private IValidator<VM_Update_Product> _updateProductValidator;
 
         // Injecting those dependencies through constructor
-        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository, IOrderWriteRepository orderWriteRepository, ICustomerWriteRepository customerWriteRepository, IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator)
+        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository,IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator, IWebHostEnvironment webHostEnvironment)
         {
             _productWriteRepository = productWriteRepository;
             _productReadRepository = productReadRepository;
-            _orderWriteRepository = orderWriteRepository;
-            _customerWriteRepository = customerWriteRepository;
+
             _createProductValidator = createProductValidator;
             _updateProductValidator = updateProductValidator;
+
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -114,6 +114,43 @@ namespace ETicaretAPI.API.Controllers
             await _productWriteRepository.RemoveAsync(id);
             await _productWriteRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpPost("[action]")]
+    
+        //[FromBody]IFormFile form
+        public async Task<IActionResult> Upload()
+        {
+
+            // Create a directory
+            // Loop over each file uploaded
+            // Name each file with a random numb
+            // Create a stream
+            // Copy from stream
+            // Flush stream
+
+            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "resource/product-images");
+
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            Random r = new();
+
+            foreach (IFormFile file in Request.Form.Files)
+            {
+                string fullPath = Path.Combine(uploadPath, $"{r.Next()}{Path.GetExtension(file.FileName)}");
+
+                using FileStream fileStream = new(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024*1024, useAsync: false);
+
+                await file.CopyToAsync(fileStream);
+                await fileStream.FlushAsync();
+            }
+
+
+            return Ok();
+
         }
     }
 

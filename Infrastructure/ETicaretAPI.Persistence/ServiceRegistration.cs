@@ -4,6 +4,7 @@ using ETicaretAPI.Application.ViewModels.Products;
 using ETicaretAPI.Persistence.Contexts;
 using ETicaretAPI.Persistence.Repositories;
 using FluentValidation;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -27,6 +28,10 @@ namespace ETicaretAPI.Persistence
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
 
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600; // Set to 100 MB, adjust as needed
+            });
             //services.AddScoped<IValidator<VM_Create_Product>, CreateProductValidator>();
         }
     }
