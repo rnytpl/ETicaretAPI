@@ -1,5 +1,6 @@
 ﻿using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.RequestParameters;
+using ETicaretAPI.Application.Services;
 using ETicaretAPI.Application.ViewModels.Products;
 using ETicaretAPI.Domain.Entities;
 using FluentValidation;
@@ -21,13 +22,13 @@ namespace ETicaretAPI.API.Controllers
         readonly private IProductWriteRepository _productWriteRepository;
         readonly private IProductReadRepository _productReadRepository;
         readonly private IWebHostEnvironment _webHostEnvironment;
-
+        readonly private IFileService _fileService;
         // Referencing FluentValidation service
         readonly private IValidator<VM_Create_Product> _createProductValidator;
         readonly private IValidator<VM_Update_Product> _updateProductValidator;
 
         // Injecting those dependencies through constructor
-        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository,IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator, IWebHostEnvironment webHostEnvironment)
+        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository,IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator, IWebHostEnvironment webHostEnvironment, IFileService fileService)
         {
             _productWriteRepository = productWriteRepository;
             _productReadRepository = productReadRepository;
@@ -36,6 +37,8 @@ namespace ETicaretAPI.API.Controllers
             _updateProductValidator = updateProductValidator;
 
             _webHostEnvironment = webHostEnvironment;
+
+            _fileService = fileService;
         }
 
         [HttpGet]
@@ -117,37 +120,19 @@ namespace ETicaretAPI.API.Controllers
         }
 
         [HttpPost("[action]")]
-    
+        [RequestSizeLimit(100_000_000)]
         //[FromBody]IFormFile form
         public async Task<IActionResult> Upload()
         {
 
-            // Create a directory
+            // Check if directory exists, create if not
             // Loop over each file uploaded
             // Name each file with a random numb
             // Create a stream
             // Copy from stream
             // Flush stream
 
-            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "resource/product-images");
-
-            if (!Directory.Exists(uploadPath))
-            {
-                Directory.CreateDirectory(uploadPath);
-            }
-
-            Random r = new();
-
-            foreach (IFormFile file in Request.Form.Files)
-            {
-                string fullPath = Path.Combine(uploadPath, $"{r.Next()}{Path.GetExtension(file.FileName)}");
-
-                using FileStream fileStream = new(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024*1024, useAsync: false);
-
-                await file.CopyToAsync(fileStream);
-                await fileStream.FlushAsync();
-            }
-
+            await _fileService.UploadAsync("resource/product-images", Request.Form.Files);
 
             return Ok();
 
