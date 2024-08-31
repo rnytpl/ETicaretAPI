@@ -118,9 +118,9 @@ namespace ETicaretAPI.Infrastructure.Services
             {
                 // Returns file name and extension of a file path
                 string newFileName = await FileRenameAsync(uploadPath, file.FileName);
-
+                
                 bool result = await CopyFileAsync($"{uploadPath}\\{newFileName}", file);
-                datas.Add((newFileName, $"{uploadPath}\\{newFileName}"));
+                datas.Add((newFileName, $"{path}\\{newFileName}"));
                 results.Add(result);
             }
 
@@ -128,7 +128,7 @@ namespace ETicaretAPI.Infrastructure.Services
                 return datas;
 
             //todo 
-            return datas;
+            return null;
 
         }
     }
