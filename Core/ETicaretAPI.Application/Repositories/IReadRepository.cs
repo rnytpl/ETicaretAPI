@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 namespace ETicaretAPI.Application.Repositories
     
 {
+    // T is the entity type to define which entity we're going to perform EF core crud operations on database objects. BaseEntity class ensures that it is derived of a class.
+    // Defines method signatures 
+    // Handles read operations for entities
     public interface IReadRepository<T> : IRepository<T> where T : BaseEntity
     {
         /// <summary>

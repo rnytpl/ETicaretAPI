@@ -33,24 +33,20 @@ namespace ETicaretAPI.Persistence
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
 
             // File operations
-            services.AddScoped<IFileReadRepository, FileReadRepository>();
-            services.AddScoped<IFileWriteRepository, FileWriteRepository>();
             services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
             services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
             services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
             services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
 
-
-
-
-
-
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
+            services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
+            // Alternative approach
+            //services.AddScoped<IValidator<VM_Create_Product>, CreateProductValidator>();
+
             services.Configure<FormOptions>(options =>
             {
                 options.MultipartBodyLengthLimit = 104857600; // Set to 100 MB, adjust as needed
             });
-            //services.AddScoped<IValidator<VM_Create_Product>, CreateProductValidator>();
         }
     }
 }

@@ -7,9 +7,12 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ETicaretAPI.Persistence.Repositories
 {
+    // Expects a generic type of T to determine which entity this generic repository is going to operate on
+    // Then passes the same entity type to IWriteRepository and ensures the generic type derives from a BaseEntity class
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
 
+        // Injects an instance of dbcontext into constructor to interact with database
         private readonly ETicaretAPIDbContext _context;
 
         public WriteRepository(ETicaretAPIDbContext context)
@@ -17,16 +20,15 @@ namespace ETicaretAPI.Persistence.Repositories
             _context = context;
         }
 
-        // Passes entity type to _context class
-
-
+        // Sets the entity type to work with
 
         public DbSet<T> Table => _context.Set<T>();
 
         public async Task<bool> AddAsync(T model)
         {
+            // Gives access to change tracking information and operations for the given entity
             EntityEntry result = await Table.AddAsync(model);
-
+            // Ensures if the entity has been added
             return result.State == EntityState.Added;
         }
 
@@ -40,7 +42,10 @@ namespace ETicaretAPI.Persistence.Repositories
 
         public bool Remove(T model)
         {
+            // Gives access to change tracking information and operations for the given entity
             EntityEntry<T> entityEntry = Table.Remove(model);
+            // Checks if the entity has been added and returns the result
+
             return entityEntry.State == EntityState.Deleted;
         }
         bool IWriteRepository<T>.RemoveRange(List<T> datas)
@@ -61,8 +66,9 @@ namespace ETicaretAPI.Persistence.Repositories
 
         public bool UpdateAsync(T model)
         {
+            // Gives access to change tracking information and operations for the given entity
             EntityEntry entityEntry = Table.Update(model);
-
+            // Checks if the entity has been added and returns the result
             return entityEntry.State == EntityState.Modified; 
         }
 

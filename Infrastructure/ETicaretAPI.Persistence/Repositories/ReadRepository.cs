@@ -31,12 +31,14 @@ namespace ETicaretAPI.Persistence.Repositories
         public IQueryable<T> GetAll(bool tracking = true) {
 
             var query = Table.AsQueryable();
+            // AsNoTracking() is a EF Core method that returns queries untracked by the context
             if (!tracking) query = query.AsNoTracking();
 
             return query;
-            }
+        }
 
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true) {
+
             var query = Table.Where(method);
 
             if (!tracking) query = query.AsNoTracking(); 

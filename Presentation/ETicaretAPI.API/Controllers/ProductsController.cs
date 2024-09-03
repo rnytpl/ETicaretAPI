@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.Repositories;
+﻿using ETicaretAPI.Application.Abstractions.Storage;
+using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.Repositories.File;
 using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
@@ -25,20 +26,21 @@ namespace ETicaretAPI.API.Controllers
         readonly private IProductWriteRepository _productWriteRepository;
         readonly private IProductReadRepository _productReadRepository;
         readonly private IWebHostEnvironment _webHostEnvironment;
-        readonly private IFileService _fileService;
+        readonly private IStorageService _storageService;
+
         // Referencing FluentValidation service
         readonly private IValidator<VM_Create_Product> _createProductValidator;
         readonly private IValidator<VM_Update_Product> _updateProductValidator;
+
         // File operations
-        readonly private IFileWriteRepository _fileWriteRepository;
-        readonly private IFileReadRepository _fileReadRepository;
         readonly private IProductImageFileReadRepository _productImageFileReadRepository;
         readonly private IProductImageFileWriteRepository _productImageFileWriteRepository;
         readonly private IInvoiceFileReadRepository _invoiceFileReadRepository;
         readonly private IInvoiceFileWriteRepository _invoiceFileWriteRepository;
 
         // Injecting those dependencies through constructor
-        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository, IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator, IWebHostEnvironment webHostEnvironment, IFileService fileService, IFileReadRepository readRepository, IFileWriteRepository fileWriteRepository, IProductImageFileReadRepository productImageFileReadRepository, IProductImageFileWriteRepository productImageFileWriteRepository, IInvoiceFileWriteRepository invoiceFileWriteRepository, IInvoiceFileReadRepository invoiceFileReadRepository)
+        public ProductsController(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository, IValidator<VM_Create_Product> createProductValidator, IValidator<VM_Update_Product> updateProductValidator, IWebHostEnvironment webHostEnvironment,
+            IProductImageFileReadRepository productImageFileReadRepository, IProductImageFileWriteRepository productImageFileWriteRepository, IInvoiceFileWriteRepository invoiceFileWriteRepository, IInvoiceFileReadRepository invoiceFileReadRepository, IStorageService storageService)
         {
             _productWriteRepository = productWriteRepository;
             _productReadRepository = productReadRepository;
@@ -48,20 +50,20 @@ namespace ETicaretAPI.API.Controllers
 
             _webHostEnvironment = webHostEnvironment;
 
-            _fileService = fileService;
-
-            _fileReadRepository = readRepository;
-            _fileWriteRepository = fileWriteRepository;
             _invoiceFileWriteRepository = invoiceFileWriteRepository;
             _invoiceFileReadRepository = invoiceFileReadRepository;
             _productImageFileReadRepository = productImageFileReadRepository;
             _productImageFileWriteRepository = productImageFileWriteRepository;
+            _storageService = storageService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]Pagination pagination)
         {
+            // Getting the total count of all entities exist in the table
             var totalCount = _productReadRepository.GetAll(false).Count();
+            // Skips a calculated number of items based on the current page and page size, 
+            // Takes the specified number of items for the current page.
             var products = _productReadRepository.GetAll(false).Select(p => new
             {
                 p.Id,
@@ -92,7 +94,7 @@ namespace ETicaretAPI.API.Controllers
         public async Task<IActionResult> Post(VM_Create_Product model)
         {
 
-            ValidationResult validationResult = _createProductValidator.Validate(model);
+            ValidationResult validationResult = await _createProductValidator.ValidateAsync(model);
 
             if (!validationResult.IsValid)
             {
@@ -124,7 +126,7 @@ namespace ETicaretAPI.API.Controllers
             product.Name = model.Name;
             product.Price = model.Price;
             await _productWriteRepository.SaveAsync();
-            return Ok();
+            return StatusCode((int)HttpStatusCode.Created) ;
         }
 
         [HttpDelete("{id}")]
@@ -141,16 +143,19 @@ namespace ETicaretAPI.API.Controllers
         //[FromBody]IFormFile form
         public async Task<IActionResult> Upload()
         {
+            
+            var datas = await _storageService.UploadAsync("resource/files", Request.Form.Files);
 
-            var datas = await _fileService.UploadAsync("resource/files", Request.Form.Files);
+            //var datas = await _fileService.UploadAsync("resource/files", Request.Form.Files);
 
-            //await _productImageFileWriteRepository.AddRangeAsync(datas.Select(d => new ProductImageFile()
-            //{
-            //    FileName = d.fileName,
-            //    Path = d.path,
-            //}).ToList());
+            await _productImageFileWriteRepository.AddRangeAsync(datas.Select(d => new ProductImageFile()
+            {
+                FileName = d.fileName,
+                Path = d.pathOrContainerName,
+                Storage = _storageService.StorageName,
+            }).ToList());
 
-            //await _productImageFileWriteRepository.SaveAsync();
+            await _productImageFileWriteRepository.SaveAsync();
 
             //await _invoiceFileWriteRepository.AddRangeAsync(datas.Select(d => new InvoiceFile()
             //{
@@ -161,11 +166,11 @@ namespace ETicaretAPI.API.Controllers
 
             //await _invoiceFileWriteRepository.SaveAsync();
 
-            await _fileWriteRepository.AddRangeAsync(datas.Select(d => new ETicaretAPI.Domain.Entities.File()
-            {
-                FileName = d.fileName,
-                Path = d.path,
-            }).ToList());
+            //await _fileWriteRepository.AddRangeAsync(datas.Select(d => new ETicaretAPI.Domain.Entities.File()
+            //{
+            //    FileName = d.fileName,
+            //    Path = d.path,
+            //}).ToList());
 
             //await _fileWriteRepository.SaveAsync();
 
@@ -173,4 +178,4 @@ namespace ETicaretAPI.API.Controllers
 
         }
     }
-}
+} 

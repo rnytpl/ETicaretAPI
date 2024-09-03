@@ -23,14 +23,14 @@ namespace ETicaretAPI.Application.Validators.Products
             RuleFor(p => p.Stock)
                 .NotEmpty()
                 .NotNull()
-                    .WithMessage("Please enter a valid stock number")
+                    .WithMessage("Please enter a valid number")
                 .Must(s => s >= 0)
                     .WithMessage("Enter a positive number starting from 0");
 
             RuleFor(p => p.Price)
                 .NotEmpty()
                 .NotNull()
-                    .WithMessage("Enter a valid price")
+                    .WithMessage("Enter a valid number")
                 .Must(s => s >= 0)
                     .WithMessage("Enter a positive number starting from 0");
         }

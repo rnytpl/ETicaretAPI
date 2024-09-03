@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ETicaretAPI.Domain.Entities
 {
+    // All entities must derive from BaseEntity class to inherit core properties
     public class File : BaseEntity
     {
         // Enables to omit properties that are not wanted to be displayed during table creation
@@ -16,5 +17,6 @@ namespace ETicaretAPI.Domain.Entities
 
         public string FileName { get; set; }
         public string Path { get; set; }
+        public string Storage { get; set; }
     }
 }

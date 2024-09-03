@@ -1,16 +1,20 @@
 using ETicaretAPI.Infrastructure;
-using ETicaretAPI.Infrastructure.Filters;
+using ETicaretAPI.Infrastructure.Services.Storage.Local;
 using ETicaretAPI.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// ADDS SERVICES TO CONTAINER //
+
 builder.Services.AddControllers();
 //builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
 builder.Services.AddPersistenceServices();
+//builder.Services.AddStorage(StorageType.Azure);
+builder.Services.AddStorage<LocalStorage>();
+
 builder.Services.AddInfraStructureService();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

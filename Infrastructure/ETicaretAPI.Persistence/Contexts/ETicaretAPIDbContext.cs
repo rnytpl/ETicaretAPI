@@ -33,7 +33,7 @@ namespace ETicaretAPI.Persistence.Contexts
         /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            // Detects modifications made on entities
+            // Detects modifications made on entities everytime SaveChangesAsync method is invoked
             // Returns entities of a given type that is being tracker
             var datas = ChangeTracker.Entries<BaseEntity>();
             // Iterates each entry returned from changetracker
@@ -48,6 +48,8 @@ namespace ETicaretAPI.Persistence.Contexts
             }
             return await base.SaveChangesAsync(cancellationToken);
         }
+
+        
 
     }
 }
