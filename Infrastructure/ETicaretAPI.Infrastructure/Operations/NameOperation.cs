@@ -19,22 +19,23 @@ namespace ETicaretAPI.Infrastructure.Operations
             {
                 switch (m.Value)
                 {
-                    case "Ö":
+                    case "Ö": return "O";
                     case "ö": return "o";
                     case "Ü":
                     case "ü": return "u";
                     case "ı":
-                    case "İ": return "i";
+                    case "İ": return "I";
                     case "ğ":
-                    case "Ğ": return "g";
-                    case "â": return "a";
-                    case "î": return "i";
+                    case "Ğ": return "G";
+                    case "â": return "A";
+                    case "î": return "I";
                     case "ş":
-                    case "Ş": return "s";
-                    case "Ç": 
+                    case "Ş": return "S";
+                    case "Ç": return "C";
                     case "ç": return "c";
                     case ".": return "-";
                     case " ": return "-";
+                    case "_": return "-";
                     default: return "";
                 }
             });

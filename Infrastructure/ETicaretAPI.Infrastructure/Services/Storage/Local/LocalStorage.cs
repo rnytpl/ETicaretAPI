@@ -12,7 +12,7 @@ using ETicaretAPI.Application.Abstractions.Storage;
 
 namespace ETicaretAPI.Infrastructure.Services.Storage.Local
 {
-    public class LocalStorage : ILocalStorage
+    public class LocalStorage : Storage, ILocalStorage
     {
         readonly private IWebHostEnvironment _webHostEnvironment;
 
@@ -66,7 +66,7 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Local
         {
             string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, path);
 
-            if (!File.Exists(uploadPath))
+            if (!Directory.Exists(uploadPath))
             {
                 Directory.CreateDirectory(uploadPath);
             }
@@ -75,9 +75,9 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Local
 
             foreach (IFormFile file in files)
             {
-
-                bool result = await CopyFileAsync($"{uploadPath}\\{file.Name}", file);
-                datas.Add((file.Name, $"{path}\\{file.Name}"));
+                string fileNewName = await FileRenameAsync(uploadPath, file.FileName, HasFile);
+                bool result = await CopyFileAsync($"{uploadPath}\\{fileNewName}", file);
+                datas.Add((fileNewName, $"{path}\\{fileNewName}"));
             }
 
             //todo 

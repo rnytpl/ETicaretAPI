@@ -1,4 +1,5 @@
 using ETicaretAPI.Infrastructure;
+using ETicaretAPI.Infrastructure.Services.Storage.Azure;
 using ETicaretAPI.Infrastructure.Services.Storage.Local;
 using ETicaretAPI.Persistence;
 
@@ -9,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 //builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
 builder.Services.AddPersistenceServices();
-//builder.Services.AddStorage(StorageType.Azure);
 builder.Services.AddStorage<LocalStorage>();
+//builder.Services.AddStorage<AzureStorage>();
 
 builder.Services.AddInfraStructureService();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
