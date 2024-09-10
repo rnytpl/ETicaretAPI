@@ -29,7 +29,7 @@ namespace ETicaretAPI.Infrastructure.Operations
                     case "Ğ": return "G";
                     case "â": return "A";
                     case "î": return "I";
-                    case "ş":
+                    case "ş": return "s";
                     case "Ş": return "S";
                     case "Ç": return "C";
                     case "ç": return "c";

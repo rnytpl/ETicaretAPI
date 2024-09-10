@@ -15,5 +15,8 @@ namespace ETicaretAPI.Domain.Entities
 
         // Many to many
         public ICollection<Order> Orders { get; set; }
+
+        //
+        public ICollection<ProductImageFile> ProductImageFiles { get; set; }
     }
 }
