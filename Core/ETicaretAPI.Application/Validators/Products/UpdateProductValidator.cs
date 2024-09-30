@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.ViewModels.Products;
+﻿using ETicaretAPI.Application.Features.Commands.Product.UpdateProduct;
+using ETicaretAPI.Application.ViewModels.Products;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Validators.Products
 {
-    public class UpdateProductValidator : AbstractValidator<VM_Update_Product>
+    public class UpdateProductValidator : AbstractValidator<UpdateProductCommandRequest>
     {
         public UpdateProductValidator()
         {

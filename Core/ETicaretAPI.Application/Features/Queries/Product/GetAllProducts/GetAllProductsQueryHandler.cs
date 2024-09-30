@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETicaretAPI.Application.Features.Queries.GetAllProducts
+namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProducts
 {
     public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQueryRequest, GetAllProductsQueryResponse>
     {
@@ -18,11 +18,11 @@ namespace ETicaretAPI.Application.Features.Queries.GetAllProducts
 
         public GetAllProductsQueryHandler(IProductReadRepository productReadRepository)
         {
-            _productReadRepository = productReadRepository; 
+            _productReadRepository = productReadRepository;
         }
         public async Task<GetAllProductsQueryResponse> Handle(GetAllProductsQueryRequest request, CancellationToken cancellationToken)
         {
-            
+
             // Getting the total count of all entities exist in the table
             var totalCount = _productReadRepository.GetAll(false).Count();
             // Skips a calculated number of items based on the current page and page size, 

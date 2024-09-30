@@ -1,4 +1,4 @@
-﻿using ETicaretAPI.Application.Repositories;
+﻿ using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.Repositories.File;
 using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
