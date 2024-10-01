@@ -10,13 +10,9 @@ using ETicaretAPI.Application.Features.Queries.ProductImageFile.GetProductImages
 using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
-
-using ETicaretAPI.Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace ETicaretAPI.API.Controllers
 {

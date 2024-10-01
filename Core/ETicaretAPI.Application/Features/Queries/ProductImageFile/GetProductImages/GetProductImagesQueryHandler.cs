@@ -30,15 +30,14 @@ namespace ETicaretAPI.Application.Features.Queries.ProductImageFile.ProductImage
         {
             Domain.Entities.Product? product = await _productReadRepository.Table.Include(p => p.ProductImageFiles).FirstOrDefaultAsync(p => p.Id == Guid.Parse(request.ProductId));
 
-            if (product != null)
-            {
+            
                return product.ProductImageFiles.Select(p => new GetProductImagesQueryResponse
                 {
                     FileName = p.FileName,
                     Path = $"{_configuration["BaseStorageURl"]}{p.Path}",
                     Id = p.Id
                 }).ToList();
-            }
+            
         }
     }
 }
