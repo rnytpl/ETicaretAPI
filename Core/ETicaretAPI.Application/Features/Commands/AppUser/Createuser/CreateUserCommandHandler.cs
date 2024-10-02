@@ -35,7 +35,7 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.Createuser
                     Message = "User created successfully"
                 };
 
-            throw new CreateUserException();   
+            throw new CreateUserException(result.Errors.First().Description.ToString());   
         }
     }
 }
