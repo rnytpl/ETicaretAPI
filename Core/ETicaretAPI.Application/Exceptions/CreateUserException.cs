@@ -8,12 +8,15 @@ namespace ETicaretAPI.Application.Exceptions
 {
     public class CreateUserException : Exception
     {
-        public CreateUserException() : base("An unexpected error while creating user")
+        public CreateUserException() : base("Registration unsuccessful")
         {
 
         }
 
         public CreateUserException(string? message) : base(message)
+        {
+        }
+        public CreateUserException(IEnumerable<string> messages) : base(string.Join(",", messages))
         {
         }
     }

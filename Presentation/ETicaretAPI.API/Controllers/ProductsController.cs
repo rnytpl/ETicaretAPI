@@ -12,12 +12,16 @@ using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Admin")]
+    //[Authorize]
+
     public class ProductsController : ControllerBase
     {
         // Referencing services to be injected in IoC
@@ -38,7 +42,7 @@ namespace ETicaretAPI.API.Controllers
 
 
         readonly IMediator _mediator;
-        // Injecting those dependencies through constructor
+        // Injecting dependencies through constructor
         public ProductsController(
             IProductWriteRepository productWriteRepository, 
             IProductReadRepository productReadRepository, 
@@ -149,5 +153,6 @@ namespace ETicaretAPI.API.Controllers
             return Ok(response );
         }
 
+        
     }
 } 

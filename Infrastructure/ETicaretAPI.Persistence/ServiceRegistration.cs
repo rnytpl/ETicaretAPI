@@ -1,23 +1,18 @@
-﻿ using ETicaretAPI.Application.Repositories;
-using ETicaretAPI.Application.Repositories.File;
+﻿using ETicaretAPI.Application.Abstractions.Services;
+using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
 using ETicaretAPI.Application.Validators.Products;
-using ETicaretAPI.Application.ViewModels.Products;
+using ETicaretAPI.Application.Validators.Users;
 using ETicaretAPI.Domain.Entities.Identity;
 using ETicaretAPI.Persistence.Contexts;
 using ETicaretAPI.Persistence.Repositories;
-using ETicaretAPI.Persistence.Repositories.File;
 using ETicaretAPI.Persistence.Repositories.ProductImageFİle;
+using ETicaretAPI.Persistence.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ETicaretAPI.Persistence
 {
@@ -32,9 +27,11 @@ namespace ETicaretAPI.Persistence
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
+                options.Password.RequiredLength = 5;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+                
             })
                 .AddEntityFrameworkStores<ETicaretAPIDbContext>();
 
@@ -53,8 +50,12 @@ namespace ETicaretAPI.Persistence
 
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
             services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
-            // Alternative approach
-            //services.AddScoped<IValidator<VM_Create_Product>, CreateProductValidator>();
+            services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+
+
+            // User Services
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.Configure<FormOptions>(options =>
             {
