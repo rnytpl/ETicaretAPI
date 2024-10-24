@@ -41,7 +41,8 @@ builder.Services.AddAuthentication(options =>
                 ValidateIssuerSigningKey = true, // confirms the token's signing key is valid
                 ValidAudience = builder.Configuration["Token:Audience"],
                 ValidIssuer = builder.Configuration["Token:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"])),
+                LifetimeValidator = (notBefore, expires, SecurityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false,
             };
         }
     );

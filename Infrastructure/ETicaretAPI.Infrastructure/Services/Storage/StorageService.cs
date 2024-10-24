@@ -13,6 +13,7 @@ namespace ETicaretAPI.Infrastructure.Services.Storage
 
         readonly IStorage _storage;
 
+
         public StorageService(IStorage storage)
         {
             _storage = storage;
@@ -22,6 +23,8 @@ namespace ETicaretAPI.Infrastructure.Services.Storage
 
         public async Task DeleteAsync(string pathOrContainerName, string fileName) =>
             await _storage.DeleteAsync(pathOrContainerName, fileName);
+        //await _storage.DeleteAsync(fileName);
+
 
         public List<string> GetFiles(string pathOrContainerName) => _storage.GetFiles(pathOrContainerName);
 

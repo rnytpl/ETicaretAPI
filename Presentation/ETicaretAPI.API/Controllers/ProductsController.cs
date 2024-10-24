@@ -10,7 +10,6 @@ using ETicaretAPI.Application.Features.Queries.ProductImageFile.GetProductImages
 using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Application.Repositories.InvoiceFile;
 using ETicaretAPI.Application.Repositories.ProductImageFile;
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,6 @@ namespace ETicaretAPI.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Admin")]
-    //[Authorize]
 
     public class ProductsController : ControllerBase
     {
@@ -30,9 +28,6 @@ namespace ETicaretAPI.API.Controllers
         readonly private IWebHostEnvironment _webHostEnvironment;
         readonly private IStorageService _storageService;
         readonly private IConfiguration _configuration;
-        // Referencing FluentValidation service
-        readonly private IValidator<CreateProductCommandRequest> _createProductValidator;
-        readonly private IValidator<UpdateProductCommandRequest> _updateProductValidator;
 
         // File operations
         readonly private IProductImageFileReadRepository _productImageFileReadRepository;
@@ -42,27 +37,22 @@ namespace ETicaretAPI.API.Controllers
 
 
         readonly IMediator _mediator;
-        // Injecting dependencies through constructor
+        // Dependency Injections
         public ProductsController(
-            IProductWriteRepository productWriteRepository, 
-            IProductReadRepository productReadRepository, 
-            IValidator<CreateProductCommandRequest> createProductValidator,
-            IValidator<UpdateProductCommandRequest> updateProductValidator, 
+            IProductWriteRepository productWriteRepository,
+            IProductReadRepository productReadRepository,
+
             IWebHostEnvironment webHostEnvironment,
             IProductImageFileReadRepository productImageFileReadRepository,
-            IProductImageFileWriteRepository productImageFileWriteRepository, 
-            IInvoiceFileWriteRepository invoiceFileWriteRepository, 
-            IInvoiceFileReadRepository invoiceFileReadRepository, 
-            IStorageService storageService, 
-            IConfiguration configuration, 
-            IMediator mediator
-        )
+            IProductImageFileWriteRepository productImageFileWriteRepository,
+            IInvoiceFileWriteRepository invoiceFileWriteRepository,
+            IInvoiceFileReadRepository invoiceFileReadRepository,
+            IStorageService storageService,
+            IConfiguration configuration,
+            IMediator mediator)
         {
             _productWriteRepository = productWriteRepository;
             _productReadRepository = productReadRepository;
-
-            _createProductValidator = createProductValidator;
-            _updateProductValidator = updateProductValidator;
 
             _webHostEnvironment = webHostEnvironment;
 
@@ -78,9 +68,11 @@ namespace ETicaretAPI.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllProductsQueryRequest getAllProductsQueryRequest)
         {
+            
            GetAllProductsQueryResponse response = await _mediator.Send(getAllProductsQueryRequest);
 
             return Ok(response);
+
         }
 
         [HttpGet("{Id}")]
@@ -100,12 +92,6 @@ namespace ETicaretAPI.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(UpdateProductCommandRequest updateProductCommandRequest)
         {
-            //ValidationResult validationResult = _updateProductValidator.Validate(model);
-
-            //if (!validationResult.IsValid)
-            //{
-            //    return BadRequest(validationResult.Errors);
-            //}
 
             UpdateProductCommandResponse response = await _mediator.Send(updateProductCommandRequest);
 
@@ -113,7 +99,7 @@ namespace ETicaretAPI.API.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Remove([FromRoute]RemoveProductCommandRequest removeProductCommandRequest)
         {
 

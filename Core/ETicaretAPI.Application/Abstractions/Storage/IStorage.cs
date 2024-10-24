@@ -9,7 +9,6 @@ namespace ETicaretAPI.Application.Abstractions.Storage
 {
     public interface IStorage
     {
-        //string StorageName { get; }
         Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string pathOrContainerName, IFormFileCollection files);
         Task DeleteAsync(string pathOrContainerName,string fileName);
         List<string> GetFiles(string pathOrContainerName);

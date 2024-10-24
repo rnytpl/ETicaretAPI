@@ -1,6 +1,6 @@
 ﻿using ETicaretAPI.Application.Features.Commands.AppUser.LoginUser;
+using ETicaretAPI.Application.Features.Commands.AppUser.NewFolder;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretAPI.API.Controllers
@@ -18,9 +18,19 @@ namespace ETicaretAPI.API.Controllers
 
         [HttpPost("[action]")]
 
-        public async Task<IActionResult> LoginUser([FromBody] LoginUserCommandRequest request)
+        public async Task<IActionResult> LoginUser([FromBody]LoginUserCommandRequest request)
         {
             LoginUserCommandResponse response = await _mediator.Send(request);
+
+            return Ok(response);
+
+        }
+
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> RefreshToken([FromBody]RefreshTokenLoginCommandRequest request )
+        {
+            RefreshTokenLoginCommandResponse response = await _mediator.Send(request);
 
             return Ok(response);
 
