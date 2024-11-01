@@ -40,6 +40,7 @@ namespace ETicaretAPI.Persistence.Services
         public async Task<Token> LoginAsync(string Email, string Password, int accessTokenLifeTime)
         {
             AppUser user = await _userManager.FindByEmailAsync(Email);
+
             if (user == null) throw new UserNotFoundException("Incorrect email or password");
 
 
@@ -47,11 +48,9 @@ namespace ETicaretAPI.Persistence.Services
 
             if (result.Succeeded)
             {
-                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime);
+                Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user);
 
-                
-
-                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 5);
+                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 60);
                 return token;
 
             };
@@ -66,8 +65,8 @@ namespace ETicaretAPI.Persistence.Services
 
             if (user != null && user?.RefreshTokenEndDate > DateTime.UtcNow)
             {
-                Token token = _tokenHandler.CreateAccessToken(15);
-                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 15);
+                Token token = _tokenHandler.CreateAccessToken(60, user);
+                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 60);
 
                 return token;
             } else

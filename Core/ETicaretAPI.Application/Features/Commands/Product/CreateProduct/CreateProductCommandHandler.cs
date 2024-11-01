@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.Repositories;
+﻿using ETicaretAPI.Application.Abstractions.Hubs;
+using ETicaretAPI.Application.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -9,16 +10,17 @@ namespace ETicaretAPI.Application.Features.Commands.Product.CreateProduct
     {
         // Write Repository
         readonly IProductWriteRepository _productWriteRepository;
+        readonly IProductHubService _productHubService;
         // Validators
         readonly IValidator<CreateProductCommandRequest> _createProductValidator;
-        
 
 
-        public CreateProductCommandHandler(IProductWriteRepository productWriteRepository, IValidator<CreateProductCommandRequest> createProductValidator)
+
+        public CreateProductCommandHandler(IProductWriteRepository productWriteRepository, IValidator<CreateProductCommandRequest> createProductValidator, IProductHubService productHubService = null)
         {
             _productWriteRepository = productWriteRepository;
             _createProductValidator = createProductValidator;
-        
+            _productHubService = productHubService;
         }
 
         public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
@@ -27,14 +29,18 @@ namespace ETicaretAPI.Application.Features.Commands.Product.CreateProduct
 
             if (!validationResult.IsValid)
             {
-                //var errors = validationResult.Errors.ForEach(e =>  new ValidationFailure() { PropertyName = e.PropertyName, ErrorMessage= e.ErrorMessage});
-                //return new CreateProductCommandResponse() { ValidationErrors = errors };
+                //ValidationFailure error = validationResult.Errors.FirstOrDefault();
+                string error = validationResult?.Errors?.Select(error =>
+                $"{error?.PropertyName}: {error?.ErrorMessage}"
+                ).Aggregate((current,next) => $"\n{current} \n {next} \n");
                 //return new()
                 //{
                 //    ErrorMessage = validationResult.Errors.First().ErrorMessage,
                 //};
 
-                throw new ValidationException(message: "Validation errror"); 
+                //throw new ValidationException($"{error.PropertyName}: {error.ErrorMessage}");
+                throw new Exception(error);
+
             }
 
             await _productWriteRepository.AddAsync(new()
@@ -45,6 +51,7 @@ namespace ETicaretAPI.Application.Features.Commands.Product.CreateProduct
             });
 
             await _productWriteRepository.SaveAsync();
+            await _productHubService.ProductAddedMessageAsync($"{request.Name} added.");
 
             return new CreateProductCommandResponse();
         }

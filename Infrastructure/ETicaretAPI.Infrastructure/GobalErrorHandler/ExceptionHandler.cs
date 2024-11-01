@@ -8,7 +8,7 @@ namespace ETicaretAPI.Infrastructure.GobalErrorHandler
     {
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            string errorMessage = exception?.Message;
+            string errorMessage = exception.Message;
             logger.LogError(exception, errorMessage);
 
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;

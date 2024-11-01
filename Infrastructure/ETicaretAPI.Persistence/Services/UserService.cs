@@ -54,7 +54,7 @@ namespace ETicaretAPI.Persistence.Services
             if (result.Succeeded)
             {
                 response.Succeeded = result.Succeeded;
-                response.Message = "New user created successfuly";
+                response.Message = "New user created successfully";
             }
 
             return response;
