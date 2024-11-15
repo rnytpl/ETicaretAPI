@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using ETicaretAPI.Application.Features.Queries.ProductImageFile.GetAllProductsImages;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -33,12 +33,7 @@ namespace ETicaretAPI.Application.Features.Commands.Product.CreateProduct
                 string error = validationResult?.Errors?.Select(error =>
                 $"{error?.PropertyName}: {error?.ErrorMessage}"
                 ).Aggregate((current,next) => $"\n{current} \n {next} \n");
-                //return new()
-                //{
-                //    ErrorMessage = validationResult.Errors.First().ErrorMessage,
-                //};
 
-                //throw new ValidationException($"{error.PropertyName}: {error.ErrorMessage}");
                 throw new Exception(error);
 
             }

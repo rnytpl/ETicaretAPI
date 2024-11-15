@@ -28,15 +28,10 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.Createuser
             if (!validationResult.IsValid)
             {
                 //ValidationFailure error = validationResult.Errors.FirstOrDefault();
-                string error = validationResult?.Errors?.Select(error =>
+                string? error = validationResult?.Errors?.Select(error =>
                 $"{error?.PropertyName}: {error?.ErrorMessage}"
                 ).Aggregate((current, next) => $"\n{current} \n {next} \n");
-                //return new()
-                //{
-                //    ErrorMessage = validationResult.Errors.First().ErrorMessage,
-                //};
 
-                //throw new ValidationException($"{error.PropertyName}: {error.ErrorMessage}");
                 throw new Exception(error);
 
             }
@@ -44,7 +39,7 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.Createuser
             try
             {
 
-                CreateUserResponse response = await _userService.CreateAsync(new()
+                CreateUserCommandResponse response = await _userService.CreateAsync(new()
                 {
                     Email = request.Email,
                     Name = request.Name,

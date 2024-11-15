@@ -20,6 +20,7 @@ namespace ETicaretAPI.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
+            // Connect to database using connection string in appsettings
            services.AddDbContext<ETicaretAPIDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
 
             services.AddIdentity<AppUser, AppRole>(options =>
@@ -27,7 +28,7 @@ namespace ETicaretAPI.Persistence
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 5;
+                options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
@@ -35,25 +36,39 @@ namespace ETicaretAPI.Persistence
             })
                 .AddEntityFrameworkStores<ETicaretAPIDbContext>();
 
+            // Customer
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+
+            // Order
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
             services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+
+            // Product
             services.AddScoped<IProductReadRepository, ProductReadRepository>();
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
 
-            // File operations
+            // Shopping Basket
+            services.AddScoped<IBasketReadRepository, BasketReadRepository>();
+            services.AddScoped<IBasketWriteRepository, BasketWriteRepository>();
+            services.AddScoped<IBasketItemReadRepository, BasketItemReadRepository>();
+            services.AddScoped<IBasketItemWriteRepository, BasketItemWriteRepository>();
+            services.AddScoped<IBasketService, BasketService>();
+
+            // File 
             services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
             services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
             services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
             services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
 
+            // Validation
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
             services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
             services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
 
 
-            // User Services
+
+            // User
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
 

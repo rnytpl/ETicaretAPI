@@ -1,16 +1,10 @@
 ﻿using ETicaretAPI.Application.Abstractions.Services;
 using ETicaretAPI.Application.DTOs.User;
 using ETicaretAPI.Application.Exceptions;
+using ETicaretAPI.Application.Features.Commands.AppUser.Createuser;
 using ETicaretAPI.Domain.Entities.Identity;
 using FluentValidation;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ETicaretAPI.Persistence.Services
 {
@@ -18,27 +12,14 @@ namespace ETicaretAPI.Persistence.Services
     {
 
         readonly UserManager<AppUser> _userManager;
-        readonly IValidator<CreateUser> _validator;
 
-        public UserService(UserManager<AppUser> userManager, IValidator<CreateUser> validator = null)
+        public UserService(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
-            _validator = validator;
         }
 
-        public async Task<CreateUserResponse> CreateAsync(CreateUser model)
+        public async Task<CreateUserCommandResponse> CreateAsync(CreateUser model)
         {
-            var validationResult = _validator.Validate(model);
-
-            
-
-            if (!validationResult.IsValid)
-            {
-                var errors = validationResult.Errors.First();
-
-                // Throw an exception with all error messages
-                throw new CreateUserException(errors.ToString());
-            }
 
             IdentityResult result = await _userManager.CreateAsync(new()
             {
@@ -48,10 +29,16 @@ namespace ETicaretAPI.Persistence.Services
                 NameSurname = $"{model.Name} {model.LastName}",
             }, model.Password);
 
-            CreateUserResponse response = new CreateUserResponse();
+            CreateUserCommandResponse response = new CreateUserCommandResponse();
 
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
+            {
+                var error = result.Errors.FirstOrDefault();
+
+                throw new Exception(error.Description);
+            }
+            else if (result.Succeeded)
             {
                 response.Succeeded = result.Succeeded;
                 response.Message = "New user created successfully";

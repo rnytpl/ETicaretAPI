@@ -11,15 +11,15 @@ using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Context;
-using Serilog.Core;
 using System.Security.Claims;
-using System.Text; 
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+// Gives us access to config file (appsettings.json)
 var configuration = builder.Configuration;
 
 // ADDS SERVICES TO CONTAINER //
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 //builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
 builder.Services.AddPersistenceServices();
@@ -55,10 +55,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.AddAuthentication(options =>
-
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme
-)
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("Admin", options =>
         {
             options.TokenValidationParameters = new()
@@ -106,7 +103,7 @@ app.UseAuthorization();
 
 app.Use(async (context, next) =>
 {
-    var userName = context.User?.Identity?.IsAuthenticated != null || true ? context.User.Identity.Name : null;
+    var userName = context.User?.Identity?.IsAuthenticated != null || true ? context?.User?.Identity?.Name : null;
 
     LogContext.PushProperty("user_name", userName);
 
@@ -117,3 +114,4 @@ app.MapControllers();
 app.MapHubs();
 
 app.Run();
+ 

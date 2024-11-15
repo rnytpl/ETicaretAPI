@@ -46,7 +46,7 @@ namespace ETicaretAPI.Infrastructure.Services.Token
                 signingCredentials: signingCredentials,
                 claims: new List<Claim>
                 {
-                    new(ClaimTypes.Name, appUser.NameSurname)
+                    new(ClaimTypes.Name, appUser.UserName)
                 }
                 );
 

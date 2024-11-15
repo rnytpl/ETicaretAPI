@@ -28,14 +28,14 @@ namespace ETicaretAPI.Application.Features.Commands.ProductImageFile.UploadProdu
         {
             List<(string fileName, string pathorContainerName)> result = await _storageService.UploadAsync("photo-images", request.Files);
 
-            ETicaretAPI.Domain.Entities.Product product = await _productReadRepository.GetByIdAsync(request.ProductId);
+            Domain.Entities.Product product = await _productReadRepository.GetByIdAsync(request.ProductId);
 
-            await _productImageFileWriteRepository.AddRangeAsync(result.Select(r => new ETicaretAPI.Domain.Entities.ProductImageFile
+            await _productImageFileWriteRepository.AddRangeAsync(result.Select(r => new Domain.Entities.ProductImageFile
             {
                 FileName = r.fileName,
                 Path = r.pathorContainerName,
                 Storage = _storageService.StorageName,
-                Products = new List<ETicaretAPI.Domain.Entities.Product>() { product }
+                Products = new List<Domain.Entities.Product>() { product }
 
             }).ToList());
 

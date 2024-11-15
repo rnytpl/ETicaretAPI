@@ -27,15 +27,22 @@ namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProducts
             var totalCount = _productReadRepository.GetAll(false).Count();
             // Skips a calculated number of items based on the current page and page size, 
             // Takes the specified number of items for the current page.
-            var products = _productReadRepository.GetAll(false).Select(p => new
-            {
-                p.Id,
-                p.Name,
-                p.Stock,
-                p.Price,
-                p.CreatedDate,
-                p.UpdatedDate,
-            }).OrderBy(p => p.CreatedDate).Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList();
+            var products = _productReadRepository
+                                .GetAll(false)
+                                .OrderBy(p => p.CreatedDate)
+                                .Select(p => new
+                                    {
+                                        p.Id,
+                                        p.Name,
+                                        p.Stock,
+                                        p.Price,
+                                        p.Description,
+                                        p.CreatedDate,
+                                        p.UpdatedDate,
+                                    })
+                                .Skip((request.Page - 1) * request.PageSize)
+                                .Take(request.PageSize)
+                                .ToList();
 
             decimal page = (decimal)totalCount / request.PageSize;
             var totalPages = Math.Ceiling(page);
