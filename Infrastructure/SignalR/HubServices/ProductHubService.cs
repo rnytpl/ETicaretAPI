@@ -24,9 +24,9 @@ namespace ETicaretAPI.SignalR.HubServices
             await _hubContext.Clients.All.SendAsync(ReceiveFunctionNames.ProductAddedMessage, message);
         }
 
-        //public async Task SendMessage(string message)
-        //{
-        //    await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
-        //}
+        public async Task SendMessage(string message)
+        {
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", message);
+        }
     }
 }

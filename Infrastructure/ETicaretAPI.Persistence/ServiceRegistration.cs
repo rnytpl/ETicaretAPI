@@ -43,6 +43,7 @@ namespace ETicaretAPI.Persistence
             // Order
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
             services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IOrderService, OrderService>();
 
             // Product
             services.AddScoped<IProductReadRepository, ProductReadRepository>();
@@ -60,6 +61,7 @@ namespace ETicaretAPI.Persistence
             services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
             services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
             services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
+
 
             // Validation
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();

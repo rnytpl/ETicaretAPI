@@ -30,7 +30,7 @@ namespace ETicaretAPI.Application.Features.Commands.Product.CreateProduct
             if (!validationResult.IsValid)
             {
                 //ValidationFailure error = validationResult.Errors.FirstOrDefault();
-                string error = validationResult?.Errors?.Select(error =>
+                string? error = validationResult?.Errors?.Select(error =>
                 $"{error?.PropertyName}: {error?.ErrorMessage}"
                 ).Aggregate((current,next) => $"\n{current} \n {next} \n");
 

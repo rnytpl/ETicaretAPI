@@ -24,7 +24,8 @@ namespace ETicaretAPI.Application.Features.Queries.Basket.GetBasketItems
 
             return basketItems.Select(ba => new GetBasketItemsQueryResponse {
                 BasketItemId = ba.Id.ToString(),
-                BasketItemImage = ba.Product.ProductImageFiles.First().Path,
+                BasketItemImage = 
+                ba.Product.ProductImageFiles?.FirstOrDefault()?.Path ?? string.Empty,
                 Name = ba.Product.Name,
                 Description = ba.Product.Description,
                 Price = ba.Product.Price,

@@ -14,5 +14,6 @@ namespace ETicaretAPI.Application.Abstractions.Services
         public Task AddItemToBasketAsync(CreateBasketItem BasketItem);
         public Task UpdateQuantityAsync(UpdateBasketItem basketItem);
         public Task RemoveBasketItemAsync(string basketItemId);
+        public Basket? GetActiveUserBasket { get; }
     }
 }

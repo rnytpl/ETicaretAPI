@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ETicaretAPI.Persistence.Migrations
 {
     [DbContext(typeof(ETicaretAPIDbContext))]
-    [Migration("20241108190955_mig1")]
-    partial class mig1
+    [Migration("20241128194818_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,10 +246,11 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OrderCode")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -257,8 +258,6 @@ namespace ETicaretAPI.Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -273,7 +272,6 @@ namespace ETicaretAPI.Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -296,8 +294,8 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("54492c31-619d-4288-af82-832d166b222e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7310),
+                            Id = new Guid("b7db01dd-e6a7-4005-ba34-e6df3aea35ff"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 18, 361, DateTimeKind.Utc).AddTicks(6031),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 1",
                             Price = 1f,
@@ -306,8 +304,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("144043a2-d52d-417e-a0a7-5a607bbd23d6"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7314),
+                            Id = new Guid("75a33e20-1d7a-452d-8cb8-7c6d00b4b27b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 19, 361, DateTimeKind.Utc).AddTicks(6041),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 2",
                             Price = 2f,
@@ -316,8 +314,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f7097b98-614e-4470-a310-0944a44096c5"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7315),
+                            Id = new Guid("d912d233-9e6e-43a7-87b2-9db4195802ce"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 20, 361, DateTimeKind.Utc).AddTicks(6043),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 3",
                             Price = 3f,
@@ -326,8 +324,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11b63475-0801-4477-9646-c80946c79595"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7317),
+                            Id = new Guid("65196271-83e7-4e54-a9a2-dde75caf3e48"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 21, 361, DateTimeKind.Utc).AddTicks(6044),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 4",
                             Price = 4f,
@@ -336,8 +334,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d997d42c-f741-4812-ac25-ebc7103fbd8b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7318),
+                            Id = new Guid("e93c2bdf-0c7d-464d-8a33-5c9d8dc83070"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 22, 361, DateTimeKind.Utc).AddTicks(6046),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 5",
                             Price = 5f,
@@ -346,8 +344,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8db6f98b-7160-43f5-beff-19088c819747"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7320),
+                            Id = new Guid("b9d3d17e-f276-4d1c-9003-393ddf2ecfab"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 23, 361, DateTimeKind.Utc).AddTicks(6073),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 6",
                             Price = 6f,
@@ -356,8 +354,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("be1f732f-8a0f-4053-a5f3-55e8847a193c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7321),
+                            Id = new Guid("91f97523-48c8-47f3-adeb-c58612a86a6a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 24, 361, DateTimeKind.Utc).AddTicks(6075),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 7",
                             Price = 7f,
@@ -366,8 +364,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("716c1fda-eb8e-4449-b651-d4074b8d33a5"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7323),
+                            Id = new Guid("4f587c70-75a2-426d-964e-581ea000424b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 25, 361, DateTimeKind.Utc).AddTicks(6076),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 8",
                             Price = 8f,
@@ -376,8 +374,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("937edb07-272c-4ce3-94e7-364c2434e1b3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7326),
+                            Id = new Guid("599e3e73-26d0-4918-82b1-742b006ec67b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 26, 361, DateTimeKind.Utc).AddTicks(6078),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 9",
                             Price = 9f,
@@ -386,8 +384,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("80bdb7d4-8dbe-40d9-925d-c76e9b020463"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7329),
+                            Id = new Guid("d0dd256e-efc7-420e-86c1-e6b80549e132"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 27, 361, DateTimeKind.Utc).AddTicks(6082),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 10",
                             Price = 10f,
@@ -396,8 +394,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d029e58f-0667-4ee0-9877-11fba0b577cf"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7331),
+                            Id = new Guid("3c967b22-06ce-4a76-b09c-312b84638885"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 28, 361, DateTimeKind.Utc).AddTicks(6084),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 11",
                             Price = 11f,
@@ -406,8 +404,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cb9e1a91-2807-455c-a1cc-891a9c341c11"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7332),
+                            Id = new Guid("f05d7e53-80d8-494c-9bf3-61c2d89dde28"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 29, 361, DateTimeKind.Utc).AddTicks(6085),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 12",
                             Price = 12f,
@@ -416,8 +414,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4218f5ac-4b22-465e-97c1-f330977ebc93"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7334),
+                            Id = new Guid("49c3a278-b13f-4c81-9c94-b3c2e5d70dbd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 30, 361, DateTimeKind.Utc).AddTicks(6087),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 13",
                             Price = 13f,
@@ -426,8 +424,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6404149-83a5-4294-8322-f3a7b6337094"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7335),
+                            Id = new Guid("2d0a3e37-dd66-4c17-8d1b-36c9446ec6e9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 31, 361, DateTimeKind.Utc).AddTicks(6091),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 14",
                             Price = 14f,
@@ -436,8 +434,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("39dcd452-7fde-41a5-b6b3-2129b24cf3b9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7337),
+                            Id = new Guid("3658c615-08e3-4768-bd17-75a22e038e73"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 32, 361, DateTimeKind.Utc).AddTicks(6155),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 15",
                             Price = 15f,
@@ -446,8 +444,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bde04654-6016-4aa3-87d4-09f16119d271"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7338),
+                            Id = new Guid("d27fc64a-1544-463f-bb33-ef45320d0423"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 33, 361, DateTimeKind.Utc).AddTicks(6157),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 16",
                             Price = 16f,
@@ -456,8 +454,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f447de6d-be02-414d-a282-2368cff7aa6c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7342),
+                            Id = new Guid("5c6ac970-40b3-4055-9482-d7ef5ea139ca"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 34, 361, DateTimeKind.Utc).AddTicks(6158),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 17",
                             Price = 17f,
@@ -466,8 +464,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ec90bb7d-a73e-49c3-8e03-79a19ef4b8d2"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7343),
+                            Id = new Guid("574b334c-611b-4e6f-9d56-69aded65e9a4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 35, 361, DateTimeKind.Utc).AddTicks(6160),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 18",
                             Price = 18f,
@@ -476,8 +474,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6602b922-5ed8-44f1-b0c7-32094dadb446"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7345),
+                            Id = new Guid("ad8e57e8-5aba-432a-9267-e1880458d9ba"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 36, 361, DateTimeKind.Utc).AddTicks(6162),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 19",
                             Price = 19f,
@@ -486,8 +484,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2781938-6b4e-40db-958c-9d038089642a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7346),
+                            Id = new Guid("33732250-d067-4f4d-a947-48a34b627625"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 37, 361, DateTimeKind.Utc).AddTicks(6163),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 20",
                             Price = 20f,
@@ -496,8 +494,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("206bbd5e-0e97-4e35-821b-2d95a781ef0e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7348),
+                            Id = new Guid("0cb5bd32-c4e6-4402-bb82-651514954b1d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 38, 361, DateTimeKind.Utc).AddTicks(6165),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 21",
                             Price = 21f,
@@ -506,8 +504,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4853ec78-4967-44c9-aaf5-703186abe730"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7349),
+                            Id = new Guid("065afe15-a962-4cd1-9ee7-1a661ec9ccc4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 39, 361, DateTimeKind.Utc).AddTicks(6168),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 22",
                             Price = 22f,
@@ -516,8 +514,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("811e8166-942b-48e2-89ae-881bc1551b54"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7351),
+                            Id = new Guid("bc620afc-f322-43e1-bf26-8af6c48dcd5f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 40, 361, DateTimeKind.Utc).AddTicks(6170),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 23",
                             Price = 23f,
@@ -526,8 +524,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5effe0b3-2a0b-4f54-8288-16ca10e735a7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7352),
+                            Id = new Guid("a75e02b6-6ec0-4ecf-8308-752d84021039"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 41, 361, DateTimeKind.Utc).AddTicks(6172),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 24",
                             Price = 24f,
@@ -536,8 +534,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d79de484-b12d-4746-b0a0-153569583b11"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7355),
+                            Id = new Guid("0c3e0919-6621-4af0-8e85-f57e1e1c0350"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 42, 361, DateTimeKind.Utc).AddTicks(6173),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 25",
                             Price = 25f,
@@ -546,8 +544,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e2b03b8e-65ff-40e2-9281-ac6ca25657ab"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7357),
+                            Id = new Guid("6d80c069-7c8c-4b1f-b0a3-77a8ba0e00a9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 43, 361, DateTimeKind.Utc).AddTicks(6175),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 26",
                             Price = 26f,
@@ -556,8 +554,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("36ee3723-57e5-46ab-8925-c3ca0554bb72"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7359),
+                            Id = new Guid("09e74537-199c-4ce9-a8d2-ec99e83713e5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 44, 361, DateTimeKind.Utc).AddTicks(6176),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 27",
                             Price = 27f,
@@ -566,8 +564,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1e2be758-a2ec-4535-821d-b2198c676999"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7396),
+                            Id = new Guid("5d26b69f-d8b5-4d01-b406-22aa5b3639e3"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 45, 361, DateTimeKind.Utc).AddTicks(6178),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 28",
                             Price = 28f,
@@ -576,8 +574,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1eed606e-8cb4-48b5-bb57-70d532b6fb34"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7398),
+                            Id = new Guid("4edacc5b-335f-469a-8e05-5361da3873eb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 46, 361, DateTimeKind.Utc).AddTicks(6179),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 29",
                             Price = 29f,
@@ -586,8 +584,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("afd28899-23c0-4932-8d7b-67f4e4176015"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7399),
+                            Id = new Guid("0fd09776-7359-4ef6-aeec-199e7870607a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 47, 361, DateTimeKind.Utc).AddTicks(6183),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 30",
                             Price = 30f,
@@ -596,8 +594,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b517d839-8d2d-424d-90b9-72a0cb6ddc53"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7401),
+                            Id = new Guid("4b7c9ad2-5593-4824-a6a3-b085169614c0"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 48, 361, DateTimeKind.Utc).AddTicks(6184),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 31",
                             Price = 31f,
@@ -606,8 +604,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a05d4263-c779-4aa6-9578-211398bc0eb3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7402),
+                            Id = new Guid("09f1be68-b01b-49c0-a8e6-523b73697acd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 49, 361, DateTimeKind.Utc).AddTicks(6186),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 32",
                             Price = 32f,
@@ -616,8 +614,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1b7bdd14-4a8e-4c4e-951f-4b43cabf5bb0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7406),
+                            Id = new Guid("5ea52548-4fe8-4760-ac85-4dc922df431c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 50, 361, DateTimeKind.Utc).AddTicks(6188),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 33",
                             Price = 33f,
@@ -626,8 +624,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3469ccf-2df5-4379-a010-09cc1fb63a77"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7407),
+                            Id = new Guid("a3620be5-bbf7-48da-95ea-88e174ecb56e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 51, 361, DateTimeKind.Utc).AddTicks(6189),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 34",
                             Price = 34f,
@@ -636,8 +634,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f9c61312-c724-4d48-960f-a28af58a6339"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7409),
+                            Id = new Guid("757b10ad-f3fd-469c-b775-10bc4dff89c7"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 52, 361, DateTimeKind.Utc).AddTicks(6191),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 35",
                             Price = 35f,
@@ -646,8 +644,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4bcbdcd8-bd08-440a-965a-14cbc2119c3c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7410),
+                            Id = new Guid("5f0be900-122d-46cf-8b16-3b3eec275087"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 53, 361, DateTimeKind.Utc).AddTicks(6192),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 36",
                             Price = 36f,
@@ -656,8 +654,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ade5fc6d-9e46-4a81-bdb6-d0942847f341"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7412),
+                            Id = new Guid("ecc56b6b-cf2d-4fba-8fce-5e5c9dc2adcd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 54, 361, DateTimeKind.Utc).AddTicks(6194),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 37",
                             Price = 37f,
@@ -666,8 +664,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("561edab9-a1d3-4813-aec4-ccff98960eb0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7413),
+                            Id = new Guid("a4418834-877a-499e-8fb9-b3f57f706757"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 55, 361, DateTimeKind.Utc).AddTicks(6197),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 38",
                             Price = 38f,
@@ -676,8 +674,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3e2bae5d-26be-42ce-bcef-8bc12cee7789"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7415),
+                            Id = new Guid("58f5ed3f-3b16-4a3a-b27c-03f2266d2843"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 56, 361, DateTimeKind.Utc).AddTicks(6199),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 39",
                             Price = 39f,
@@ -686,8 +684,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7797d914-f785-4030-a8d5-93bdf2670c23"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7417),
+                            Id = new Guid("92a0848c-bfc9-4400-9ad3-c56cfba21ccc"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 57, 361, DateTimeKind.Utc).AddTicks(6200),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 40",
                             Price = 40f,
@@ -696,8 +694,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c8baf2fa-a991-4648-8d97-352ae9134eed"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7420),
+                            Id = new Guid("ac6861db-2db3-4c6e-bd89-35566663c05e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 58, 361, DateTimeKind.Utc).AddTicks(6202),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 41",
                             Price = 41f,
@@ -706,8 +704,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d79d1d56-8971-4eca-88d1-0afc0415d51e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7421),
+                            Id = new Guid("3ccea834-2439-4818-93b7-a5c14f16193e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 48, 59, 361, DateTimeKind.Utc).AddTicks(6203),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 42",
                             Price = 42f,
@@ -716,8 +714,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a9877776-0d53-43e9-8929-8ca0d1208a16"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7423),
+                            Id = new Guid("fc81a440-7053-422c-bafd-bc04cf42bf6a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 0, 361, DateTimeKind.Utc).AddTicks(6205),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 43",
                             Price = 43f,
@@ -726,8 +724,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab321a5f-4814-48f4-8f09-a1319b5b7092"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7424),
+                            Id = new Guid("6905bc25-19ad-410b-ab49-5e0e019360f2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 1, 361, DateTimeKind.Utc).AddTicks(6207),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 44",
                             Price = 44f,
@@ -736,8 +734,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a01bcc6-7a6d-49a2-bec5-0a36a6c081c1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7426),
+                            Id = new Guid("ce4568af-9fda-4619-99ae-d0e8a3d7619c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 2, 361, DateTimeKind.Utc).AddTicks(6208),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 45",
                             Price = 45f,
@@ -746,8 +744,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3130c5fd-2b6d-4081-964a-eccb7d789952"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7428),
+                            Id = new Guid("9e062fe8-d11c-47a7-bd26-5dc114dc87b9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 3, 361, DateTimeKind.Utc).AddTicks(6211),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 46",
                             Price = 46f,
@@ -756,8 +754,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("db2ea6fd-5d2f-4041-a52e-058a7286fcfd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7429),
+                            Id = new Guid("9bf8cbc5-24a3-4fc0-826d-e63d8854ab3e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 4, 361, DateTimeKind.Utc).AddTicks(6213),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 47",
                             Price = 47f,
@@ -766,8 +764,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44c0ee35-0792-4ab1-901b-ed5065b813b4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7431),
+                            Id = new Guid("4056d50f-10c8-4059-b401-aae531bd8a62"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 5, 361, DateTimeKind.Utc).AddTicks(6215),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 48",
                             Price = 48f,
@@ -776,8 +774,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1e7e5c58-d7df-4bc5-80af-8223238eb2f3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7434),
+                            Id = new Guid("fafe1ada-295d-4762-8aad-f4353f26b285"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 6, 361, DateTimeKind.Utc).AddTicks(6216),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 49",
                             Price = 49f,
@@ -786,8 +784,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("13723910-321f-4416-a99c-63148b3cfb91"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7435),
+                            Id = new Guid("fa89257d-0355-4650-8151-6e3dd2fc04ce"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 7, 361, DateTimeKind.Utc).AddTicks(6218),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 50",
                             Price = 50f,
@@ -796,8 +794,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("55fcb327-b65e-4930-968b-026d8d2c5eef"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7437),
+                            Id = new Guid("6db97869-1a48-41a7-ae9a-94f3cdd25a75"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 8, 361, DateTimeKind.Utc).AddTicks(6219),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 51",
                             Price = 51f,
@@ -806,8 +804,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("91a43617-4626-41d6-b78c-b5e51d04c37d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7439),
+                            Id = new Guid("d2363849-9738-47b7-a376-1ff2310d579f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 9, 361, DateTimeKind.Utc).AddTicks(6221),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 52",
                             Price = 52f,
@@ -816,8 +814,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2e97a6ff-19c0-4e5e-8a86-632bbe708c6e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7440),
+                            Id = new Guid("6cdb5ade-6415-4253-8161-ea199d529884"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 10, 361, DateTimeKind.Utc).AddTicks(6222),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 53",
                             Price = 53f,
@@ -826,8 +824,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9f01b293-ede4-4685-aa0f-90da2ce038db"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7442),
+                            Id = new Guid("6f806ab1-e61d-458f-a873-0a75a8ddd467"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 11, 361, DateTimeKind.Utc).AddTicks(6226),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 54",
                             Price = 54f,
@@ -836,8 +834,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9d23cc90-4f8e-45dc-b5f5-08f8fb80a04a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7443),
+                            Id = new Guid("9531890e-6b51-4456-ace3-d2e2ec01e6a9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 12, 361, DateTimeKind.Utc).AddTicks(6227),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 55",
                             Price = 55f,
@@ -846,8 +844,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2088e8ee-fcd4-4b55-b472-9aae6318d181"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7445),
+                            Id = new Guid("7d50a40f-e8f9-45d9-a616-ce99950d62f6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 13, 361, DateTimeKind.Utc).AddTicks(6229),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 56",
                             Price = 56f,
@@ -856,8 +854,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6eacc51b-867f-4da0-96d0-3ad64d797099"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7448),
+                            Id = new Guid("f1267b59-fa9e-4f66-a011-5348a9e9ab6c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 14, 361, DateTimeKind.Utc).AddTicks(6230),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 57",
                             Price = 57f,
@@ -866,8 +864,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("65c62a2d-62b6-40e5-8527-dcbdef2c63b3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7449),
+                            Id = new Guid("db88b308-a58c-4108-a24a-740efc46b92a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 15, 361, DateTimeKind.Utc).AddTicks(6232),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 58",
                             Price = 58f,
@@ -876,8 +874,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f16aa624-e7e8-42a8-a6dd-a63599c229c9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7451),
+                            Id = new Guid("ce61080b-5328-4841-8d30-8ef703b2ec8f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 16, 361, DateTimeKind.Utc).AddTicks(6234),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 59",
                             Price = 59f,
@@ -886,8 +884,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dbd9f2bd-df99-4ec1-a036-c0b78f338519"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7453),
+                            Id = new Guid("ff192ab1-c9b0-49eb-acc4-93aa7ed3ab7b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 17, 361, DateTimeKind.Utc).AddTicks(6235),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 60",
                             Price = 60f,
@@ -896,8 +894,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c868da54-50e3-48ab-894e-1f456511236e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7454),
+                            Id = new Guid("aa10b935-6366-4f1a-83e0-b5d16b1793f5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 18, 361, DateTimeKind.Utc).AddTicks(6237),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 61",
                             Price = 61f,
@@ -906,8 +904,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("551ae0cf-bd0e-475d-a8b3-83190c7d3f3a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7456),
+                            Id = new Guid("641d2439-0236-4954-a213-e23c661022da"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 19, 361, DateTimeKind.Utc).AddTicks(6240),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 62",
                             Price = 62f,
@@ -916,8 +914,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3bea2003-5aa5-40a0-a927-cc5018331b9e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7457),
+                            Id = new Guid("feaa9587-b91d-48a0-89b6-7d313c90f27f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 20, 361, DateTimeKind.Utc).AddTicks(6242),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 63",
                             Price = 63f,
@@ -926,8 +924,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96e9b766-ed2b-42c0-a42e-8d01757957ff"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7459),
+                            Id = new Guid("b3adb1d6-78ef-4b62-83d5-177f34fbc0d7"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 21, 361, DateTimeKind.Utc).AddTicks(6243),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 64",
                             Price = 64f,
@@ -936,8 +934,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("285ccca5-9cdb-4b17-9911-393a74e95733"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7462),
+                            Id = new Guid("eac14f1c-8b17-425a-9586-a77919b3afca"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 22, 361, DateTimeKind.Utc).AddTicks(6245),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 65",
                             Price = 65f,
@@ -946,8 +944,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d9d9ddc7-0e19-4a38-9b43-90f96e17e9af"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7464),
+                            Id = new Guid("e98fc479-07b3-45b3-ad10-cc71d16c6ad5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 23, 361, DateTimeKind.Utc).AddTicks(6246),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 66",
                             Price = 66f,
@@ -956,8 +954,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("feaaf4a6-82e8-4674-a860-47ee657bf3ff"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7465),
+                            Id = new Guid("eac6d522-ea3f-44c5-8ec8-9cbd363b7247"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 24, 361, DateTimeKind.Utc).AddTicks(6248),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 67",
                             Price = 67f,
@@ -966,8 +964,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bfa22996-5b2a-4a66-aec4-a79b249be4ee"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7467),
+                            Id = new Guid("1bae2bb2-e655-44d4-80b2-a57f804a9fda"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 25, 361, DateTimeKind.Utc).AddTicks(6249),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 68",
                             Price = 68f,
@@ -976,8 +974,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ad8dab28-11d7-4ccd-ada0-db0de6893c95"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7468),
+                            Id = new Guid("9417e4dd-78a4-48ad-b54d-cb5ef15c0c81"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 26, 361, DateTimeKind.Utc).AddTicks(6251),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 69",
                             Price = 69f,
@@ -986,8 +984,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b3e52a2f-b763-421a-b82f-94fd99878139"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7470),
+                            Id = new Guid("5967d848-ce09-49c9-aa69-53444ddd602e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 27, 361, DateTimeKind.Utc).AddTicks(6254),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 70",
                             Price = 70f,
@@ -996,8 +994,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aa063d15-45dc-45c0-8275-d6804b76374c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7471),
+                            Id = new Guid("0ae95a4c-00d3-4f5c-8d91-cad7949aeab5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 28, 361, DateTimeKind.Utc).AddTicks(6256),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 71",
                             Price = 71f,
@@ -1006,8 +1004,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8c1ee33b-a3b5-45ac-9fbf-84efd029f253"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7473),
+                            Id = new Guid("3e5ef132-213f-4e29-ac3f-49fadda6a4f1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 29, 361, DateTimeKind.Utc).AddTicks(6317),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 72",
                             Price = 72f,
@@ -1016,8 +1014,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ef17ec80-d4de-4bc2-a6f4-75cf8ffa3c29"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7476),
+                            Id = new Guid("018f0020-23b7-4fc8-8670-f8ef1b358e80"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 30, 361, DateTimeKind.Utc).AddTicks(6319),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 73",
                             Price = 73f,
@@ -1026,8 +1024,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("87c89173-fc21-4764-8833-bad9e6a3ba6b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7478),
+                            Id = new Guid("148506c8-521c-4a3e-94c1-430b6f94fbce"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 31, 361, DateTimeKind.Utc).AddTicks(6321),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 74",
                             Price = 74f,
@@ -1036,8 +1034,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f29287d9-52e7-4ace-8d1d-9b2b4f3044fc"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7479),
+                            Id = new Guid("fa898489-7779-432f-aaeb-676ebe8c94c8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 32, 361, DateTimeKind.Utc).AddTicks(6322),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 75",
                             Price = 75f,
@@ -1046,8 +1044,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5d49c093-1ee5-4436-a1d7-7fdb51fc9dec"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7481),
+                            Id = new Guid("2eacc785-88a0-45cb-b275-cc79276c2178"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 33, 361, DateTimeKind.Utc).AddTicks(6324),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 76",
                             Price = 76f,
@@ -1056,8 +1054,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("98559c2f-6fc7-455a-ba52-d1d06ba8e707"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7482),
+                            Id = new Guid("06f475f1-1001-45ab-9da3-aa0f402e2dda"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 34, 361, DateTimeKind.Utc).AddTicks(6325),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 77",
                             Price = 77f,
@@ -1066,8 +1064,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("17b7878b-7472-4fb9-bade-9bf9fe4c748a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7484),
+                            Id = new Guid("d4f4286b-8456-48db-b860-a0da97df17df"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 35, 361, DateTimeKind.Utc).AddTicks(6329),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 78",
                             Price = 78f,
@@ -1076,8 +1074,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0caf5274-c88c-41ed-87e9-fb100c3f9fe1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7485),
+                            Id = new Guid("638a4938-cbca-49ad-bccb-6a35c99a9d84"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 36, 361, DateTimeKind.Utc).AddTicks(6330),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 79",
                             Price = 79f,
@@ -1086,8 +1084,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2044db05-33e3-4361-bd93-a3f0ff008e3e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7487),
+                            Id = new Guid("ddcb12cf-abe8-4054-b82e-9041646f5ac5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 37, 361, DateTimeKind.Utc).AddTicks(6332),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 80",
                             Price = 80f,
@@ -1096,8 +1094,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6be6f88b-c02c-4e50-95ed-68dba59fd255"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7490),
+                            Id = new Guid("70c2f193-4c99-4feb-a98e-ed8d8e62cc11"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 38, 361, DateTimeKind.Utc).AddTicks(6333),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 81",
                             Price = 81f,
@@ -1106,8 +1104,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("94a8bc18-d0a2-4c5f-b304-40e24bb9f916"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7545),
+                            Id = new Guid("3ca5cfe0-d9a5-42e4-9a6c-0a43b4a4afe2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 39, 361, DateTimeKind.Utc).AddTicks(6335),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 82",
                             Price = 82f,
@@ -1116,8 +1114,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("24e709e0-664f-4ad0-8b7e-2a2682d591f1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7547),
+                            Id = new Guid("5ea25fa4-5479-44fe-b108-90db06eb0374"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 40, 361, DateTimeKind.Utc).AddTicks(6337),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 83",
                             Price = 83f,
@@ -1126,8 +1124,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dd5e2709-fda5-4f95-89fd-3c8084754488"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7548),
+                            Id = new Guid("af737d8f-7821-4b57-8d6f-0bc407235735"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 41, 361, DateTimeKind.Utc).AddTicks(6338),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 84",
                             Price = 84f,
@@ -1136,8 +1134,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d5e31ca8-8bd5-4bf4-8df7-64d78bae4b6b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7550),
+                            Id = new Guid("c9a7cb0f-f66a-477f-b815-9256c6698490"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 42, 361, DateTimeKind.Utc).AddTicks(6340),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 85",
                             Price = 85f,
@@ -1146,8 +1144,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("86b3cc96-661a-4436-9917-db4a3b7b818b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7552),
+                            Id = new Guid("a588efba-19cd-48f0-9c40-bc5ec6dcb122"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 43, 361, DateTimeKind.Utc).AddTicks(6344),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 86",
                             Price = 86f,
@@ -1156,8 +1154,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a108ed09-d2ad-49d9-9293-92421496e003"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7553),
+                            Id = new Guid("e6cd1235-df13-479c-8377-f020909c8a95"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 44, 361, DateTimeKind.Utc).AddTicks(6345),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 87",
                             Price = 87f,
@@ -1166,8 +1164,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6d64f518-2842-4d14-b4cd-52184ae99711"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7555),
+                            Id = new Guid("04a0c859-17df-4067-a4af-b3e65bf23d4f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 45, 361, DateTimeKind.Utc).AddTicks(6347),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 88",
                             Price = 88f,
@@ -1176,8 +1174,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6b97b8ff-59b9-4317-a14b-95f4a8563a45"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7558),
+                            Id = new Guid("74a810a5-8add-49e1-9d14-5c75083a5ac9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 46, 361, DateTimeKind.Utc).AddTicks(6348),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 89",
                             Price = 89f,
@@ -1186,8 +1184,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d055bf9f-1561-4e5b-88df-cd8294892453"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7559),
+                            Id = new Guid("77b62506-4f31-4dc1-8a93-2d4994bb891b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 47, 361, DateTimeKind.Utc).AddTicks(6350),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 90",
                             Price = 90f,
@@ -1196,8 +1194,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("484f8985-31bf-4e74-a610-25379ba231d9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7561),
+                            Id = new Guid("bfba4d1b-7b5f-4b15-86c8-bb0004866c3e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 48, 361, DateTimeKind.Utc).AddTicks(6352),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 91",
                             Price = 91f,
@@ -1206,8 +1204,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5415b41a-0450-4825-b73e-b87ea70c441f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7562),
+                            Id = new Guid("9b56ec7f-fccd-4f6a-ba72-7510e2ffae3c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 49, 361, DateTimeKind.Utc).AddTicks(6353),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 92",
                             Price = 92f,
@@ -1216,8 +1214,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("455e14e8-1f5a-4ef8-955d-5cf752da9207"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7564),
+                            Id = new Guid("823dc64e-87b7-466c-8d6b-48202ed1d9df"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 50, 361, DateTimeKind.Utc).AddTicks(6355),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 93",
                             Price = 93f,
@@ -1226,8 +1224,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0869c6e4-deaf-4646-852e-4fc7d76c46ae"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7566),
+                            Id = new Guid("d65ac1d8-30ea-4eb9-bd59-f688c853f572"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 51, 361, DateTimeKind.Utc).AddTicks(6358),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 94",
                             Price = 94f,
@@ -1236,8 +1234,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c9ffc819-d1f4-48f0-9a5f-f515b0f5cc8f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7567),
+                            Id = new Guid("b1425a76-0eb2-42a0-b777-053e1f5e3134"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 52, 361, DateTimeKind.Utc).AddTicks(6360),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 95",
                             Price = 95f,
@@ -1246,8 +1244,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ec8da7f1-60ad-40e1-b63f-5298e6e9bfd4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7569),
+                            Id = new Guid("39c478de-7631-4d9f-8e19-b89c7d81ec39"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 53, 361, DateTimeKind.Utc).AddTicks(6361),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 96",
                             Price = 96f,
@@ -1256,8 +1254,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d0296082-b1f2-411e-b519-818644d684f7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7572),
+                            Id = new Guid("98d9af9a-6e39-493e-b267-c987fe8e27a2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 54, 361, DateTimeKind.Utc).AddTicks(6363),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 97",
                             Price = 97f,
@@ -1266,8 +1264,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e4f033d-d4df-4e99-bcc0-7c663176487a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7574),
+                            Id = new Guid("00fdf57a-c5fc-4f3f-ae16-5e365eb80af8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 55, 361, DateTimeKind.Utc).AddTicks(6365),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 98",
                             Price = 98f,
@@ -1276,8 +1274,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("056c8410-39c0-4efc-898d-8bd6c7b6b956"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7575),
+                            Id = new Guid("c8a4cb60-99b5-4266-9ded-b100ef37c170"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 56, 361, DateTimeKind.Utc).AddTicks(6366),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 99",
                             Price = 99f,
@@ -1286,8 +1284,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5040d39f-0d4e-47c4-84c6-03d47678c915"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7577),
+                            Id = new Guid("8808b2a8-1b4c-4c8b-813e-0a80eb2aee0c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 57, 361, DateTimeKind.Utc).AddTicks(6368),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 100",
                             Price = 100f,
@@ -1296,8 +1294,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b7421db9-0202-4fa6-a021-112a6ba63b8d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7578),
+                            Id = new Guid("f0ad8582-056c-4013-aca1-430736d2f2f5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 58, 361, DateTimeKind.Utc).AddTicks(6370),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 101",
                             Price = 101f,
@@ -1306,8 +1304,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("215b680a-787d-4397-840f-406e6538ec34"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7580),
+                            Id = new Guid("e690ed59-69b8-4baa-8914-3a00d7cd9464"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 49, 59, 361, DateTimeKind.Utc).AddTicks(6373),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 102",
                             Price = 102f,
@@ -1316,8 +1314,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("650f15a8-d295-4ffb-9eaf-47a83bebf58a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7582),
+                            Id = new Guid("a6e1ee33-1c5c-4b26-8719-c13df1c6e942"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 0, 361, DateTimeKind.Utc).AddTicks(6375),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 103",
                             Price = 103f,
@@ -1326,8 +1324,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0e540c24-b6cb-4ce4-8125-74fc6ecfa9fa"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7583),
+                            Id = new Guid("9a28e607-0121-4962-bf38-9fd79c179d81"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 1, 361, DateTimeKind.Utc).AddTicks(6376),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 104",
                             Price = 104f,
@@ -1336,8 +1334,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c01a032c-9e28-48d7-bd8f-2a04ca293f1d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7586),
+                            Id = new Guid("2144fb61-f951-4e18-a321-277f5c48080b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 2, 361, DateTimeKind.Utc).AddTicks(6378),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 105",
                             Price = 105f,
@@ -1346,8 +1344,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a22e73a4-8911-4072-bdc1-2714a9dd98c7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7588),
+                            Id = new Guid("99c7630a-56b0-4aea-84b6-a0ee7cca478d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 3, 361, DateTimeKind.Utc).AddTicks(6379),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 106",
                             Price = 106f,
@@ -1356,8 +1354,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c06629e-4892-4e14-a046-ef179a351d27"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7589),
+                            Id = new Guid("e0a1f22d-f4af-48fb-a68a-14a3ed790a03"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 4, 361, DateTimeKind.Utc).AddTicks(6381),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 107",
                             Price = 107f,
@@ -1366,8 +1364,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("26cc2a98-38bf-4d97-8d03-16b3182490e4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7591),
+                            Id = new Guid("f70a492a-11ff-4aa9-898b-17efe2314006"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 5, 361, DateTimeKind.Utc).AddTicks(6383),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 108",
                             Price = 108f,
@@ -1376,8 +1374,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6ebee923-00d9-4c96-a0be-3bd5003aeece"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7592),
+                            Id = new Guid("60e938bb-8dee-4a70-a270-e6d97ced7354"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 6, 361, DateTimeKind.Utc).AddTicks(6384),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 109",
                             Price = 109f,
@@ -1386,8 +1384,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("70edbfe1-6ac6-4b40-9899-ec1210ca9be0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7594),
+                            Id = new Guid("c58b7556-e3cc-4af2-98ba-b81718f6af9a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 7, 361, DateTimeKind.Utc).AddTicks(6388),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 110",
                             Price = 110f,
@@ -1396,8 +1394,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b5e12802-270a-4c42-bc3e-64ffaaf97613"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7595),
+                            Id = new Guid("ddc4cefa-3dd3-4c03-9285-4a392555ae74"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 8, 361, DateTimeKind.Utc).AddTicks(6389),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 111",
                             Price = 111f,
@@ -1406,8 +1404,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("99ec5078-ee0c-468d-b813-55ac6fbc4663"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7597),
+                            Id = new Guid("43d81e0e-3ee4-446e-a84e-8772ed3cf853"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 9, 361, DateTimeKind.Utc).AddTicks(6391),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 112",
                             Price = 112f,
@@ -1416,8 +1414,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("54bd73fb-04fa-455a-9af1-47f8fea59d7d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7600),
+                            Id = new Guid("01e64950-5fde-426d-8943-253abd072710"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 10, 361, DateTimeKind.Utc).AddTicks(6392),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 113",
                             Price = 113f,
@@ -1426,8 +1424,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e26e7404-69f9-4190-9888-291b950b21ec"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7602),
+                            Id = new Guid("d8347337-ee89-4094-b484-3b3b83a961d2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 11, 361, DateTimeKind.Utc).AddTicks(6394),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 114",
                             Price = 114f,
@@ -1436,8 +1434,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("57a18664-51b4-49f2-a190-c1263ffa153c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7603),
+                            Id = new Guid("b1f84f22-1a81-4a0d-b010-4ced952ef2c1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 12, 361, DateTimeKind.Utc).AddTicks(6396),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 115",
                             Price = 115f,
@@ -1446,8 +1444,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2a15eea-1ed4-47c4-a5a9-b76888f72a60"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7605),
+                            Id = new Guid("e0277a3e-2550-4d6f-8a75-712640e99bba"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 13, 361, DateTimeKind.Utc).AddTicks(6397),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 116",
                             Price = 116f,
@@ -1456,8 +1454,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("03d1a2d1-7285-4eee-a733-44aaf3d55bef"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7606),
+                            Id = new Guid("b3a73b43-375c-4ef9-aae6-8ac89b17deee"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 14, 361, DateTimeKind.Utc).AddTicks(6399),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 117",
                             Price = 117f,
@@ -1466,8 +1464,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("390fddc7-e14e-4cc3-b646-25aee2ef8afb"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7608),
+                            Id = new Guid("d0704a42-cc7b-43d8-aa2d-933d1b09fa38"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 15, 361, DateTimeKind.Utc).AddTicks(6402),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 118",
                             Price = 118f,
@@ -1476,8 +1474,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("29ee5acd-1c3f-4dae-86eb-140dd24b9ef5"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7609),
+                            Id = new Guid("0e0c5584-c2d0-43a0-a122-d2e36171a7d6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 16, 361, DateTimeKind.Utc).AddTicks(6404),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 119",
                             Price = 119f,
@@ -1486,8 +1484,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("650cb0e0-0ee3-4675-ab01-fff64e861873"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7611),
+                            Id = new Guid("a55ee33a-98bf-4937-a3db-2bbd8dbfd02c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 17, 361, DateTimeKind.Utc).AddTicks(6406),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 120",
                             Price = 120f,
@@ -1496,8 +1494,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25ccbedf-a91a-4091-b808-9938280830fd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7614),
+                            Id = new Guid("1e7da26e-26fe-4ada-b027-2ac8896a13ed"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 18, 361, DateTimeKind.Utc).AddTicks(6407),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 121",
                             Price = 121f,
@@ -1506,8 +1504,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("30407481-c7f6-468b-ba0d-0c52bbdf5ed4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7616),
+                            Id = new Guid("1555e051-bfa7-4709-a19b-1cc6cbe0ade1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 19, 361, DateTimeKind.Utc).AddTicks(6409),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 122",
                             Price = 122f,
@@ -1516,8 +1514,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7dc828e3-b95c-4e0f-8aeb-568ca7c70750"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7617),
+                            Id = new Guid("fa50268b-376a-4057-ba8f-7d20d8c61f82"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 20, 361, DateTimeKind.Utc).AddTicks(6410),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 123",
                             Price = 123f,
@@ -1526,8 +1524,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ff3d8185-5736-43ae-930b-5ba0f7f46a2e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7619),
+                            Id = new Guid("1501b755-c839-4a6e-a304-47ab153bdfdc"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 21, 361, DateTimeKind.Utc).AddTicks(6412),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 124",
                             Price = 124f,
@@ -1536,8 +1534,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f6b524e1-5eaa-4a22-a6b0-c5924be58143"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7620),
+                            Id = new Guid("9710dd48-a72d-4107-bb27-1e6bae8770d8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 22, 361, DateTimeKind.Utc).AddTicks(6414),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 125",
                             Price = 125f,
@@ -1546,8 +1544,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ba19c183-9458-4c7f-88d9-a5873399e357"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7622),
+                            Id = new Guid("dbe74eb1-b0f3-476c-8922-af714acd39e2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 23, 361, DateTimeKind.Utc).AddTicks(6417),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 126",
                             Price = 126f,
@@ -1556,8 +1554,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2071ff1a-1db6-4762-92be-c56c1e2c192b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7623),
+                            Id = new Guid("bd50f94b-4452-4ab3-81bd-7d55fa7e546c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 24, 361, DateTimeKind.Utc).AddTicks(6419),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 127",
                             Price = 127f,
@@ -1566,8 +1564,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("61a82ec3-6c02-40d1-98a2-c52a49119050"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7625),
+                            Id = new Guid("dda99abc-399c-4f44-8da5-0690fe33949b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 25, 361, DateTimeKind.Utc).AddTicks(6421),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 128",
                             Price = 128f,
@@ -1576,8 +1574,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1c29c085-9ca3-4cf5-9a7e-1a1453abcc6e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7628),
+                            Id = new Guid("d3fc5794-8920-4854-804d-2c6b54cb62e1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 26, 361, DateTimeKind.Utc).AddTicks(6919),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 129",
                             Price = 129f,
@@ -1586,8 +1584,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2a862650-303e-4f4c-bb8c-3a41ddc8b636"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7630),
+                            Id = new Guid("fca5e9b2-79d9-4330-8ff1-e29554ed4606"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 27, 361, DateTimeKind.Utc).AddTicks(6922),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 130",
                             Price = 130f,
@@ -1596,8 +1594,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d5798089-d5e2-41e3-9197-21495bbb82b9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7631),
+                            Id = new Guid("4f199562-e524-4aa2-86ab-6e72711409a6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 28, 361, DateTimeKind.Utc).AddTicks(6924),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 131",
                             Price = 131f,
@@ -1606,8 +1604,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7f4bb283-08ef-494e-a302-31b7eb33b8a1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7633),
+                            Id = new Guid("dc483bd3-5bf7-49c3-b343-1d9305779962"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 29, 361, DateTimeKind.Utc).AddTicks(6926),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 132",
                             Price = 132f,
@@ -1616,8 +1614,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8641f75c-1256-4201-ad7d-d1dc340fc3fc"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7634),
+                            Id = new Guid("046e2150-ac6a-43d4-b3ad-bf87b9cabbab"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 30, 361, DateTimeKind.Utc).AddTicks(6929),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 133",
                             Price = 133f,
@@ -1626,8 +1624,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab7e3a41-a618-4662-b28d-e2d8e2cbc0df"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7636),
+                            Id = new Guid("96b0522c-092d-4072-b331-0cfacd5036ca"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 31, 361, DateTimeKind.Utc).AddTicks(6934),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 134",
                             Price = 134f,
@@ -1636,8 +1634,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b239f9cb-42f9-4d41-b0e8-f8dbdb3849ef"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7637),
+                            Id = new Guid("7649914c-b4e3-44d9-9e99-4900f7775ff4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 32, 361, DateTimeKind.Utc).AddTicks(6937),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 135",
                             Price = 135f,
@@ -1646,8 +1644,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("39966b89-848e-4f2e-b4b8-5ace132dce44"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7667),
+                            Id = new Guid("f447912b-ef9f-4fc8-ac9a-f66dc643c833"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 33, 361, DateTimeKind.Utc).AddTicks(6939),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 136",
                             Price = 136f,
@@ -1656,8 +1654,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d9aae037-30dd-4dc4-b3c6-f807ae26a66f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7672),
+                            Id = new Guid("026c5bbd-e3ed-4ed4-9449-42e358fa56d1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 34, 361, DateTimeKind.Utc).AddTicks(6941),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 137",
                             Price = 137f,
@@ -1666,8 +1664,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e1d56ab2-987e-4f24-b2ad-6488d1615fb0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7674),
+                            Id = new Guid("77facf6f-f61d-48af-9f0f-a80d4cabd9d4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 35, 361, DateTimeKind.Utc).AddTicks(6943),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 138",
                             Price = 138f,
@@ -1676,8 +1674,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("553db280-45d5-44f7-93d5-de945279b745"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7677),
+                            Id = new Guid("412c5c67-df7e-46b8-8ee0-f6f038958104"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 36, 361, DateTimeKind.Utc).AddTicks(6945),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 139",
                             Price = 139f,
@@ -1686,8 +1684,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3cf9169-2e0d-4a65-86f6-b4e572633607"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7679),
+                            Id = new Guid("4a9fb42e-c8ed-4039-a3e5-a18cd7122166"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 37, 361, DateTimeKind.Utc).AddTicks(6947),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 140",
                             Price = 140f,
@@ -1696,8 +1694,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("47afdf47-6469-4a91-bd59-bbc507f50c14"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7681),
+                            Id = new Guid("59fafd3d-1ec5-46f6-9b4d-c7a2424bba8a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 38, 361, DateTimeKind.Utc).AddTicks(6949),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 141",
                             Price = 141f,
@@ -1706,8 +1704,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a4e71078-f28c-4962-9cf8-7cbfea014414"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7684),
+                            Id = new Guid("6bb233fe-d2ce-4e9c-a0e9-62c01be219ec"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 39, 361, DateTimeKind.Utc).AddTicks(6954),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 142",
                             Price = 142f,
@@ -1716,8 +1714,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f7567b47-82fb-44c8-a16e-14dba083b845"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7686),
+                            Id = new Guid("692204d9-e6cb-4e13-92ee-6e66d16a92f8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 40, 361, DateTimeKind.Utc).AddTicks(6956),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 143",
                             Price = 143f,
@@ -1726,8 +1724,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7c30defb-c3db-4dd7-871d-6e4ed8dbe331"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7688),
+                            Id = new Guid("4313af1b-998f-49a5-856f-b66f4eb56128"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 41, 361, DateTimeKind.Utc).AddTicks(6958),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 144",
                             Price = 144f,
@@ -1736,8 +1734,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e9e21ba1-bf04-4fce-a6ea-888715c7f0b1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7693),
+                            Id = new Guid("1368c9f6-8b90-49ed-83b7-1b34d1ee60c7"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 42, 361, DateTimeKind.Utc).AddTicks(6961),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 145",
                             Price = 145f,
@@ -1746,8 +1744,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f037419-8cb3-47f1-bf2c-7979f4b95b34"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7696),
+                            Id = new Guid("4c70a6ca-7250-40a8-b234-cf49cf96b156"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 43, 361, DateTimeKind.Utc).AddTicks(6962),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 146",
                             Price = 146f,
@@ -1756,8 +1754,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("51569cad-2c41-43b3-96b9-25cb902dbaeb"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7698),
+                            Id = new Guid("299c2d84-db28-468c-a2d5-a271a8230ab4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 44, 361, DateTimeKind.Utc).AddTicks(6964),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 147",
                             Price = 147f,
@@ -1766,8 +1764,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d5c8f5de-13a8-4ed2-918f-178d14791398"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7700),
+                            Id = new Guid("f835270f-9af3-4902-9e6f-c3d7ee5c2118"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 45, 361, DateTimeKind.Utc).AddTicks(6965),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 148",
                             Price = 148f,
@@ -1776,8 +1774,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0c040ae-b5a5-4996-833c-9a43bef32ade"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7702),
+                            Id = new Guid("71ccd651-d3f8-45f3-8310-a7e2697a5835"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 46, 361, DateTimeKind.Utc).AddTicks(6967),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 149",
                             Price = 149f,
@@ -1786,8 +1784,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("29f79426-3d94-4167-9f9e-20fe7bd986c5"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7705),
+                            Id = new Guid("6541deb4-5221-4c9a-82b0-98d3a3ce40ef"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 47, 361, DateTimeKind.Utc).AddTicks(6971),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 150",
                             Price = 150f,
@@ -1796,8 +1794,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("62a5c608-062f-41a4-96a2-4ca44b2c490d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7707),
+                            Id = new Guid("33ccf7cd-6990-44ec-a53c-669a9ffb5432"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 48, 361, DateTimeKind.Utc).AddTicks(6972),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 151",
                             Price = 151f,
@@ -1806,8 +1804,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d047c3b4-f0ec-4fc9-8693-448e008dd639"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7709),
+                            Id = new Guid("6c9473c6-540b-4ef7-89cc-468704faba33"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 49, 361, DateTimeKind.Utc).AddTicks(6974),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 152",
                             Price = 152f,
@@ -1816,8 +1814,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b4efd66a-85ad-4a49-8cdd-6bd075cd00b9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7714),
+                            Id = new Guid("d60a901e-5bcc-4642-b257-4a0ad9b295d5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 50, 361, DateTimeKind.Utc).AddTicks(6975),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 153",
                             Price = 153f,
@@ -1826,8 +1824,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2070cf0-6b9c-48c2-a413-da56510d1745"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7716),
+                            Id = new Guid("4dc9e560-db34-45db-ac27-420042d7d7bd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 51, 361, DateTimeKind.Utc).AddTicks(6977),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 154",
                             Price = 154f,
@@ -1836,8 +1834,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3e788c89-4936-48d8-9319-39818ed32555"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7718),
+                            Id = new Guid("b642d702-d10a-4493-839a-0e8a894139b6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 52, 361, DateTimeKind.Utc).AddTicks(6979),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 155",
                             Price = 155f,
@@ -1846,8 +1844,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("79e09130-3035-4db3-80f4-e684719d6957"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7720),
+                            Id = new Guid("73b40383-e6bd-4e14-974e-138281cf0dd4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 53, 361, DateTimeKind.Utc).AddTicks(6980),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 156",
                             Price = 156f,
@@ -1856,8 +1854,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("13ff00ca-46bb-47aa-ad2b-4f9fe9961786"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7722),
+                            Id = new Guid("b66da1f1-7b01-40c5-8393-0892184e9a3a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 54, 361, DateTimeKind.Utc).AddTicks(6982),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 157",
                             Price = 157f,
@@ -1866,8 +1864,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9465d402-177c-43c2-84e5-4354922de315"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7725),
+                            Id = new Guid("0363b147-d2ea-41a3-aa0f-8eb351b4f0e6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 55, 361, DateTimeKind.Utc).AddTicks(6985),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 158",
                             Price = 158f,
@@ -1876,8 +1874,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a8695cb0-1a8c-4ae4-a4ad-d331fd4ea22b"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7727),
+                            Id = new Guid("4db16b1b-94d6-4857-b8ba-4da2adc6d578"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 56, 361, DateTimeKind.Utc).AddTicks(6987),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 159",
                             Price = 159f,
@@ -1886,8 +1884,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d972c587-7509-41e7-ae45-26f37da6ac39"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7730),
+                            Id = new Guid("4e64d24b-5a95-472d-a18c-87d80c8ca5df"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 57, 361, DateTimeKind.Utc).AddTicks(6989),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 160",
                             Price = 160f,
@@ -1896,8 +1894,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("43396c05-8538-474d-a30e-3d683fa57d1e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7734),
+                            Id = new Guid("d020bf55-187d-4e77-80c0-de100de5894b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 58, 361, DateTimeKind.Utc).AddTicks(6990),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 161",
                             Price = 161f,
@@ -1906,8 +1904,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1fa6d43e-96e5-4af9-a516-13a1487a40c1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7737),
+                            Id = new Guid("1b144b0b-c65f-49ca-870e-f040e4a3f62c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 50, 59, 361, DateTimeKind.Utc).AddTicks(6992),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 162",
                             Price = 162f,
@@ -1916,8 +1914,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("face70fc-5b1e-4e07-8df4-a74232b85243"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7739),
+                            Id = new Guid("e3b46c04-4f01-4c7c-af1d-84f75d8e9dcd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 0, 361, DateTimeKind.Utc).AddTicks(6994),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 163",
                             Price = 163f,
@@ -1926,8 +1924,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f55e4fd-205b-4615-882f-41baac529a3c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7742),
+                            Id = new Guid("e5739026-2ec5-4439-a079-7efe6ee63711"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 1, 361, DateTimeKind.Utc).AddTicks(6995),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 164",
                             Price = 164f,
@@ -1936,8 +1934,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96f94b8e-90c7-4f83-bb40-1b0d97d56f4f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7744),
+                            Id = new Guid("d7d5de3c-25ca-4a12-b980-04da5e4c2e8a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 2, 361, DateTimeKind.Utc).AddTicks(6997),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 165",
                             Price = 165f,
@@ -1946,8 +1944,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ded1fe59-a047-4a89-b0cd-5a2c89995ff9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7747),
+                            Id = new Guid("4617811d-a24b-4370-ae0e-44e7120139bb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 3, 361, DateTimeKind.Utc).AddTicks(7000),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 166",
                             Price = 166f,
@@ -1956,8 +1954,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("56d8ddd1-e054-4525-a597-2f51813020d4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7749),
+                            Id = new Guid("d348421d-89c2-433d-bded-9c62cd0063ad"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 4, 361, DateTimeKind.Utc).AddTicks(7002),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 167",
                             Price = 167f,
@@ -1966,8 +1964,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("65453a68-6995-4798-a465-1d547eb98cc4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7751),
+                            Id = new Guid("88c33fde-d70f-45ee-8475-63e6297ba54e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 5, 361, DateTimeKind.Utc).AddTicks(7004),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 168",
                             Price = 168f,
@@ -1976,8 +1974,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("13f2a9eb-b897-4f16-b355-ca207e06673d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7756),
+                            Id = new Guid("85fdde4b-c719-4301-881d-460b5068df08"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 6, 361, DateTimeKind.Utc).AddTicks(7005),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 169",
                             Price = 169f,
@@ -1986,8 +1984,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bb789b67-7005-4828-967a-ff3449cb3773"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7758),
+                            Id = new Guid("d2c6e21a-3109-42a4-9551-eed51c7752ba"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 7, 361, DateTimeKind.Utc).AddTicks(7007),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 170",
                             Price = 170f,
@@ -1996,8 +1994,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c4fe56e7-8c45-4fa6-ae4b-0b53d1f93949"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7760),
+                            Id = new Guid("b5830330-e322-4d58-88e9-c26db9353647"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 8, 361, DateTimeKind.Utc).AddTicks(7009),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 171",
                             Price = 171f,
@@ -2006,8 +2004,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2b49d015-e167-4acb-a75c-3f57cca227fa"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7763),
+                            Id = new Guid("34c39e64-f89e-487a-b542-02a2f33c9862"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 9, 361, DateTimeKind.Utc).AddTicks(7010),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 172",
                             Price = 172f,
@@ -2016,8 +2014,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("df5338c3-8b6a-4aca-9987-cdc355fe1cbe"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7765),
+                            Id = new Guid("2dd804bf-0702-440c-a361-0af065b20b22"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 10, 361, DateTimeKind.Utc).AddTicks(7012),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 173",
                             Price = 173f,
@@ -2026,8 +2024,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5df4e01a-5767-4de9-8c33-8648903d5b05"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7767),
+                            Id = new Guid("844af6f0-dc20-485d-a6f5-b5172f9d7d85"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 11, 361, DateTimeKind.Utc).AddTicks(7015),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 174",
                             Price = 174f,
@@ -2036,8 +2034,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c844711d-f217-4525-b066-8f8def290154"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7769),
+                            Id = new Guid("fd2576ee-2b7d-4ada-9add-edf645fff536"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 12, 361, DateTimeKind.Utc).AddTicks(7017),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 175",
                             Price = 175f,
@@ -2046,8 +2044,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("225edf74-bb47-4dca-a539-4e1ad8343190"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7772),
+                            Id = new Guid("97d43f5b-aa45-4a12-9844-5dbdb1222899"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 13, 361, DateTimeKind.Utc).AddTicks(7018),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 176",
                             Price = 176f,
@@ -2056,8 +2054,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f297a332-18f7-4206-a571-a33002e7d0ee"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7776),
+                            Id = new Guid("7f1314f1-d805-44a1-b6eb-d1dcf5c1e7c8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 14, 361, DateTimeKind.Utc).AddTicks(7020),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 177",
                             Price = 177f,
@@ -2066,8 +2064,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1bb8c55-a40c-45c6-bcf9-4a3fe0c73adc"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7778),
+                            Id = new Guid("f9f21cc7-a005-4b60-9de0-df778e5cc2aa"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 15, 361, DateTimeKind.Utc).AddTicks(7022),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 178",
                             Price = 178f,
@@ -2076,8 +2074,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa640071-018d-436f-b41f-17e21e048b5a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7780),
+                            Id = new Guid("7f9f904a-80bb-46b4-9b8c-997a3b88ec01"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 16, 361, DateTimeKind.Utc).AddTicks(7023),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 179",
                             Price = 179f,
@@ -2086,8 +2084,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0e1ed51b-1bb3-422d-b7d0-69e61fb6fbdd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7783),
+                            Id = new Guid("f2210186-03de-4a53-8930-e49ef2886ed0"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 17, 361, DateTimeKind.Utc).AddTicks(7025),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 180",
                             Price = 180f,
@@ -2096,8 +2094,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1faaa97e-219d-4389-bddb-f6758139acb4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7785),
+                            Id = new Guid("5d5cd34e-8f54-4293-b8e7-1aecc5f63f77"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 18, 361, DateTimeKind.Utc).AddTicks(7027),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 181",
                             Price = 181f,
@@ -2106,8 +2104,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8de3d314-2f7d-4c35-aa52-fd4694837037"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7787),
+                            Id = new Guid("c21b2aeb-bedf-44ec-b637-782ea5cb07a3"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 19, 361, DateTimeKind.Utc).AddTicks(7030),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 182",
                             Price = 182f,
@@ -2116,8 +2114,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c956380-5551-49a6-9675-8da077475f7c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7789),
+                            Id = new Guid("f86a28c4-3b26-44f2-908a-a57cbcd555d6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 20, 361, DateTimeKind.Utc).AddTicks(7032),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 183",
                             Price = 183f,
@@ -2126,8 +2124,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0acfe31a-a00c-4e1f-9241-f83ce3aa7016"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7792),
+                            Id = new Guid("e871da05-8157-4fa7-8631-2bda0a45b0ac"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 21, 361, DateTimeKind.Utc).AddTicks(7033),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 184",
                             Price = 184f,
@@ -2136,8 +2134,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("445cd154-9072-48be-a98e-b74fa488d066"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7796),
+                            Id = new Guid("7b4262d4-99b8-4982-9246-db962cdb9b4e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 22, 361, DateTimeKind.Utc).AddTicks(7035),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 185",
                             Price = 185f,
@@ -2146,8 +2144,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e43ffcc3-99a4-45b1-afff-2599a15414af"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7798),
+                            Id = new Guid("9c18c2ca-7598-459d-af2f-a828dd864ef7"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 23, 361, DateTimeKind.Utc).AddTicks(7116),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 186",
                             Price = 186f,
@@ -2156,8 +2154,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c5b0f3d-88c2-4058-a28f-909d5ac66014"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7800),
+                            Id = new Guid("c32a9c68-1ed2-4a05-b1e4-5dcd2561180d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 24, 361, DateTimeKind.Utc).AddTicks(7120),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 187",
                             Price = 187f,
@@ -2166,8 +2164,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3f4eff2a-4309-4fb2-8b0b-b5a83c16e7db"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7803),
+                            Id = new Guid("34bad381-7133-4e0a-8483-056f1334adc6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 25, 361, DateTimeKind.Utc).AddTicks(7122),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 188",
                             Price = 188f,
@@ -2176,8 +2174,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f4c2966-764b-4f17-a302-b968453aefa6"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7805),
+                            Id = new Guid("e6dbc674-b338-4df7-8ec3-38462540df63"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 26, 361, DateTimeKind.Utc).AddTicks(7123),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 189",
                             Price = 189f,
@@ -2186,8 +2184,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e319b691-cc84-4dc0-a5e8-1a552f46cdd1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7835),
+                            Id = new Guid("cf31d58b-3b31-44f8-90da-f62073522c54"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 27, 361, DateTimeKind.Utc).AddTicks(7127),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 190",
                             Price = 190f,
@@ -2196,8 +2194,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f53fc8d7-978c-4c9e-a92b-5b7b605fb15c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7837),
+                            Id = new Guid("b4464cf5-e2c8-46ab-be98-7cac1c2752d8"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 28, 361, DateTimeKind.Utc).AddTicks(7128),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 191",
                             Price = 191f,
@@ -2206,8 +2204,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc7537b4-0498-4c31-a929-40b5b59d3369"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7840),
+                            Id = new Guid("72a020db-10d0-4269-8ee8-2e1cb20e3272"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 29, 361, DateTimeKind.Utc).AddTicks(7130),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 192",
                             Price = 192f,
@@ -2216,8 +2214,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bab45cdb-b5a2-49fb-9b7d-aa5746e11ccd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7845),
+                            Id = new Guid("1b2cb807-27b6-485d-b518-a5c35df9f557"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 30, 361, DateTimeKind.Utc).AddTicks(7132),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 193",
                             Price = 193f,
@@ -2226,8 +2224,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ffe45bb8-ed48-49ba-8693-0155bc16814c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7847),
+                            Id = new Guid("6f8f5335-6b97-43ed-ad94-3d0c183eded4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 31, 361, DateTimeKind.Utc).AddTicks(7133),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 194",
                             Price = 194f,
@@ -2236,8 +2234,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("75bf4858-6d1e-41fa-8f91-635c4d5898f2"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7850),
+                            Id = new Guid("ab1dc5c6-f3b5-42ff-bb7a-a56f4e90a635"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 32, 361, DateTimeKind.Utc).AddTicks(7135),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 195",
                             Price = 195f,
@@ -2246,8 +2244,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cdbdf9cb-18d1-40ce-ad1d-9dc9134c0702"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7852),
+                            Id = new Guid("95f815ee-59b3-4ecd-a594-af05ef4b7941"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 33, 361, DateTimeKind.Utc).AddTicks(7137),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 196",
                             Price = 196f,
@@ -2256,8 +2254,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("626a40c0-9372-412b-89bd-398f69c84b6d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7854),
+                            Id = new Guid("e84584e8-2575-4fef-accc-36b9426de8f6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 34, 361, DateTimeKind.Utc).AddTicks(7138),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 197",
                             Price = 197f,
@@ -2266,8 +2264,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("af5d9beb-a460-43d4-afc9-3514754b1cfd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7857),
+                            Id = new Guid("2079c1f7-a87e-47f3-ade9-6a7dff65fcc1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 35, 361, DateTimeKind.Utc).AddTicks(7141),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 198",
                             Price = 198f,
@@ -2276,8 +2274,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4919d5b7-0820-40e9-9647-33bb07b50f01"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7860),
+                            Id = new Guid("aab49194-d32e-43b1-b1ad-59db96238055"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 36, 361, DateTimeKind.Utc).AddTicks(7143),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 199",
                             Price = 199f,
@@ -2286,8 +2284,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fb9445a2-26a9-464a-944f-9359fe9788c0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7862),
+                            Id = new Guid("3625129b-c952-452c-b981-dc6654a9c95e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 37, 361, DateTimeKind.Utc).AddTicks(7145),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 200",
                             Price = 200f,
@@ -2296,8 +2294,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9514f666-0083-475e-b998-7571d8323147"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7866),
+                            Id = new Guid("02a0c85a-ca27-41ab-baeb-d9c1468e3960"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 38, 361, DateTimeKind.Utc).AddTicks(7146),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 201",
                             Price = 201f,
@@ -2306,8 +2304,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("70bde2bf-62a9-4bcd-ae4c-f7d0bec44b28"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7868),
+                            Id = new Guid("e2bc171a-afb3-468d-b574-d18b90b9acbb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 39, 361, DateTimeKind.Utc).AddTicks(7148),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 202",
                             Price = 202f,
@@ -2316,8 +2314,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5f5d3df8-876d-4c48-ac2e-3c44796e30f1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7871),
+                            Id = new Guid("d190004b-fced-470c-932e-2fcc12c8c47d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 40, 361, DateTimeKind.Utc).AddTicks(7149),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 203",
                             Price = 203f,
@@ -2326,8 +2324,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f2185c2-9284-4a03-8942-2e5f63fd39bd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7873),
+                            Id = new Guid("6dd6f810-095f-4a21-9f78-93fd937c5a01"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 41, 361, DateTimeKind.Utc).AddTicks(7151),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 204",
                             Price = 204f,
@@ -2336,8 +2334,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7e253b43-9405-4ce7-8345-a478535d37ac"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7875),
+                            Id = new Guid("495f3af6-f363-46a6-a1bf-3876d1f4bfbb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 42, 361, DateTimeKind.Utc).AddTicks(7153),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 205",
                             Price = 205f,
@@ -2346,8 +2344,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aaaf3a7a-6d25-4c11-b95e-c21211134aad"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7878),
+                            Id = new Guid("2629b197-2857-4754-9c30-77583bc6874c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 43, 361, DateTimeKind.Utc).AddTicks(7156),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 206",
                             Price = 206f,
@@ -2356,8 +2354,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("67b787b9-a90c-4b7e-9044-2f12890dfb4e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7880),
+                            Id = new Guid("f77b7a8b-883a-40ce-b12f-e716f46b1d17"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 44, 361, DateTimeKind.Utc).AddTicks(7158),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 207",
                             Price = 207f,
@@ -2366,8 +2364,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("95f6379b-02c5-4b46-8552-e31f1f089186"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7883),
+                            Id = new Guid("322dfee9-dbfa-4d50-a279-f42ad51ef3f0"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 45, 361, DateTimeKind.Utc).AddTicks(7159),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 208",
                             Price = 208f,
@@ -2376,8 +2374,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fb07db00-9258-49fb-8520-a6d59ef5cf63"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7887),
+                            Id = new Guid("ceb8e893-5218-4086-8a26-b2bee5ffd15b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 46, 361, DateTimeKind.Utc).AddTicks(7161),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 209",
                             Price = 209f,
@@ -2386,8 +2384,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e64159fa-a1d8-4a40-b9e2-5e1b404d5d4d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7890),
+                            Id = new Guid("51c76142-9323-4369-91a7-c78dedcc0c16"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 47, 361, DateTimeKind.Utc).AddTicks(7162),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 210",
                             Price = 210f,
@@ -2396,8 +2394,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59c87866-3a48-4a9e-a5c5-4fe271346a15"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7892),
+                            Id = new Guid("11ed3771-0321-48fa-9a6d-9105ab6697f5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 48, 361, DateTimeKind.Utc).AddTicks(7164),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 211",
                             Price = 211f,
@@ -2406,8 +2404,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("63977730-1ca2-4dd8-b4fa-d9b332c575ba"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7895),
+                            Id = new Guid("60309abf-50b7-4521-b23c-ce6d2be669c6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 49, 361, DateTimeKind.Utc).AddTicks(7166),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 212",
                             Price = 212f,
@@ -2416,8 +2414,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b83e369a-804e-42ac-9b4b-ea9e673341a2"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7897),
+                            Id = new Guid("5293d9d8-9946-44d7-a40f-7c9dd509e349"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 50, 361, DateTimeKind.Utc).AddTicks(7167),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 213",
                             Price = 213f,
@@ -2426,8 +2424,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9e8b0fe7-535d-4246-b697-227cf32e76a6"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7899),
+                            Id = new Guid("2210d247-68a8-41b0-a02b-4a7baa431c64"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 51, 361, DateTimeKind.Utc).AddTicks(7171),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 214",
                             Price = 214f,
@@ -2436,8 +2434,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f332b8c7-be69-4f02-b4e1-22db8ae9dc18"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7902),
+                            Id = new Guid("e9182255-dd7c-4e0c-8d37-fa17a38e1aae"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 52, 361, DateTimeKind.Utc).AddTicks(7172),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 215",
                             Price = 215f,
@@ -2446,8 +2444,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3737460a-3c6a-4e9c-a212-d4df4b47f56c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7904),
+                            Id = new Guid("aed913b4-ce54-476f-89e0-d4fc248da10c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 53, 361, DateTimeKind.Utc).AddTicks(7174),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 216",
                             Price = 216f,
@@ -2456,8 +2454,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a44203ca-cef5-4491-b8dd-6ec29c6c8b85"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7909),
+                            Id = new Guid("a4ae1e4b-d9c8-4324-9f66-139cba0fcca1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 54, 361, DateTimeKind.Utc).AddTicks(7175),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 217",
                             Price = 217f,
@@ -2466,8 +2464,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4aa474d2-64a6-4ad5-b241-6c869fb2d441"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7911),
+                            Id = new Guid("12cee1a1-0702-4dee-9bda-2a62d0eba9a1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 55, 361, DateTimeKind.Utc).AddTicks(7177),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 218",
                             Price = 218f,
@@ -2476,8 +2474,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8847df9e-3c06-4f2a-8b31-0b7e4ef967e0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7914),
+                            Id = new Guid("1240b5ed-aa52-4469-91d9-93ec7e6c7d2a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 56, 361, DateTimeKind.Utc).AddTicks(7179),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 219",
                             Price = 219f,
@@ -2486,8 +2484,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e52ed4c-7c25-4e20-ab6b-a73b1a9eae32"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7916),
+                            Id = new Guid("75cbcc59-5d9f-44e4-8860-f649a88de9fd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 57, 361, DateTimeKind.Utc).AddTicks(7180),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 220",
                             Price = 220f,
@@ -2496,8 +2494,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0cab2d3-cbf2-47d4-8ae0-186bef33884e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7919),
+                            Id = new Guid("06ca8a9a-669e-4911-9e14-dceb7121a2b7"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 58, 361, DateTimeKind.Utc).AddTicks(7182),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 221",
                             Price = 221f,
@@ -2506,8 +2504,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("54960c85-5c5c-48c8-822b-1fe90e90b262"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7921),
+                            Id = new Guid("9ed941d3-311d-4eaa-8f90-cd5fbf62db7a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 51, 59, 361, DateTimeKind.Utc).AddTicks(7185),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 222",
                             Price = 222f,
@@ -2516,8 +2514,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3f8757a6-99b4-409a-bcf1-7bb789f86043"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7924),
+                            Id = new Guid("63f93fa3-135f-4cda-b0da-4ba16828a94c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 0, 361, DateTimeKind.Utc).AddTicks(7187),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 223",
                             Price = 223f,
@@ -2526,8 +2524,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d6ef3d4a-f074-42f1-b0a3-807fad22bc12"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7926),
+                            Id = new Guid("e9c3dbe4-048e-4fee-aaff-afc76a562fc2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 1, 361, DateTimeKind.Utc).AddTicks(7188),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 224",
                             Price = 224f,
@@ -2536,8 +2534,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("03cc7f16-8627-4eda-93f3-9e5adc7772bb"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7931),
+                            Id = new Guid("6709e358-cebc-4fb2-8af9-f096aba957c4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 2, 361, DateTimeKind.Utc).AddTicks(7190),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 225",
                             Price = 225f,
@@ -2546,8 +2544,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a0e42f05-8d6b-41fa-9b65-9a78f5cc75bf"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7933),
+                            Id = new Guid("71f36e45-40ff-4d78-ab38-11d16f7473a1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 3, 361, DateTimeKind.Utc).AddTicks(7192),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 226",
                             Price = 226f,
@@ -2556,8 +2554,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e6c70b61-0fde-4b96-8459-da1baaeb1ba8"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7936),
+                            Id = new Guid("69d53c23-e1e3-4d98-9a86-f92b34edb18f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 4, 361, DateTimeKind.Utc).AddTicks(7193),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 227",
                             Price = 227f,
@@ -2566,8 +2564,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8185b669-7acc-4700-a90d-00fe6c26919f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7938),
+                            Id = new Guid("99b27343-aa1e-4181-863e-4ef047f0cd55"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 5, 361, DateTimeKind.Utc).AddTicks(7195),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 228",
                             Price = 228f,
@@ -2576,8 +2574,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("db85b53e-bae2-4f79-9662-ed7a75ea50e4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7941),
+                            Id = new Guid("60dbd129-58e2-430b-9de9-bd052a86fcec"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 6, 361, DateTimeKind.Utc).AddTicks(7197),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 229",
                             Price = 229f,
@@ -2586,8 +2584,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b36e7ac2-1991-4573-8ffd-56e7e3075848"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7944),
+                            Id = new Guid("fff709cb-963c-4d33-8799-6e9493028581"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 7, 361, DateTimeKind.Utc).AddTicks(7200),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 230",
                             Price = 230f,
@@ -2596,8 +2594,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8cd246b1-1486-4c20-9b56-118cd7936052"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7946),
+                            Id = new Guid("1a9fdc18-7854-4d2d-b304-54d0a1c9d3fe"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 8, 361, DateTimeKind.Utc).AddTicks(7201),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 231",
                             Price = 231f,
@@ -2606,8 +2604,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e7533ad8-37fe-4b06-aff1-50c2b2199f4c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7948),
+                            Id = new Guid("c7e9272a-623c-4042-9521-ff41bb262787"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 9, 361, DateTimeKind.Utc).AddTicks(7203),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 232",
                             Price = 232f,
@@ -2616,8 +2614,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c6b2e2de-1c6b-40b8-8b85-e4f8aacd0729"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7953),
+                            Id = new Guid("6de83349-118d-45c4-8b82-936d7df4984c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 10, 361, DateTimeKind.Utc).AddTicks(7205),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 233",
                             Price = 233f,
@@ -2626,8 +2624,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eae605fc-7bd9-4da0-914c-e47b391cba8d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7955),
+                            Id = new Guid("e09bbcbe-2353-43bd-975d-cf52ce7aa477"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 11, 361, DateTimeKind.Utc).AddTicks(7206),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 234",
                             Price = 234f,
@@ -2636,8 +2634,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("97f557cb-93d6-4e59-9f45-23aa4d807d0f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7958),
+                            Id = new Guid("9d087da0-cc1c-4adc-8b47-8df5f90ca993"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 12, 361, DateTimeKind.Utc).AddTicks(7208),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 235",
                             Price = 235f,
@@ -2646,8 +2644,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f305beb-898d-4b92-9648-724777e4b166"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7960),
+                            Id = new Guid("4d4f2426-8e17-4d84-bec4-0c37577746ab"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 13, 361, DateTimeKind.Utc).AddTicks(7210),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 236",
                             Price = 236f,
@@ -2656,8 +2654,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4a7e6337-c7a4-47b9-ae23-0fcaf0a7db19"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7962),
+                            Id = new Guid("aee49875-9605-4e21-b2c9-844cb1e0c347"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 14, 361, DateTimeKind.Utc).AddTicks(7211),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 237",
                             Price = 237f,
@@ -2666,8 +2664,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b1aed93b-a915-4591-96ed-8dd568a19d84"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7965),
+                            Id = new Guid("845daff0-aba6-4642-9ca5-ae9d19d3f79a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 15, 361, DateTimeKind.Utc).AddTicks(7214),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 238",
                             Price = 238f,
@@ -2676,8 +2674,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("867afb5a-c898-41de-89af-c171cc23afac"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7967),
+                            Id = new Guid("86c8f201-d021-4231-9ff9-a3cf958d11bf"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 16, 361, DateTimeKind.Utc).AddTicks(7216),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 239",
                             Price = 239f,
@@ -2686,8 +2684,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2e0c034-3c71-43f0-aeda-f83ec65b4e28"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7970),
+                            Id = new Guid("26a20a62-fcef-462c-831f-8392fa0b8689"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 17, 361, DateTimeKind.Utc).AddTicks(7218),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 240",
                             Price = 240f,
@@ -2696,8 +2694,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b3afad89-9067-4084-afe5-dff5c4af556f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7974),
+                            Id = new Guid("47f368ab-e6b8-4f0a-a300-c83519522be5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 18, 361, DateTimeKind.Utc).AddTicks(7219),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 241",
                             Price = 241f,
@@ -2706,8 +2704,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("27d81bca-ac88-4a1d-b8c2-5e60d65c118d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7976),
+                            Id = new Guid("b720a96b-2649-4c7b-82bd-c779d6f1f842"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 19, 361, DateTimeKind.Utc).AddTicks(7264),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 242",
                             Price = 242f,
@@ -2716,8 +2714,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ad227d71-cf23-46e0-8f07-e31855c4057a"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(7979),
+                            Id = new Guid("f16ae760-b53b-4052-805a-cedbe087e022"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 20, 361, DateTimeKind.Utc).AddTicks(7266),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 243",
                             Price = 243f,
@@ -2726,8 +2724,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f7df532-9be7-49f4-8cbe-e8b3ef6e3ae7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8009),
+                            Id = new Guid("990effab-e8ba-470c-be79-6982be1200b2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 21, 361, DateTimeKind.Utc).AddTicks(7267),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 244",
                             Price = 244f,
@@ -2736,8 +2734,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2d23de41-4ac2-4019-bcda-121994db4a28"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8011),
+                            Id = new Guid("e6364a19-c54c-44b8-a144-71fd44dabe8c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 22, 361, DateTimeKind.Utc).AddTicks(7269),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 245",
                             Price = 245f,
@@ -2746,8 +2744,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("885aff44-e44e-4eb2-bf1e-b092f67170a4"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8013),
+                            Id = new Guid("cc8ea5b6-04d7-4425-95c9-54a3a1022c75"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 23, 361, DateTimeKind.Utc).AddTicks(7272),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 246",
                             Price = 246f,
@@ -2756,8 +2754,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("46948ca1-3d95-48d8-a1a2-befa77f10762"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8015),
+                            Id = new Guid("81f4896d-1b9c-433a-83fa-101ca53a5083"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 24, 361, DateTimeKind.Utc).AddTicks(7274),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 247",
                             Price = 247f,
@@ -2766,8 +2764,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c18d63f8-21cd-4355-9488-d96e1591ec56"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8017),
+                            Id = new Guid("0b5010f3-43f9-438e-bdbe-aa0f920dfbf6"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 25, 361, DateTimeKind.Utc).AddTicks(7276),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 248",
                             Price = 248f,
@@ -2776,8 +2774,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7901055-9e0f-47b5-9ff7-5f4c32d2af47"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8023),
+                            Id = new Guid("f6023db9-1b2f-4d21-a621-f788fc13e319"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 26, 361, DateTimeKind.Utc).AddTicks(7277),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 249",
                             Price = 249f,
@@ -2786,8 +2784,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e150a8ee-b509-474a-9f41-3ae71658c6fd"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8025),
+                            Id = new Guid("e3933706-b2c0-4925-9f42-685b9eca3862"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 27, 361, DateTimeKind.Utc).AddTicks(7279),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 250",
                             Price = 250f,
@@ -2796,8 +2794,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d68e3c20-e62b-4985-9971-920f5c5d0157"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8026),
+                            Id = new Guid("5d18c662-0ac6-4ef2-aa99-f6937a1196d2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 28, 361, DateTimeKind.Utc).AddTicks(7281),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 251",
                             Price = 251f,
@@ -2806,8 +2804,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9f6b19b5-6505-446e-8414-b351e85c6582"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8028),
+                            Id = new Guid("e077e55d-3a98-4e20-8b2d-5984327c66fd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 29, 361, DateTimeKind.Utc).AddTicks(7282),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 252",
                             Price = 252f,
@@ -2816,8 +2814,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8fe5aac6-5023-42c4-a70a-42eb0be15444"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8029),
+                            Id = new Guid("2178c663-9ed2-4f8a-a20b-d861b12258c3"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 30, 361, DateTimeKind.Utc).AddTicks(7284),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 253",
                             Price = 253f,
@@ -2826,8 +2824,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("66937669-ebbc-437b-9df6-3b98b98169da"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8031),
+                            Id = new Guid("c0672ccd-e2ae-422d-82db-4f741e568f43"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 31, 361, DateTimeKind.Utc).AddTicks(7287),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 254",
                             Price = 254f,
@@ -2836,8 +2834,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96f5d810-c929-419c-86e3-7c4a94992bc9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8032),
+                            Id = new Guid("c0481d3b-c7e7-44b4-b744-5280e9b42af0"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 32, 361, DateTimeKind.Utc).AddTicks(7289),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 255",
                             Price = 255f,
@@ -2846,8 +2844,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9be8a6f8-c830-4d36-acf7-bf9a19a91f07"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8034),
+                            Id = new Guid("fad65776-e016-4d34-b567-d97a3ff84a0e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 33, 361, DateTimeKind.Utc).AddTicks(7290),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 256",
                             Price = 256f,
@@ -2856,8 +2854,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11d04f8c-272b-462c-bd6a-3e2feb19ec10"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8037),
+                            Id = new Guid("765bd8c8-1c57-49a2-b0fc-297d196e3684"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 34, 361, DateTimeKind.Utc).AddTicks(7292),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 257",
                             Price = 257f,
@@ -2866,8 +2864,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("98c91543-1fab-4eeb-b231-21be86961fe2"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8039),
+                            Id = new Guid("e36cc0b4-7d13-444d-a506-0de0133ddf30"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 35, 361, DateTimeKind.Utc).AddTicks(7294),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 258",
                             Price = 258f,
@@ -2876,8 +2874,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("07887d82-2fbb-4ced-a3e4-793274018cc5"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8040),
+                            Id = new Guid("7d146457-d32b-44a2-841c-1b3fdc70c9be"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 36, 361, DateTimeKind.Utc).AddTicks(7295),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 259",
                             Price = 259f,
@@ -2886,8 +2884,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9d9f288d-ddd2-4aff-8640-47f37b53f107"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8042),
+                            Id = new Guid("35433bf2-cdab-4a5c-9a32-baf3f3959a31"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 37, 361, DateTimeKind.Utc).AddTicks(7297),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 260",
                             Price = 260f,
@@ -2896,8 +2894,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("04f51d94-4286-49b0-9286-bb961d50aa34"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8043),
+                            Id = new Guid("02d55502-d940-4f9f-b2b9-3395650362cd"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 38, 361, DateTimeKind.Utc).AddTicks(7298),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 261",
                             Price = 261f,
@@ -2906,8 +2904,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d025e4d0-6d3a-4210-b43a-2f86057dad9e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8045),
+                            Id = new Guid("ee0f55a2-0f57-4149-88ac-12b5f184a5ba"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 39, 361, DateTimeKind.Utc).AddTicks(7302),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 262",
                             Price = 262f,
@@ -2916,8 +2914,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d45be847-509e-4655-8499-acaf28b438bb"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8046),
+                            Id = new Guid("eceeaea7-0543-4af8-88cf-34045c747598"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 40, 361, DateTimeKind.Utc).AddTicks(7303),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 263",
                             Price = 263f,
@@ -2926,8 +2924,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f31d9374-d6ee-4bb3-a78a-4bf921588eaf"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8048),
+                            Id = new Guid("e73197c1-623d-43fa-a5a3-ec18017ce387"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 41, 361, DateTimeKind.Utc).AddTicks(7305),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 264",
                             Price = 264f,
@@ -2936,8 +2934,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7ef0444a-3699-4115-9932-d3c048c7a397"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8051),
+                            Id = new Guid("91580e7e-b767-4fdd-aaa2-b68bbaa5b75d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 42, 361, DateTimeKind.Utc).AddTicks(7307),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 265",
                             Price = 265f,
@@ -2946,8 +2944,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("210afffb-6c1a-4e5e-9657-bfb7607d2fab"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8052),
+                            Id = new Guid("03fb4c17-3e3a-47a6-868b-4651b6ef3aa1"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 43, 361, DateTimeKind.Utc).AddTicks(7308),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 266",
                             Price = 266f,
@@ -2956,8 +2954,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("07280ded-fcd9-43bf-a86c-67aef7304fb7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8054),
+                            Id = new Guid("0ec1d491-6276-4187-bf30-39bd238b1425"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 44, 361, DateTimeKind.Utc).AddTicks(7310),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 267",
                             Price = 267f,
@@ -2966,8 +2964,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c74c1ab5-ae9b-4486-a309-bf7f1b015515"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8055),
+                            Id = new Guid("ab52ce0d-a46a-48a2-b14a-a2a845ba9997"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 45, 361, DateTimeKind.Utc).AddTicks(7311),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 268",
                             Price = 268f,
@@ -2976,8 +2974,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd5b614d-859c-4b3b-8af8-fe7ff40dfa22"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8057),
+                            Id = new Guid("4f721571-6dd9-4f90-9597-52d66646e063"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 46, 361, DateTimeKind.Utc).AddTicks(7313),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 269",
                             Price = 269f,
@@ -2986,8 +2984,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aba7f9bc-c400-4354-8d56-c7d5441e3fee"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8058),
+                            Id = new Guid("4734e25f-465e-4647-afa6-45bc4687ff26"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 47, 361, DateTimeKind.Utc).AddTicks(7316),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 270",
                             Price = 270f,
@@ -2996,8 +2994,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1dc4e6e3-d24a-40e2-bf0a-adbb5f9dfae6"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8060),
+                            Id = new Guid("0c81026d-4261-4345-8973-230b98778b5f"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 48, 361, DateTimeKind.Utc).AddTicks(7318),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 271",
                             Price = 271f,
@@ -3006,8 +3004,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("83107190-61ac-4889-a766-551f5e9e9aa3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8062),
+                            Id = new Guid("bb7a1aec-e44c-4e83-8ccb-cc639ab6f12e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 49, 361, DateTimeKind.Utc).AddTicks(7320),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 272",
                             Price = 272f,
@@ -3016,8 +3014,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("461bdd63-fc87-4184-aa26-b617ea594dd9"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8065),
+                            Id = new Guid("f01791fe-c756-42ba-ba49-d2165eb67b4d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 50, 361, DateTimeKind.Utc).AddTicks(7321),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 273",
                             Price = 273f,
@@ -3026,8 +3024,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4d368e15-eae7-4f98-b56e-94c6d060b868"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8066),
+                            Id = new Guid("dbc22b59-1ba0-4366-b95c-dae2030bf4fb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 51, 361, DateTimeKind.Utc).AddTicks(7323),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 274",
                             Price = 274f,
@@ -3036,8 +3034,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("085efdb9-f777-4d23-8403-976b7902f01f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8068),
+                            Id = new Guid("eabcaa9f-436e-415f-803b-59fddc80b593"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 52, 361, DateTimeKind.Utc).AddTicks(7324),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 275",
                             Price = 275f,
@@ -3046,8 +3044,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f1c55f1-dde5-4ff6-a2be-c121f6e2c3b8"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8069),
+                            Id = new Guid("8b6fa02e-3b30-4bf9-b5e1-16d29d2b9d47"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 53, 361, DateTimeKind.Utc).AddTicks(7326),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 276",
                             Price = 276f,
@@ -3056,8 +3054,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2357980-2187-4067-a462-4ed0d11d9628"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8071),
+                            Id = new Guid("49126ae2-5b90-4805-b6e3-0d11ebea4d3c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 54, 361, DateTimeKind.Utc).AddTicks(7328),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 277",
                             Price = 277f,
@@ -3066,8 +3064,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("300aca05-268f-413c-96e2-d8c975c8fd1c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8072),
+                            Id = new Guid("aa0641d0-00ee-479f-a11e-26138224cdc4"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 55, 361, DateTimeKind.Utc).AddTicks(7331),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 278",
                             Price = 278f,
@@ -3076,8 +3074,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2d615b6a-e2b2-463e-9e00-96f8e77d9c6e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8074),
+                            Id = new Guid("6a55a9c4-6446-497b-8699-6f3793de64f2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 56, 361, DateTimeKind.Utc).AddTicks(7333),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 279",
                             Price = 279f,
@@ -3086,8 +3084,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f1be4a36-e8ec-449f-bfca-dce82f09d49e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8075),
+                            Id = new Guid("797e91f3-4cef-45e6-8df9-a252e132fc76"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 57, 361, DateTimeKind.Utc).AddTicks(7334),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 280",
                             Price = 280f,
@@ -3096,8 +3094,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("03be7b27-56e7-405e-b97d-75e13d7b0ab3"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8079),
+                            Id = new Guid("d6e80f1d-957c-418f-b13a-b3279d56ad83"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 58, 361, DateTimeKind.Utc).AddTicks(7336),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 281",
                             Price = 281f,
@@ -3106,8 +3104,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7f54cfa3-7141-4691-bfca-7500cf110b87"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8080),
+                            Id = new Guid("d5344e71-64e5-433d-905d-9d2b52e1bb39"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 52, 59, 361, DateTimeKind.Utc).AddTicks(7337),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 282",
                             Price = 282f,
@@ -3116,8 +3114,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3ce8ebc-7e35-45c7-843d-1667848cfb99"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8082),
+                            Id = new Guid("e0c37770-19fb-4266-bb85-e2b675be10da"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 0, 361, DateTimeKind.Utc).AddTicks(7339),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 283",
                             Price = 283f,
@@ -3126,8 +3124,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d15f2074-aca9-41f5-8bde-7d5179f59c5d"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8083),
+                            Id = new Guid("3378e223-4e60-4a34-89a7-2cc1091d04d2"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 1, 361, DateTimeKind.Utc).AddTicks(7341),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 284",
                             Price = 284f,
@@ -3136,8 +3134,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("daf2411d-3e62-40a8-819e-de8bcb4ef13c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8085),
+                            Id = new Guid("95bb7599-077b-46f2-b699-310ebe14300c"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 2, 361, DateTimeKind.Utc).AddTicks(7342),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 285",
                             Price = 285f,
@@ -3146,8 +3144,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("882d3d90-e9ce-400b-8028-08010bbc5b74"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8086),
+                            Id = new Guid("c961d178-9636-455a-bc59-f1a803afff27"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 3, 361, DateTimeKind.Utc).AddTicks(7346),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 286",
                             Price = 286f,
@@ -3156,8 +3154,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("da32ad32-81f2-444f-8a61-489f18a6ae92"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8088),
+                            Id = new Guid("364bbdde-f3a9-469f-a3d0-cb33cb320c63"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 4, 361, DateTimeKind.Utc).AddTicks(7347),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 287",
                             Price = 287f,
@@ -3166,8 +3164,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b31fec00-e633-4a41-86c8-ad2ea16fb633"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8089),
+                            Id = new Guid("a675d782-1d21-45fc-afc4-ccfe9fadc15e"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 5, 361, DateTimeKind.Utc).AddTicks(7349),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 288",
                             Price = 288f,
@@ -3176,8 +3174,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7310001a-d7d8-44e3-8098-f2f2dc3a6162"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8092),
+                            Id = new Guid("b5dd9d5f-76ee-43c0-ac8b-7283033fd5cb"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 6, 361, DateTimeKind.Utc).AddTicks(7351),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 289",
                             Price = 289f,
@@ -3186,8 +3184,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e6604263-5837-44a8-90b0-f686f2652623"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8094),
+                            Id = new Guid("2bf757a2-15ae-48e0-8974-4ad712c4f42d"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 7, 361, DateTimeKind.Utc).AddTicks(7352),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 290",
                             Price = 290f,
@@ -3196,8 +3194,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6bee43f3-87b9-41fd-8fb4-8f43b5c8d6e0"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8095),
+                            Id = new Guid("9e92a63a-2ee6-43af-8075-1e7ee4453125"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 8, 361, DateTimeKind.Utc).AddTicks(7354),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 291",
                             Price = 291f,
@@ -3206,8 +3204,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d3cc69a8-1094-4ff1-ac7e-1ed38c4b49d1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8097),
+                            Id = new Guid("901268c0-adb8-4a08-8736-4c2560b7d927"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 9, 361, DateTimeKind.Utc).AddTicks(7355),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 292",
                             Price = 292f,
@@ -3216,8 +3214,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d3e4cd72-6a1a-4578-b6a8-58e8da4d148c"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8099),
+                            Id = new Guid("89302b4f-3956-4a68-b745-854e3941bc96"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 10, 361, DateTimeKind.Utc).AddTicks(7357),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 293",
                             Price = 293f,
@@ -3226,8 +3224,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("27211666-863f-4120-aede-f6b752784ae6"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8100),
+                            Id = new Guid("32d10c8b-8e8e-43f1-b61c-6621deb105f5"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 11, 361, DateTimeKind.Utc).AddTicks(7360),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 294",
                             Price = 294f,
@@ -3236,8 +3234,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3345f2b-4572-4114-b14b-01207a7c05da"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8102),
+                            Id = new Guid("556f5303-2d85-4cdd-b7fc-5b5283a68317"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 12, 361, DateTimeKind.Utc).AddTicks(7362),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 295",
                             Price = 295f,
@@ -3246,8 +3244,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("08d22839-466d-42d4-96c2-05afb4ef45b7"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8103),
+                            Id = new Guid("9c613f89-32ba-46f3-97d3-0a023a1c097a"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 13, 361, DateTimeKind.Utc).AddTicks(7363),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 296",
                             Price = 296f,
@@ -3256,8 +3254,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7b433c84-ccaf-4949-8f43-85a94266d17f"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8106),
+                            Id = new Guid("a98034e9-71ab-46f4-aba6-014ad44e662b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 14, 361, DateTimeKind.Utc).AddTicks(7365),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 297",
                             Price = 297f,
@@ -3266,8 +3264,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ff428dc9-669a-4017-a8c5-323e9329c9d1"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8130),
+                            Id = new Guid("b532e9d0-2a75-4e1e-bd00-94caca3b26d9"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 15, 361, DateTimeKind.Utc).AddTicks(7367),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 298",
                             Price = 298f,
@@ -3276,8 +3274,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1eafaa9f-e0ad-4aec-a9e4-7864fa809f8e"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8132),
+                            Id = new Guid("3f3c2982-47da-48dd-a6d5-02d389be1b9b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 16, 361, DateTimeKind.Utc).AddTicks(7393),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 299",
                             Price = 299f,
@@ -3286,8 +3284,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5723d4ad-e5ba-417c-8416-d18297c77ede"),
-                            CreatedDate = new DateTime(2024, 11, 8, 19, 9, 54, 793, DateTimeKind.Utc).AddTicks(8133),
+                            Id = new Guid("5b3fa38e-973e-47b1-a315-fab09816b48b"),
+                            CreatedDate = new DateTime(2024, 11, 28, 19, 53, 17, 361, DateTimeKind.Utc).AddTicks(7395),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 300",
                             Price = 300f,
@@ -3402,21 +3400,6 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.Property<Guid>("OrdersId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductsId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("OrdersId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("OrderProduct");
-                });
-
             modelBuilder.Entity("ProductProductImageFile", b =>
                 {
                     b.Property<Guid>("ProductImageFilesId")
@@ -3481,12 +3464,6 @@ namespace ETicaretAPI.Persistence.Migrations
 
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("ETicaretAPI.Domain.Entities.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ETicaretAPI.Domain.Entities.Basket", "Basket")
                         .WithOne("Order")
                         .HasForeignKey("ETicaretAPI.Domain.Entities.Order", "Id")
@@ -3494,8 +3471,6 @@ namespace ETicaretAPI.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Basket");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -3549,21 +3524,6 @@ namespace ETicaretAPI.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("ETicaretAPI.Domain.Entities.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ETicaretAPI.Domain.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ProductProductImageFile", b =>
                 {
                     b.HasOne("ETicaretAPI.Domain.Entities.ProductImageFile", null)
@@ -3585,11 +3545,6 @@ namespace ETicaretAPI.Persistence.Migrations
 
                     b.Navigation("Order")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ETicaretAPI.Domain.Entities.Customer", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Identity.AppUser", b =>
