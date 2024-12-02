@@ -24,23 +24,23 @@ namespace ETicaretAPI.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            var products = new Product[300];
+            //var products = new Product[300];
 
-            for (int i = 0; i < 300; i++)
-            {
-                products[i] = new Product
-                {
-                    Id = Guid.NewGuid(),
-                    Name = $"Product {i + 1}",
-                    Description = "A brief description of the product, highlighting its key features and benefits.",
-                    Price = i + 1,
-                    Stock = i + 1,
-                    CreatedDate = DateTime.UtcNow.AddSeconds(i),
-                };
-            }
+            //for (int i = 0; i < 300; i++)
+            //{
+            //    products[i] = new Product
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Name = $"Product {i + 1}",
+            //        Description = "A brief description of the product, highlighting its key features and benefits.",
+            //        Price = i + 1,
+            //        Stock = i + 1,
+            //        CreatedDate = DateTime.UtcNow.AddSeconds(i),
+            //    };
+            //}
 
-            builder.Entity<Product>()
-                .HasData(products);
+            //builder.Entity<Product>()
+            //    .HasData(products);
 
             // Sets the id of Order as primary key
             builder.Entity<Order>()

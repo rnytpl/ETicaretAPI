@@ -1,7 +1,9 @@
-﻿using ETicaretAPI.Application.Abstractions.Storage;
+﻿using ETicaretAPI.Application.Abstractions.Services;
+using ETicaretAPI.Application.Abstractions.Storage;
 using ETicaretAPI.Application.Abstractions.Storage.Azure;
 using ETicaretAPI.Application.Abstractions.Token;
 using ETicaretAPI.Infrastructure.Enums;
+using ETicaretAPI.Infrastructure.Services;
 using ETicaretAPI.Infrastructure.Services.Storage;
 using ETicaretAPI.Infrastructure.Services.Storage.Azure;
 using ETicaretAPI.Infrastructure.Services.Storage.Local;
@@ -18,6 +20,7 @@ namespace ETicaretAPI.Infrastructure
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddScoped<IAzureStorage, AzureStorage>();
+            services.AddScoped<IMailService,MailService>();
         } 
         public static void AddStorage<T>(this IServiceCollection services) where T: Storage, IStorage
         {

@@ -37,17 +37,25 @@ namespace ETicaretAPI.Persistence.Services
             {
                 AppUser? user = await _userManager.Users
                                     .Include(u => u.Baskets)
+                                        .ThenInclude(b => b.BasketItems)
+                                            .ThenInclude(bi => bi.Product)
+                                                .ThenInclude(p => p.ProductImageFiles)
                                     .FirstOrDefaultAsync(u => u.UserName == username);
 
-                var _basket = from basket in user?.Baskets
-                              join order in _orderReadRepository.Table
-                              on basket.Id equals order.Id into BasketOrders
-                              from order in BasketOrders.DefaultIfEmpty()
-                              select new
-                              {
-                                  Basket = basket,
-                                  Order = order
-                              };
+
+                var _basket =   // Retrieve a user's existing baskets
+                                from basket in user?.Baskets
+                                // Join Basket and Order 
+                                join order in _orderReadRepository.Table
+                                // Match basketId with orderId and group results into BasketOrders          collection
+                                on basket.Id equals order.Id into BasketOrders
+                                // If a basket has no associated order, ensure Basket is included in        the result with order being null
+                                from order in BasketOrders.DefaultIfEmpty()
+                                // Project the results into an anonymous type
+                                select new {
+                                    Basket = basket,
+                                    Order = order
+                                };
 
                 Basket? targetBasket = null;
 
@@ -92,43 +100,37 @@ namespace ETicaretAPI.Persistence.Services
             }
         }
 
-        public async Task<List<BasketItem>> GetBasketItemsAsync()
+        public async Task<Basket> GetBasketItemsAsync()
         {
             Basket? basket = await ContextUser();
-
-            //Basket? result = await _basketReadRepository.Table
-            //    .Include(b => b.BasketItems)
-            //    .ThenInclude(bi => bi.Product)
-            //    .ThenInclude(p => p.ProductImageFiles.Select(pif => pif.Path))
-            //    .FirstOrDefaultAsync(b => b.Id == basket.Id);
 
             Basket? result = await _basketReadRepository.Table
                 .Where(b => b.Id == basket.Id)
                 .Select(b => new Basket
-                {
-                    Id = b.Id,
-                    BasketItems = b.BasketItems.Select(bi => new BasketItem
                     {
-                        Id = bi.Id,
-                        Quantity = bi.Quantity,
-                        Product = new Product
+                        Id = b.Id,
+                        BasketItems = b.BasketItems.Select(bi => new BasketItem
                         {
-                            Id = bi.Product.Id,
-                            Name = bi.Product.Name,
-                            Price = bi.Product.Price,
-                            Description = bi.Product.Description,
-                            ProductImageFiles = bi.Product.ProductImageFiles.Select(pif => new ProductImageFile
+                            Id = bi.Id,
+                            Quantity = bi.Quantity,
+                            Product = new Product
                             {
-                                Path = pif.Path
-                            }).ToList(),
+                                Id = bi.Product.Id,
+                                Name = bi.Product.Name,
+                                Price = bi.Product.Price,
+                                Description = bi.Product.Description,
+                                ProductImageFiles = bi.Product.ProductImageFiles.Select(pif => new ProductImageFile
+                                {
+                                    Path = pif.Path
+                                }).ToList(),
 
-                            
-                        }
-                    }).ToList()
-                })
+                            }
+                        }).ToList()
+                    }
+                )
                 .FirstOrDefaultAsync();
 
-            return result?.BasketItems?.ToList();
+            return result;
         }
 
         public async Task RemoveBasketItemAsync(string basketItemId)

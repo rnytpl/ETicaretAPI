@@ -37,8 +37,8 @@ namespace ETicaretAPI.Application.Features.Queries.Product.GetAllProducts
                                         p.Stock,
                                         p.Price,
                                         p.Description,
-                                        p.CreatedDate,
-                                        p.UpdatedDate,
+                                        createdDate = p.CreatedDate.ToString("dd/MM/yyyy                                HH:mm:ss.ff"),
+                                        updatedDate = p.UpdatedDate.ToString("dd/MM/yyyy                                HH:mm:ss.ff"),
                                     })
                                 .Skip((request.Page - 1) * request.PageSize)
                                 .Take(request.PageSize)

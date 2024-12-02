@@ -8,6 +8,7 @@ namespace ETicaretAPI.Application.Features.Queries.Basket.GetBasketItems
 {
     public class GetBasketItemsQueryResponse
     {
+        public string BasketId { get; set; }
         public string BasketItemId { get; set; }
         public string BasketItemImage { get; set; }
         public string Name { get; set; }

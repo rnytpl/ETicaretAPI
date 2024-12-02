@@ -1,10 +1,5 @@
 ﻿using ETicaretAPI.Application.Abstractions.Services;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Features.Queries.Basket.GetBasketItems
 {
@@ -20,16 +15,17 @@ namespace ETicaretAPI.Application.Features.Queries.Basket.GetBasketItems
 
         public async Task<List<GetBasketItemsQueryResponse>> Handle(GetBasketItemsQueryRequest request, CancellationToken cancellationToken)
         {
-            var basketItems = await _basketService.GetBasketItemsAsync();
+            var basket = await _basketService.GetBasketItemsAsync();
 
-            return basketItems.Select(ba => new GetBasketItemsQueryResponse {
-                BasketItemId = ba.Id.ToString(),
+            return basket.BasketItems.Select(bi => new GetBasketItemsQueryResponse {
+                BasketId = basket.Id.ToString(),
+                BasketItemId = bi.Id.ToString(),
                 BasketItemImage = 
-                ba.Product.ProductImageFiles?.FirstOrDefault()?.Path ?? string.Empty,
-                Name = ba.Product.Name,
-                Description = ba.Product.Description,
-                Price = ba.Product.Price,
-                Quantity = ba.Quantity })
+                bi.Product.ProductImageFiles?.FirstOrDefault()?.Path ?? string.Empty,
+                Name = bi.Product.Name,
+                Description = bi.Product.Description,
+                Price = bi.Product.Price,
+                Quantity = bi.Quantity })
                 .ToList(); 
 
         }
