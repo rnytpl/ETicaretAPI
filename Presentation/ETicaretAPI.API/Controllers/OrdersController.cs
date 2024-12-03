@@ -3,7 +3,6 @@ using ETicaretAPI.Application.Features.Queries.Order.GetOrderById;
 using ETicaretAPI.Application.Features.Queries.Order.GetOrders;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretAPI.API.Controllers

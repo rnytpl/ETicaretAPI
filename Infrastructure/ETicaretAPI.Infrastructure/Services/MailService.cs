@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Gmail.v1;
+using System.Text;
 
 namespace ETicaretAPI.Infrastructure.Services
 {
@@ -17,12 +18,12 @@ namespace ETicaretAPI.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public async Task SendMessageAsync(string to, string subject, string body, bool isBodyHtml = true)
+        public async Task SendMailAsync(string to, string subject, string body, bool isBodyHtml = true)
         {
-            await SendMessageAsync(new[] {to}, subject, body, isBodyHtml);
+            await SendMailAsync(new[] {to}, subject, body, isBodyHtml);
         }
 
-        public async Task SendMessageAsync(string[] tos, string subject, string body, bool isBodyHtml = true)
+        public async Task SendMailAsync(string[] tos, string subject, string body, bool isBodyHtml = true)
         {
 
             MailMessage mail = new();
@@ -33,7 +34,7 @@ namespace ETicaretAPI.Infrastructure.Services
                 mail.To.Add(to);
                 mail.Subject = subject;
                 mail.Body = body;
-                mail.From = new("info@omniharvest.io", "About", System.Text.Encoding.UTF8);
+                mail.From = new("info@omniharvest.io", subject, System.Text.Encoding.UTF8);
 
 
                 SmtpClient smtp = new SmtpClient();
@@ -46,5 +47,79 @@ namespace ETicaretAPI.Infrastructure.Services
                 await smtp.SendMailAsync(mail);
             }
         }
+
+        public async Task SendPasswordResetMailAsync(string to, string userId, string resetToken)
+        {
+            string mail = $@"
+            <!DOCTYPE html>
+            <html lang=""en"">
+                <head>
+                    <meta charset=""UTF-8"">
+                    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            line-height: 1.6;
+                            color: #333333;
+                            background-color: #f9f9f9;
+                            margin: 0;
+                            padding: 0;
+                        }}
+                        .container {{
+                            width: 100%;
+                            max-width: 600px;
+                            margin: 0 auto;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            border: 1px solid #dddddd;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        }}
+                        a {{
+                            color: #0066cc;
+                            text-decoration: none;
+                        }}
+                        a:hover {{
+                            text-decoration: underline;
+                        }}
+                        .footer {{
+                            margin-top: 20px;
+                            font-size: 12px;
+                            color: #777777;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    <div class=""container"">
+                        <h2>Password Reset Request</h2>
+                        <p>Dear User,</p>
+                        <p>
+                            You can reset your password using the link below. If you did not request a password reset, you can safely ignore this email.
+                        </p>
+                        <p>
+                            <a 
+                                href=""{_configuration["ClientUrl"]}/update-password/{userId}/{resetToken}""
+                                target=""_self""
+                            >
+                                Click here to reset your password
+                            </a>
+                        </p>
+                        <p>Thank you, <br> The OmniHarvest Team</p>
+                        <div class=""footer"">
+                            <p>
+                                If you have any questions, please contact our support team at 
+                                <a href=""mailto:info@omniharvest.io"">info@omniharvest.io</a>.
+                            </p>
+                            <p>© 2024 OmniHarvest. All rights reserved.</p>
+                        </div>
+                    </div>
+                </body>
+            </html>
+            ";
+
+            await SendMailAsync(to, "Password Reset Request", mail);
+
+        }
+
     }
 }

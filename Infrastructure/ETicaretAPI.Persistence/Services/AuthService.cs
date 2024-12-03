@@ -2,6 +2,7 @@
 using ETicaretAPI.Application.Abstractions.Token;
 using ETicaretAPI.Application.DTOs;
 using ETicaretAPI.Application.Exceptions;
+using ETicaretAPI.Application.Helpers;
 using ETicaretAPI.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +16,14 @@ namespace ETicaretAPI.Persistence.Services
         readonly SignInManager<AppUser> _signInManager;
         readonly ITokenHandler _tokenHandler;
         readonly IUserService _userService;
-        public AuthService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler, IUserService userService = null)
+        readonly IMailService _mailService;
+        public AuthService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler, IUserService userService, IMailService mailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenHandler = tokenHandler;
             _userService = userService;
+            _mailService = mailService;
         }
 
         public Task FacebookLoginASync()
@@ -39,7 +42,7 @@ namespace ETicaretAPI.Persistence.Services
 
         public async Task<Token> LoginAsync(string Email, string Password, int accessTokenLifeTime)
         {
-            AppUser user = await _userManager.FindByEmailAsync(Email);
+            AppUser? user = await _userManager.FindByEmailAsync(Email);
 
             if (user == null) throw new UserNotFoundException("Incorrect email or password");
 
@@ -50,7 +53,7 @@ namespace ETicaretAPI.Persistence.Services
             {
                 Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, user);
 
-                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 60);
+                await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 60);
                 return token;
 
             };
@@ -66,13 +69,43 @@ namespace ETicaretAPI.Persistence.Services
             if (user != null && user?.RefreshTokenEndDate > DateTime.UtcNow)
             {
                 Token token = _tokenHandler.CreateAccessToken(60, user);
-                await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiration, 60);
+                await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 60);
 
                 return token;
             } else
             {
                 throw new UserNotFoundException("User was not found");
             }
+        }
+
+        public async Task PasswordResetAsync(string email)
+        {
+            AppUser? user = await _userManager.FindByEmailAsync(email);
+
+            if (user !!= null)
+            {
+                string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                resetToken = resetToken.UrlEncode();
+
+                await _mailService.SendPasswordResetMailAsync(email, user.Id, resetToken);
+            }
+        }
+
+        public async Task<bool> VerifyResetTokenAsync(string userId, string resetToken)
+        {
+            AppUser? user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+
+                resetToken = resetToken.UrlDecode();
+
+
+                return await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", resetToken);
+            }
+
+            return false;
         }
     }
 }

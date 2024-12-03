@@ -2,8 +2,8 @@
 using ETicaretAPI.Application.DTOs.User;
 using ETicaretAPI.Application.Exceptions;
 using ETicaretAPI.Application.Features.Commands.AppUser.Createuser;
+using ETicaretAPI.Application.Helpers;
 using ETicaretAPI.Domain.Entities.Identity;
-using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 
 namespace ETicaretAPI.Persistence.Services
@@ -36,7 +36,7 @@ namespace ETicaretAPI.Persistence.Services
             {
                 var error = result.Errors.FirstOrDefault();
 
-                throw new Exception(error.Description);
+                throw new Exception(error?.Description);
             }
             else if (result.Succeeded)
             {
@@ -48,7 +48,34 @@ namespace ETicaretAPI.Persistence.Services
 
         }
 
-        public async Task UpdateRefreshToken(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenData)
+        public async Task<bool> UpdatePasswordAsync(string userId, string resetToken, string newPassword)
+        {
+            AppUser? user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                resetToken = resetToken.UrlDecode();
+
+                bool isPasswordSame = await _userManager.CheckPasswordAsync(user, newPassword);
+                if (isPasswordSame)
+                    throw new Exception("Choose a password different from your previous passwords.");
+
+                IdentityResult result = await _userManager.ResetPasswordAsync(user, resetToken, newPassword);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+                    
+                } else
+                {
+                    throw new Exception("An unexpected error occurred");
+                }
+            }
+
+            return true;
+        }
+
+        public async Task UpdateRefreshTokenAsync(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenData)
         {
 
             if (user != null )

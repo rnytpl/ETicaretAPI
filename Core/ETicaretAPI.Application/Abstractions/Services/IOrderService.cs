@@ -1,6 +1,4 @@
 ﻿using ETicaretAPI.Application.DTOs.Order;
-using ETicaretAPI.Application.Features.Queries.Order;
-using ETicaretAPI.Domain.Entities;
 
 namespace ETicaretAPI.Application.Abstractions.Services
 {

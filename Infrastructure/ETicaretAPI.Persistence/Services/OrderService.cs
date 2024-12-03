@@ -95,7 +95,7 @@ namespace ETicaretAPI.Persistence.Services
 
                 }),
                 Address = result.Address,
-                CreatedDate = result.CreatedDate,
+                CreatedDate = result.CreatedDate.ToString("dd/MM/yy hh:mm:ss"),
                 Description = result.Description,
                 OrderCode = result.OrderCode,
                 UserName = result?.Basket?.User?.UserName,

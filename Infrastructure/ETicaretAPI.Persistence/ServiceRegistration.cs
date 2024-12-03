@@ -11,6 +11,7 @@ using ETicaretAPI.Persistence.Repositories.ProductImageFİle;
 using ETicaretAPI.Persistence.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,7 +35,8 @@ namespace ETicaretAPI.Persistence
                 options.User.RequireUniqueEmail = true;
                 
             })
-                .AddEntityFrameworkStores<ETicaretAPIDbContext>();
+                .AddEntityFrameworkStores<ETicaretAPIDbContext>()
+                .AddDefaultTokenProviders();
 
             // Customer
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();

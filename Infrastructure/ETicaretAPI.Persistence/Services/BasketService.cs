@@ -75,7 +75,7 @@ namespace ETicaretAPI.Persistence.Services
 
             }
 
-            throw new Exception("An unexpected error occured");
+            throw new Exception("An unexpected error occurred");
 
         }
         public async Task AddItemToBasketAsync(CreateBasketItem BasketItem)
