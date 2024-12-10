@@ -1,9 +1,9 @@
 ﻿using ETicaretAPI.Application.Abstractions.Services;
 using ETicaretAPI.Application.DTOs.Order;
-using ETicaretAPI.Application.Features.Queries.Order;
+using ETicaretAPI.Application.Features.Commands.Order.CreateOrder;
 using ETicaretAPI.Application.Repositories;
+using ETicaretAPI.Application.Repositories.CompletedOrder;
 using ETicaretAPI.Domain.Entities;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaretAPI.Persistence.Services
@@ -12,23 +12,27 @@ namespace ETicaretAPI.Persistence.Services
     {
         readonly IOrderWriteRepository _orderWriteRepository;
         readonly IOrderReadRepository _orderReadRepository;
+        readonly ICompletedOrderWriteRepository _completedOrderWriteRepository;
+        readonly ICompletedOrderReadRepository _completedOrderReadRepository;
 
-        public OrderService(IOrderWriteRepository orderWriteRepository, IOrderReadRepository orderReadRepository)
+        public OrderService(IOrderWriteRepository orderWriteRepository, IOrderReadRepository orderReadRepository, ICompletedOrderWriteRepository completedOrderWriteRepository, ICompletedOrderReadRepository completedOrderReadRepository)
         {
             _orderWriteRepository = orderWriteRepository;
             _orderReadRepository = orderReadRepository;
+            _completedOrderWriteRepository = completedOrderWriteRepository;
+            _completedOrderReadRepository = completedOrderReadRepository;
         }
 
-        public async Task CreateOrderAsync(CreateOrderDTO createOrder)
+        public async Task CreateOrderAsync(CreateOrderCommandRequest request)
         {
 
             var orderCode = new Random().Next(1000000, 10000000).ToString();
 
             await _orderWriteRepository.AddAsync(new()
             {
-                Address = createOrder.Address,
-                Description = createOrder.Description,
-                Id = Guid.Parse(createOrder.BasketId),
+                Address = request.Address,
+                Description = request.Description,
+                Id = Guid.Parse(request.BasketId),
                 OrderCode = orderCode
                 
             });
@@ -46,29 +50,42 @@ namespace ETicaretAPI.Persistence.Services
                                 .ThenInclude(b => b.BasketItems)
                                 .ThenInclude(bi => bi.Product);
 
-            var data = await query
-                        .Select(o => new
-                            {
-                                Description = o.Description,
-                                Address = o.Address,
-                                Id = o.Id,
-                                CreatedDate = o.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss.ff"),
-                                OrderCode = o.OrderCode,
-                                TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Product.Price                            * bi.Quantity),
-                                UserName = o.Basket.User.UserName,
-                                UserId = o.Basket.User.Id,
-                            }
-                        )
-                        .Skip((page - 1) * pageSize)
-                        .Take(pageSize)
-                        .ToListAsync();
+
+            var data = query.Skip((page -1) * pageSize).Take(pageSize);
+
+            var data2 = from order in data
+                        join completedOrder in _completedOrderReadRepository.Table
+                            on order.Id equals completedOrder.OrderId into co
+                        from _co in co.DefaultIfEmpty()
+                        select new
+                        {
+                            Id = order.Id,
+                            CreatedDate = order.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss"),
+                            OrderCode = order.OrderCode,
+                            Basket = order.Basket,
+                            UserId = order.Basket.User.Id,
+                            Completed = _co != null ? true : false,
+                            Address = order.Address,
+                            Description = order.Description,
+                        };
 
             var totalOrderCount = await query.CountAsync();
 
             return new()
             {
-                TotalOrderCount = totalOrderCount,
-                Orders = data,
+                TotalOrderCount = await query.CountAsync(),
+                Orders = await data2.Select(o => new
+                {
+                    Id = o.Id,
+                    UserId = o.UserId,
+                    CreatedDate = o.CreatedDate,
+                    OrderCode = o.OrderCode,
+                    TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price),
+                    UserName = o.Basket.User.UserName,
+                    Address = o.Address,
+                    Description = o.Description,
+                    o.Completed,
+                }).ToListAsync(),
             };
         }
 
@@ -79,8 +96,10 @@ namespace ETicaretAPI.Persistence.Services
                                 .ThenInclude(b => b.BasketItems)
                                     .ThenInclude(bi => bi.Product)
                                         .ThenInclude(p => p.ProductImageFiles)
+                            .Include(o => o.CompletedOrder)
                             .Include(o => o.Basket.User)
                                             .FirstOrDefaultAsync(o => o.Id == Guid.Parse(orderId));
+
 
             return new ()
             {
@@ -99,7 +118,22 @@ namespace ETicaretAPI.Persistence.Services
                 Description = result.Description,
                 OrderCode = result.OrderCode,
                 UserName = result?.Basket?.User?.UserName,
+                Completed = result.CompletedOrder != null ? true : false,
             };
+        }
+
+        public async Task CompleteOrderAsync(string Id)
+        {
+            Order order = await _orderReadRepository.GetByIdAsync(Id);
+
+            if (order != null)
+            {
+                await _completedOrderWriteRepository.AddAsync(new()
+                {
+                    OrderId = Guid.Parse(Id),
+                });
+                await _completedOrderWriteRepository.SaveAsync();
+            }
         }
     }
 }

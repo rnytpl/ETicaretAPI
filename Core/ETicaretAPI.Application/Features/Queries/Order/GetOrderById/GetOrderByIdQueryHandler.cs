@@ -1,5 +1,6 @@
 ﻿using ETicaretAPI.Application.Abstractions.Services;
 using MediatR;
+using System.Management;
 
 namespace ETicaretAPI.Application.Features.Queries.Order.GetOrderById
 {
@@ -25,7 +26,7 @@ namespace ETicaretAPI.Application.Features.Queries.Order.GetOrderById
                 CreatedDate = data.CreatedDate,
                 Address = data.Address,
                 UserName = data.UserName,
-
+                Completed = data.Completed,
             };
         }
     }

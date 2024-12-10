@@ -22,9 +22,6 @@ namespace ETicaretAPI.Application.Features.Queries.Order.GetOrders
 
             var totalPages = (int)Math.Ceiling((decimal)result.TotalOrderCount / request.PageSize);
 
-
-
-
             return new() { Orders = result, TotalPages = totalPages };
         }
     }

@@ -82,7 +82,7 @@ namespace ETicaretAPI.Persistence.Services
         {
             AppUser? user = await _userManager.FindByEmailAsync(email);
 
-            if (user !!= null)
+            if (user != null)
             {
                 string resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 

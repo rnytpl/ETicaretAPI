@@ -22,14 +22,9 @@ namespace ETicaretAPI.Application.Features.Commands.Order.CreateOrder
 
         public async Task<CreateOrderCommandResponse> Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
         {
-            var username = _httpContextAccessor?.HttpContext?.User?.Identity?.Name;
+            string? username = _httpContextAccessor?.HttpContext?.User?.Identity?.Name;
 
-            await _orderService.CreateOrderAsync(new()
-            {
-                Address = request.Address,
-                Description = request.Description,
-                BasketId = _basketService.GetActiveUserBasket?.Id.ToString(),
-            });
+            await _orderService.CreateOrderAsync(request);
 
             await _orderHubService.OrderCreatedMessageAsync(username, "New order inbound");
 

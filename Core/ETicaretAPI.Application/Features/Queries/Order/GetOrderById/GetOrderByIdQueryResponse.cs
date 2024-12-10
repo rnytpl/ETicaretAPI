@@ -15,5 +15,7 @@ namespace ETicaretAPI.Application.Features.Queries.Order.GetOrderById
         public string Id { get; set; }
         public string OrderCode { get; set; }
         public string UserName { get; set; }
+
+        public bool Completed { get; set; }
     }
 }

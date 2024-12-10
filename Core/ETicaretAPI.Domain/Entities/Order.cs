@@ -12,5 +12,10 @@ namespace ETicaretAPI.Domain.Entities
         // Navigation Property
         // An order can be associated with one Basket
         public Basket Basket { get; set; }
+
+        // One to one
+        // Navigation Property
+        // An order can be associated with one Basket
+        public CompletedOrder CompletedOrder { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace ETicaretAPI.API.Controllers
 
         public async Task<IActionResult> GetBasketItems([FromQuery] GetBasketItemsQueryRequest request)
         {
-            List<GetBasketItemsQueryResponse> response = await _mediator.Send(request);
+            GetBasketItemsQueryResponse response = await _mediator.Send(request);
 
             return Ok(response);
         }

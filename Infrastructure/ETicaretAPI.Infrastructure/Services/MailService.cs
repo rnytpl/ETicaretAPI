@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;
-using Google.Apis.Gmail.v1.Data;
-using Google.Apis.Gmail.v1;
-using System.Text;
 
 namespace ETicaretAPI.Infrastructure.Services
 {
