@@ -23,21 +23,27 @@ namespace ETicaretAPI.Persistence.Services
             _completedOrderReadRepository = completedOrderReadRepository;
         }
 
-        public async Task CreateOrderAsync(CreateOrderCommandRequest request)
+        public async Task<bool> CreateOrderAsync(CreateOrderCommandRequest request)
         {
-
-            var orderCode = new Random().Next(1000000, 10000000).ToString();
-
-            await _orderWriteRepository.AddAsync(new()
+            try
             {
-                Address = request.Address,
-                Description = request.Description,
-                Id = Guid.Parse(request.BasketId),
-                OrderCode = orderCode
-                
-            });
+                var orderCode = new Random().Next(1000000, 10000000).ToString();
 
-            await _orderWriteRepository.SaveAsync();
+                await _orderWriteRepository.AddAsync(new()
+                {
+                    Address = request.Address,
+                    Description = request.Description,
+                    Id = Guid.Parse(request.BasketId),
+                    OrderCode = orderCode
+                });
+
+                return await _orderWriteRepository.SaveAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public async Task<OrderListDTO> GetOrdersAsync(int page, int pageSize)
@@ -49,7 +55,6 @@ namespace ETicaretAPI.Persistence.Services
                             .Include(o => o.Basket)
                                 .ThenInclude(b => b.BasketItems)
                                 .ThenInclude(bi => bi.Product);
-
 
             var data = query.Skip((page -1) * pageSize).Take(pageSize);
 
@@ -69,7 +74,6 @@ namespace ETicaretAPI.Persistence.Services
                             Description = order.Description,
                         };
 
-            var totalOrderCount = await query.CountAsync();
 
             return new()
             {
@@ -118,13 +122,14 @@ namespace ETicaretAPI.Persistence.Services
                 Description = result.Description,
                 OrderCode = result.OrderCode,
                 UserName = result?.Basket?.User?.UserName,
+                UserId = result.Basket.User.Id,
                 Completed = result.CompletedOrder != null ? true : false,
             };
         }
 
-        public async Task CompleteOrderAsync(string Id)
+        public async Task<Order> CompleteOrderAsync(string Id)
         {
-            Order order = await _orderReadRepository.GetByIdAsync(Id);
+            Order? order = await _orderReadRepository.GetByIdAsync(Id);
 
             if (order != null)
             {
@@ -134,6 +139,8 @@ namespace ETicaretAPI.Persistence.Services
                 });
                 await _completedOrderWriteRepository.SaveAsync();
             }
+
+            return order;
         }
     }
 }

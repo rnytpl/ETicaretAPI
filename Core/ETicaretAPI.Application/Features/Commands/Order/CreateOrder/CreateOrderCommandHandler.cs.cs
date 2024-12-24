@@ -11,24 +11,26 @@ namespace ETicaretAPI.Application.Features.Commands.Order.CreateOrder
         readonly IOrderService _orderService;
         readonly IBasketService _basketService;
         readonly IOrderHubService _orderHubService;
+        readonly IMailService _mailService;
 
-        public CreateOrderCommandHandler(IOrderService orderService, IBasketService basketService, IOrderHubService orderHubService, IHttpContextAccessor httpContextAccessor)
+        public CreateOrderCommandHandler(IOrderService orderService, IBasketService basketService, IOrderHubService orderHubService, IHttpContextAccessor httpContextAccessor, IMailService mailService)
         {
             _orderService = orderService;
             _basketService = basketService;
             _orderHubService = orderHubService;
             _httpContextAccessor = httpContextAccessor;
+            _mailService = mailService;
         }
 
         public async Task<CreateOrderCommandResponse> Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
         {
             string? username = _httpContextAccessor?.HttpContext?.User?.Identity?.Name;
 
-            await _orderService.CreateOrderAsync(request);
+            var result = await _orderService.CreateOrderAsync(request);
 
-            await _orderHubService.OrderCreatedMessageAsync(username, "New order inbound");
+            if (result ) await _orderHubService.OrderCreatedMessageAsync(username, "New order inbound");
 
-            return new();
+            return new() { Result = result };
         }
     }
 }

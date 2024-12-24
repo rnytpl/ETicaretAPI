@@ -25,6 +25,7 @@ namespace ETicaretAPI.Application.Features.Queries.Order.GetOrderById
                 BasketItems = data.BasketItems,
                 CreatedDate = data.CreatedDate,
                 Address = data.Address,
+                UserId = data.UserId,
                 UserName = data.UserName,
                 Completed = data.Completed,
             };

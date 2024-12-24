@@ -1,18 +1,12 @@
 ﻿using ETicaretAPI.Domain.Entities.Common;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Repositories
-    
+
 {
-    // T is the entity type to define which entity we're going to perform EF core crud operations on database objects. BaseEntity class ensures that it is derived of a class.
-    // Defines method signatures 
-    // Handles read operations for entities
+    // T type determines which entity we're going to perform crud operations on using EF Core.
+    // BaseEntity class ensures that it is derived of a class.
+
     public interface IReadRepository<T> : IRepository<T> where T : BaseEntity
     {
         /// <summary>

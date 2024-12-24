@@ -2,13 +2,11 @@
 using Azure.Storage.Blobs.Models;
 using ETicaretAPI.Application.Abstractions.Storage.Azure;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
+
 
 namespace ETicaretAPI.Infrastructure.Services.Storage.Azure
 {
@@ -23,11 +21,8 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Azure
         BlobContainerClient _blobContainerClient;
 
         public AzureStorage(IConfiguration configuration)
-        {
-            
+        {            
             _blobServiceClient = new(configuration["Storage:Azure"]);
-
-            
         }
 
         public async Task DeleteAsync(string containerName, string fileName)
@@ -41,10 +36,8 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Azure
         public async Task<bool> DeleteFromStorage(string blobName)
         {
             _blobContainerClient = _blobServiceClient.GetBlobContainerClient("photo-images");
-            //BlobClient blobClient = _blobContainerClient.GetBlobClient(blobName);
             var response = _blobContainerClient.DeleteBlob(blobName,DeleteSnapshotsOption.IncludeSnapshots);
-            //blobClient.Delete
-            //var result = _blobContainerClient.DeleteBlob(blobName);
+
 
             return true;
 
@@ -64,25 +57,76 @@ namespace ETicaretAPI.Infrastructure.Services.Storage.Azure
             
 
         }
-         
+
+        //public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string containerName, IFormFileCollection files)
+        //{
+        //    // Retrieves container name
+        //    _blobContainerClient =  _blobServiceClient.GetBlobContainerClient(containerName);
+        //    // Creates container if doesn't exist
+        //    await _blobContainerClient.CreateIfNotExistsAsync();
+
+        //    await _blobContainerClient.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
+
+        //    List<(string fileName, string pathOrContainerName)> datas = new();
+
+        //    foreach (IFormFile file in files) 
+        //    {
+        //        string fileNewName = await FileRenameAsync(containerName, file.FileName, HasFile);
+        //        // 
+        //        BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNewName);
+
+        //        await blobClient.UploadAsync(file.OpenReadStream());
+        //        datas.Add((fileNewName, $"{containerName}/{fileNewName}"));
+        //    }
+
+        //    return datas;
+        //}
+
         public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string containerName, IFormFileCollection files)
         {
             // Retrieves container name
-            _blobContainerClient =  _blobServiceClient.GetBlobContainerClient(containerName);
+            _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+
             // Creates container if doesn't exist
             await _blobContainerClient.CreateIfNotExistsAsync();
-
             await _blobContainerClient.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
 
             List<(string fileName, string pathOrContainerName)> datas = new();
 
-            foreach (IFormFile file in files) 
+            foreach (IFormFile file in files)
             {
                 string fileNewName = await FileRenameAsync(containerName, file.FileName, HasFile);
-                // 
-                BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNewName);
-                
-                await blobClient.UploadAsync(file.OpenReadStream());
+
+                // Compress image
+                using (var inputStream = file.OpenReadStream())
+                {
+                    using (var image = await Image.LoadAsync(inputStream)) // Load the image
+                    {
+                        // Resize or compress the image
+                        image.Mutate(x => x.Resize(new ResizeOptions
+                        {
+                            Mode = ResizeMode.Max,
+                            Size = new Size(1024, 768) // Adjust the size as needed
+                        }));
+
+                        // Set JPEG compression quality
+                        var jpegOptions = new JpegEncoder
+                        {
+                            Quality = 75 // Set the quality (1-100). Adjust as per your need.
+                        };
+
+                        using (var outputStream = new MemoryStream())
+                        {
+                            await image.SaveAsync(outputStream, jpegOptions); // Save compressed image
+                            outputStream.Position = 0; // Reset stream position
+
+                            // Upload compressed image to Azure Blob Storage
+                            BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNewName);
+                            await blobClient.UploadAsync(outputStream);
+                        }
+                    }
+                }
+
                 datas.Add((fileNewName, $"{containerName}/{fileNewName}"));
             }
 

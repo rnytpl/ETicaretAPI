@@ -1,14 +1,15 @@
 ﻿using ETicaretAPI.Application.DTOs.Order;
 using ETicaretAPI.Application.Features.Commands.Order.CreateOrder;
+using ETicaretAPI.Domain.Entities;
 
 namespace ETicaretAPI.Application.Abstractions.Services
 {
     public interface IOrderService
     {
         Task<OrderListDTO> GetOrdersAsync(int Page, int PageSize);
-        Task CreateOrderAsync(CreateOrderCommandRequest request);
+        Task<bool> CreateOrderAsync(CreateOrderCommandRequest request);
         Task<SingleOrder> GetOrderByIdAsync(string orderId);
-        Task CompleteOrderAsync(string Id);
+        Task<Order> CompleteOrderAsync(string Id);
 
     }
 }

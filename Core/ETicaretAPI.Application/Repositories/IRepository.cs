@@ -1,13 +1,12 @@
 ﻿using ETicaretAPI.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ETicaretAPI.Application.Repositories
 {
+    /// <summary>
+    /// IRepository must be of T type where type T derives from BaseEntity Class
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : BaseEntity
     {
         // TEntity type must derive from a class

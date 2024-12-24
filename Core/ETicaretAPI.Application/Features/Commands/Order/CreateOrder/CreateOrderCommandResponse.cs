@@ -8,5 +8,6 @@ namespace ETicaretAPI.Application.Features.Commands.Order.CreateOrder
 {
     public class CreateOrderCommandResponse
     {
+        public bool Result { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace ETicaretAPI.Persistence.Repositories
             _context = context;
         }
 
+        // Sets the table 
         public DbSet<T> Table => _context.Set<T>();
 
         public IQueryable<T> GetAll(bool tracking = true) {

@@ -22,6 +22,21 @@ namespace ETicaretAPI.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("AppRoleEndpoint", b =>
+                {
+                    b.Property<Guid>("EndpointsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("RolesId")
+                        .HasColumnType("text");
+
+                    b.HasKey("EndpointsId", "RolesId");
+
+                    b.HasIndex("RolesId");
+
+                    b.ToTable("AppRoleEndpoint");
+                });
+
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Basket", b =>
                 {
                     b.Property<Guid>("Id")
@@ -117,6 +132,44 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("ETicaretAPI.Domain.Entities.Endpoint", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ActionType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Definition")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HttpType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("MenuId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("Endpoints");
                 });
 
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.File", b =>
@@ -254,6 +307,27 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ETicaretAPI.Domain.Entities.Menu", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menus");
+                });
+
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -316,8 +390,8 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6bbdbec6-1d60-4cf1-b850-806dbb3776f7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 35, 752, DateTimeKind.Utc).AddTicks(4898),
+                            Id = new Guid("f8982a65-8828-4715-b17b-496da729ef9a"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 38, 45, DateTimeKind.Utc).AddTicks(9051),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 1",
                             Price = 1f,
@@ -326,8 +400,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bdf55eeb-55c8-4e60-bbc4-e3e2b0903532"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 36, 752, DateTimeKind.Utc).AddTicks(4903),
+                            Id = new Guid("06f98894-732c-4cb5-80e2-cc3b037805e1"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 39, 45, DateTimeKind.Utc).AddTicks(9059),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 2",
                             Price = 2f,
@@ -336,8 +410,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b55f1825-77a6-41af-a686-a889824120db"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 37, 752, DateTimeKind.Utc).AddTicks(4904),
+                            Id = new Guid("5015fdcf-078a-401f-8261-b4f4710d7d22"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 40, 45, DateTimeKind.Utc).AddTicks(9060),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 3",
                             Price = 3f,
@@ -346,8 +420,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4006d689-48e2-45a1-a3ef-39b72093c37f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 38, 752, DateTimeKind.Utc).AddTicks(4906),
+                            Id = new Guid("741cdc91-7422-47f3-ae69-09983686ac9c"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 41, 45, DateTimeKind.Utc).AddTicks(9062),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 4",
                             Price = 4f,
@@ -356,8 +430,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("429a3812-bf4c-44e0-a3be-56d1cbe17c7d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 39, 752, DateTimeKind.Utc).AddTicks(4908),
+                            Id = new Guid("56e0226b-3c38-4ff3-b350-12365bd16da7"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 42, 45, DateTimeKind.Utc).AddTicks(9064),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 5",
                             Price = 5f,
@@ -366,8 +440,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("729f00e5-06dc-450a-a23b-6624efbfe7b6"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 40, 752, DateTimeKind.Utc).AddTicks(4921),
+                            Id = new Guid("cf7608a4-fde3-46f2-9514-76a975e5bc5f"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 43, 45, DateTimeKind.Utc).AddTicks(9065),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 6",
                             Price = 6f,
@@ -376,8 +450,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42f4f0a5-5f45-44d4-9a8a-066eb5f21b29"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 41, 752, DateTimeKind.Utc).AddTicks(4923),
+                            Id = new Guid("722126c8-4c8d-4cc0-8435-2ac0548c855b"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 44, 45, DateTimeKind.Utc).AddTicks(9080),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 7",
                             Price = 7f,
@@ -386,8 +460,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5baf9e84-8eae-444a-82b7-44e8639c7fcb"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 42, 752, DateTimeKind.Utc).AddTicks(4925),
+                            Id = new Guid("e2133344-417f-4633-9aea-04c5d1da5dba"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 45, 45, DateTimeKind.Utc).AddTicks(9082),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 8",
                             Price = 8f,
@@ -396,8 +470,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0caab144-2609-410d-8076-ccf6824f50fd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 43, 752, DateTimeKind.Utc).AddTicks(4926),
+                            Id = new Guid("080f49d2-9e1b-4c5b-92b1-6e68c8797064"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 46, 45, DateTimeKind.Utc).AddTicks(9084),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 9",
                             Price = 9f,
@@ -406,8 +480,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("43b34d99-1cea-4e9a-abaa-2183417516aa"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 44, 752, DateTimeKind.Utc).AddTicks(4929),
+                            Id = new Guid("86beb608-871a-4105-848d-318f8847cfe4"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 47, 45, DateTimeKind.Utc).AddTicks(9088),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 10",
                             Price = 10f,
@@ -416,8 +490,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a8233abe-3dc4-4775-9198-8ca55e8095f6"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 45, 752, DateTimeKind.Utc).AddTicks(4931),
+                            Id = new Guid("7c4972d0-203c-4fd7-9caa-f40c4b0471c3"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 48, 45, DateTimeKind.Utc).AddTicks(9091),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 11",
                             Price = 11f,
@@ -426,8 +500,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("532cbfd6-6e16-4c68-9dd2-498b240108db"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 46, 752, DateTimeKind.Utc).AddTicks(4933),
+                            Id = new Guid("b03bf9a7-c9e9-4357-b686-dee3360c7a3c"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 49, 45, DateTimeKind.Utc).AddTicks(9093),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 12",
                             Price = 12f,
@@ -436,8 +510,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ae462d60-ac36-402e-b4bb-61e346d8af99"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 47, 752, DateTimeKind.Utc).AddTicks(4934),
+                            Id = new Guid("d9bb563a-c4c4-4a9b-9339-231a0d292cfd"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 50, 45, DateTimeKind.Utc).AddTicks(9095),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 13",
                             Price = 13f,
@@ -446,8 +520,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("63cf1a0e-dde2-49a4-b0f3-d19d7ef8f2e9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 48, 752, DateTimeKind.Utc).AddTicks(4938),
+                            Id = new Guid("82068b35-1f97-430f-9bb3-bcc218c97a0a"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 51, 45, DateTimeKind.Utc).AddTicks(9097),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 14",
                             Price = 14f,
@@ -456,8 +530,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5ec6294a-ae3b-403c-a702-bd490d52ee2b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 49, 752, DateTimeKind.Utc).AddTicks(4940),
+                            Id = new Guid("0fb40992-b702-499d-9a15-ef5d02063d1d"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 52, 45, DateTimeKind.Utc).AddTicks(9102),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 15",
                             Price = 15f,
@@ -466,8 +540,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0c93843c-9ed3-4e62-a892-8b62f5a8e864"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 50, 752, DateTimeKind.Utc).AddTicks(4942),
+                            Id = new Guid("c4502854-a40b-4fcb-8387-71baf888cdaa"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 53, 45, DateTimeKind.Utc).AddTicks(9104),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 16",
                             Price = 16f,
@@ -476,8 +550,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ee3c6215-d536-49c3-83cc-8e8ecbc287c5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 51, 752, DateTimeKind.Utc).AddTicks(4943),
+                            Id = new Guid("27d257cc-326e-4072-94e1-899b8662c1ed"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 54, 45, DateTimeKind.Utc).AddTicks(9106),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 17",
                             Price = 17f,
@@ -486,8 +560,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1b31870a-70e4-4eb7-8e08-dcb03bd0b810"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 52, 752, DateTimeKind.Utc).AddTicks(4945),
+                            Id = new Guid("446a1ec5-baa9-40b3-8992-181d05138639"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 55, 45, DateTimeKind.Utc).AddTicks(9108),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 18",
                             Price = 18f,
@@ -496,8 +570,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1341441d-dd7c-4261-9935-b2c59b77a973"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 53, 752, DateTimeKind.Utc).AddTicks(4947),
+                            Id = new Guid("7e98e120-2abf-4eaa-b3ef-bdf40afc29bc"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 56, 45, DateTimeKind.Utc).AddTicks(9110),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 19",
                             Price = 19f,
@@ -506,8 +580,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7ac8fe37-ef65-4fea-b676-ff799a33d161"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 54, 752, DateTimeKind.Utc).AddTicks(4948),
+                            Id = new Guid("4981fc6c-9295-4af2-a0ea-d2d23352d25b"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 57, 45, DateTimeKind.Utc).AddTicks(9112),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 20",
                             Price = 20f,
@@ -516,8 +590,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2df15b79-426a-4c18-bc56-f528048116bb"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 55, 752, DateTimeKind.Utc).AddTicks(4950),
+                            Id = new Guid("fbde78a1-e189-42d7-b751-ffd334f1620e"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 58, 45, DateTimeKind.Utc).AddTicks(9114),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 21",
                             Price = 21f,
@@ -526,8 +600,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ffbf4746-0f20-499d-81e0-5ba9e99fe4ec"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 56, 752, DateTimeKind.Utc).AddTicks(4953),
+                            Id = new Guid("82643079-3647-42a5-8fe8-c013d88602b8"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 27, 59, 45, DateTimeKind.Utc).AddTicks(9116),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 22",
                             Price = 22f,
@@ -536,8 +610,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ca79f7ba-abde-4cfa-90e8-47ef7286fb44"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 57, 752, DateTimeKind.Utc).AddTicks(4955),
+                            Id = new Guid("37d831a7-8318-4c87-b133-4b3133a9cbae"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 0, 45, DateTimeKind.Utc).AddTicks(9120),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 23",
                             Price = 23f,
@@ -546,8 +620,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c3f1726b-3880-4dba-b633-c0c6ca83b304"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 58, 752, DateTimeKind.Utc).AddTicks(4956),
+                            Id = new Guid("1639b235-82e7-4410-92f1-5f4be2278994"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 1, 45, DateTimeKind.Utc).AddTicks(9122),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 24",
                             Price = 24f,
@@ -556,8 +630,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("26369069-265f-4b77-93a7-86c6760ac39b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 53, 59, 752, DateTimeKind.Utc).AddTicks(4958),
+                            Id = new Guid("a91778b7-f074-45d6-afe9-f97249a7ecc2"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 2, 45, DateTimeKind.Utc).AddTicks(9125),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 25",
                             Price = 25f,
@@ -566,8 +640,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5868c57a-98c3-4389-b146-837c5e36a645"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 0, 752, DateTimeKind.Utc).AddTicks(4960),
+                            Id = new Guid("dd497706-e704-4113-a68f-63217fd8fd82"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 3, 45, DateTimeKind.Utc).AddTicks(9127),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 26",
                             Price = 26f,
@@ -576,8 +650,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("953a91d3-327e-4e9c-98d6-6bd894c16f42"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 1, 752, DateTimeKind.Utc).AddTicks(4961),
+                            Id = new Guid("b0a59ffa-1560-462b-9f32-12d0c888fbea"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 4, 45, DateTimeKind.Utc).AddTicks(9129),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 27",
                             Price = 27f,
@@ -586,8 +660,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("215dd295-35ec-4486-9d27-9f4f7c502c87"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 2, 752, DateTimeKind.Utc).AddTicks(4963),
+                            Id = new Guid("fcdcac25-d005-408b-87c2-823d82a18d43"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 5, 45, DateTimeKind.Utc).AddTicks(9131),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 28",
                             Price = 28f,
@@ -596,8 +670,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("32492719-0b19-43d2-bd79-4f9d38ca8631"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 3, 752, DateTimeKind.Utc).AddTicks(4964),
+                            Id = new Guid("0ee80f3e-d965-4a92-a164-6295e649ebe7"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 6, 45, DateTimeKind.Utc).AddTicks(9133),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 29",
                             Price = 29f,
@@ -606,8 +680,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ba4bc2e2-7aae-45b1-8766-51b42db9ef52"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 4, 752, DateTimeKind.Utc).AddTicks(4968),
+                            Id = new Guid("c26c5f3a-a852-42aa-887d-819b1dbc2f8d"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 7, 45, DateTimeKind.Utc).AddTicks(9135),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 30",
                             Price = 30f,
@@ -616,8 +690,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("05d78535-a13f-4b39-837a-66f1096f8de7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 5, 752, DateTimeKind.Utc).AddTicks(4969),
+                            Id = new Guid("7b0d3322-9ee0-4665-9f94-9531fd5651d1"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 8, 45, DateTimeKind.Utc).AddTicks(9139),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 31",
                             Price = 31f,
@@ -626,8 +700,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("67d21efb-b4f8-4192-b55a-cff070f0a095"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 6, 752, DateTimeKind.Utc).AddTicks(4971),
+                            Id = new Guid("916dca98-1c3b-47c2-9fac-51c7fe91a464"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 9, 45, DateTimeKind.Utc).AddTicks(9207),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 32",
                             Price = 32f,
@@ -636,8 +710,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f9e0e18f-8d23-4fd5-8c03-677214248148"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 7, 752, DateTimeKind.Utc).AddTicks(4973),
+                            Id = new Guid("da2f1808-0ca8-44ee-90ef-a9cbdd90d1ca"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 10, 45, DateTimeKind.Utc).AddTicks(9209),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 33",
                             Price = 33f,
@@ -646,8 +720,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0a390757-b56f-431d-94e3-91882307b8e4"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 8, 752, DateTimeKind.Utc).AddTicks(4974),
+                            Id = new Guid("ac9bb4b9-9f25-4847-874f-126c4f1f5e49"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 11, 45, DateTimeKind.Utc).AddTicks(9210),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 34",
                             Price = 34f,
@@ -656,8 +730,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0d167cb8-d68f-417e-95cf-8638a047c025"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 9, 752, DateTimeKind.Utc).AddTicks(4976),
+                            Id = new Guid("98c43b7d-a4de-4961-9c91-30bad7fb4456"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 12, 45, DateTimeKind.Utc).AddTicks(9212),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 35",
                             Price = 35f,
@@ -666,8 +740,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("170e9de4-907a-4376-91e1-d4073b3bff8a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 10, 752, DateTimeKind.Utc).AddTicks(4978),
+                            Id = new Guid("cb398ecc-e88a-4fee-b218-18ce30947c8a"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 13, 45, DateTimeKind.Utc).AddTicks(9214),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 36",
                             Price = 36f,
@@ -676,8 +750,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("28c2791c-29c9-479c-a85b-10590444d98f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 11, 752, DateTimeKind.Utc).AddTicks(4979),
+                            Id = new Guid("4bf97d69-54e4-4947-b138-6daea4f188a1"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 14, 45, DateTimeKind.Utc).AddTicks(9215),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 37",
                             Price = 37f,
@@ -686,8 +760,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ca6d2257-f755-4dcb-b3c9-93b111c649f3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 12, 752, DateTimeKind.Utc).AddTicks(4984),
+                            Id = new Guid("87006eca-dbfd-489f-b015-50564934fae4"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 15, 45, DateTimeKind.Utc).AddTicks(9217),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 38",
                             Price = 38f,
@@ -696,8 +770,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6c1a85e5-e6f9-4aa2-8b06-3eb6f1b8d466"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 13, 752, DateTimeKind.Utc).AddTicks(4986),
+                            Id = new Guid("f150917b-3e0c-4d04-a168-27f16f3f7d24"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 16, 45, DateTimeKind.Utc).AddTicks(9220),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 39",
                             Price = 39f,
@@ -706,8 +780,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9ee373a9-b778-409f-8087-56cb426e833c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 14, 752, DateTimeKind.Utc).AddTicks(4987),
+                            Id = new Guid("f27e0768-f401-4c6c-82fb-f323ad81db4b"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 17, 45, DateTimeKind.Utc).AddTicks(9222),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 40",
                             Price = 40f,
@@ -716,8 +790,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e78b3492-890b-40bb-8794-e2617b55c59f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 15, 752, DateTimeKind.Utc).AddTicks(4989),
+                            Id = new Guid("111eebb3-74ba-4e92-81be-22a1af290d44"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 18, 45, DateTimeKind.Utc).AddTicks(9224),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 41",
                             Price = 41f,
@@ -726,8 +800,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3e18bdb2-d9a6-4276-a5fd-e43010941d4a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 16, 752, DateTimeKind.Utc).AddTicks(5009),
+                            Id = new Guid("c12a18fe-9f8f-43ca-8f21-0387907f1c8d"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 19, 45, DateTimeKind.Utc).AddTicks(9225),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 42",
                             Price = 42f,
@@ -736,8 +810,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25ba2f07-f0f2-4e7b-bb87-747cbb5c50c0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 17, 752, DateTimeKind.Utc).AddTicks(5011),
+                            Id = new Guid("630ffcba-1346-457c-8ffb-c1198f2f9a74"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 20, 45, DateTimeKind.Utc).AddTicks(9227),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 43",
                             Price = 43f,
@@ -746,8 +820,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ece5ec80-aa7f-4be5-a4df-5c7abfa2ddae"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 18, 752, DateTimeKind.Utc).AddTicks(5013),
+                            Id = new Guid("b570f014-132b-48de-a065-d35700eee1fb"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 21, 45, DateTimeKind.Utc).AddTicks(9229),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 44",
                             Price = 44f,
@@ -756,8 +830,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("03f2930c-a98c-4d90-9035-9b07833d2c81"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 19, 752, DateTimeKind.Utc).AddTicks(5015),
+                            Id = new Guid("31e4946e-06ca-4978-858c-e497de0c5501"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 22, 45, DateTimeKind.Utc).AddTicks(9230),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 45",
                             Price = 45f,
@@ -766,8 +840,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a993202e-2890-4b5a-bd59-86be39bd9aea"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 20, 752, DateTimeKind.Utc).AddTicks(5018),
+                            Id = new Guid("0d1f3e7b-6291-44a6-ba65-8a6f7e558bd2"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 23, 45, DateTimeKind.Utc).AddTicks(9232),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 46",
                             Price = 46f,
@@ -776,8 +850,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9227c1bc-b2ae-4fc9-8148-8f875b59b274"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 21, 752, DateTimeKind.Utc).AddTicks(5020),
+                            Id = new Guid("ba7802f6-a7a5-4945-8f44-1866ad8768cc"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 24, 45, DateTimeKind.Utc).AddTicks(9235),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 47",
                             Price = 47f,
@@ -786,8 +860,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("45615b07-88e1-4b80-8dba-77828bf7c05a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 22, 752, DateTimeKind.Utc).AddTicks(5022),
+                            Id = new Guid("ca12bca4-027f-40b6-b134-bbdb246afbb2"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 25, 45, DateTimeKind.Utc).AddTicks(9237),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 48",
                             Price = 48f,
@@ -796,8 +870,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d02f7fb8-0c6f-4012-9c4b-38c71fc0db27"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 23, 752, DateTimeKind.Utc).AddTicks(5023),
+                            Id = new Guid("14d90990-0d72-4068-a736-7512b655634f"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 26, 45, DateTimeKind.Utc).AddTicks(9239),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 49",
                             Price = 49f,
@@ -806,8 +880,8 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1c77deca-b575-4b54-a960-1c8e49369b32"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 24, 752, DateTimeKind.Utc).AddTicks(5025),
+                            Id = new Guid("7d1bb5a3-cd16-4d2d-90b1-c9d29b2c6501"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 27, 45, DateTimeKind.Utc).AddTicks(9240),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 50",
                             Price = 50f,
@@ -816,2502 +890,12 @@ namespace ETicaretAPI.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("024fac67-9fd5-48d7-b853-f4558adb094f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 25, 752, DateTimeKind.Utc).AddTicks(5027),
+                            Id = new Guid("f5b39d61-79cd-4fad-97e4-ed013ed83185"),
+                            CreatedDate = new DateTime(2024, 12, 21, 12, 28, 28, 45, DateTimeKind.Utc).AddTicks(9242),
                             Description = "A brief description of the product, highlighting its key features and benefits.",
                             Name = "Product 51",
                             Price = 51f,
                             Stock = 51,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4a7a0860-8014-45a1-a18e-23de8627f58f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 26, 752, DateTimeKind.Utc).AddTicks(5028),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 52",
-                            Price = 52f,
-                            Stock = 52,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("12b46091-cc4a-4ee3-86c7-3c8f7bb2eb3b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 27, 752, DateTimeKind.Utc).AddTicks(5030),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 53",
-                            Price = 53f,
-                            Stock = 53,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("6dbd953d-3576-4567-8b60-732189630b0b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 28, 752, DateTimeKind.Utc).AddTicks(5033),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 54",
-                            Price = 54f,
-                            Stock = 54,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bc1fa9cf-7f76-4a20-b859-24cda385a581"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 29, 752, DateTimeKind.Utc).AddTicks(5035),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 55",
-                            Price = 55f,
-                            Stock = 55,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2320c615-350a-43a0-9bbc-a8c5b5a0d2b0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 30, 752, DateTimeKind.Utc).AddTicks(5036),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 56",
-                            Price = 56f,
-                            Stock = 56,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ecfa5559-a50a-4475-bb76-1b78d1e6014f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 31, 752, DateTimeKind.Utc).AddTicks(5038),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 57",
-                            Price = 57f,
-                            Stock = 57,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("00fa100f-6a1c-4621-a4de-d892d54f0529"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 32, 752, DateTimeKind.Utc).AddTicks(5040),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 58",
-                            Price = 58f,
-                            Stock = 58,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("cde127b8-6e1b-4b0f-8592-5c9048422c5e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 33, 752, DateTimeKind.Utc).AddTicks(5041),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 59",
-                            Price = 59f,
-                            Stock = 59,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("521f59e6-97cf-4ef6-88b5-2062a15eb3f9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 34, 752, DateTimeKind.Utc).AddTicks(5043),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 60",
-                            Price = 60f,
-                            Stock = 60,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("be354a46-deef-4f4c-8e94-3661f57e1216"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 35, 752, DateTimeKind.Utc).AddTicks(5044),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 61",
-                            Price = 61f,
-                            Stock = 61,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bac64ce2-77aa-405c-bfaf-4553365b27eb"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 36, 752, DateTimeKind.Utc).AddTicks(5048),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 62",
-                            Price = 62f,
-                            Stock = 62,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("89c4472d-1504-4710-aced-7d1e88baa287"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 37, 752, DateTimeKind.Utc).AddTicks(5049),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 63",
-                            Price = 63f,
-                            Stock = 63,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("f84830d8-193d-47ec-81de-058305476b0e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 38, 752, DateTimeKind.Utc).AddTicks(5051),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 64",
-                            Price = 64f,
-                            Stock = 64,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("80fa7627-917d-4a18-b28d-adcee85d7e36"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 39, 752, DateTimeKind.Utc).AddTicks(5052),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 65",
-                            Price = 65f,
-                            Stock = 65,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("fb3158d1-3ddb-46b0-a18f-80ad9316fe42"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 40, 752, DateTimeKind.Utc).AddTicks(5054),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 66",
-                            Price = 66f,
-                            Stock = 66,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3910d31d-128a-4472-a97e-2c03b3a9beb3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 41, 752, DateTimeKind.Utc).AddTicks(5056),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 67",
-                            Price = 67f,
-                            Stock = 67,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8433c95f-9867-4a35-895b-fe93abaef848"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 42, 752, DateTimeKind.Utc).AddTicks(5057),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 68",
-                            Price = 68f,
-                            Stock = 68,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0b9c5d04-45ca-4d8c-b14e-7584e88322fe"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 43, 752, DateTimeKind.Utc).AddTicks(5059),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 69",
-                            Price = 69f,
-                            Stock = 69,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("974ab1b3-95aa-48eb-85c0-3deb6c5ffefc"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 44, 752, DateTimeKind.Utc).AddTicks(5062),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 70",
-                            Price = 70f,
-                            Stock = 70,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("6edf211a-8f99-4727-aa89-b6e9724a65b1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 45, 752, DateTimeKind.Utc).AddTicks(5064),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 71",
-                            Price = 71f,
-                            Stock = 71,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("577a36f5-d13d-47c5-b486-6478f2b4b31e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 46, 752, DateTimeKind.Utc).AddTicks(5065),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 72",
-                            Price = 72f,
-                            Stock = 72,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9c1d1a6a-13fa-459b-b743-5681d1fa1498"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 47, 752, DateTimeKind.Utc).AddTicks(5067),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 73",
-                            Price = 73f,
-                            Stock = 73,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("417f466b-8d26-4123-9bf4-6c656bd29b82"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 48, 752, DateTimeKind.Utc).AddTicks(5068),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 74",
-                            Price = 74f,
-                            Stock = 74,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ad5b6a3f-7488-4896-9bff-1e25f294e8b3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 49, 752, DateTimeKind.Utc).AddTicks(5070),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 75",
-                            Price = 75f,
-                            Stock = 75,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("04220fd0-1629-4720-bddf-ac4fdc502ea7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 50, 752, DateTimeKind.Utc).AddTicks(5072),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 76",
-                            Price = 76f,
-                            Stock = 76,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("73f47cf8-7c6b-47f2-b15c-de3f5cb02bc5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 51, 752, DateTimeKind.Utc).AddTicks(5073),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 77",
-                            Price = 77f,
-                            Stock = 77,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("7bac55e2-8cad-4c18-84a9-c2c7cb3b1f4c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 52, 752, DateTimeKind.Utc).AddTicks(5076),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 78",
-                            Price = 78f,
-                            Stock = 78,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("cd10d78a-6936-49a0-88bf-17c2aa4e615d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 53, 752, DateTimeKind.Utc).AddTicks(5078),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 79",
-                            Price = 79f,
-                            Stock = 79,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5fc91278-0c83-4f85-b18b-d1c336d3e85b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 54, 752, DateTimeKind.Utc).AddTicks(5080),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 80",
-                            Price = 80f,
-                            Stock = 80,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1e88f08e-20c0-4fda-a69a-2badd6b68a32"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 55, 752, DateTimeKind.Utc).AddTicks(5081),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 81",
-                            Price = 81f,
-                            Stock = 81,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("51d73ac5-8220-4967-b1f7-911101a759df"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 56, 752, DateTimeKind.Utc).AddTicks(5083),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 82",
-                            Price = 82f,
-                            Stock = 82,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("217972e7-03ff-4da8-b3e1-34bd0c08e322"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 57, 752, DateTimeKind.Utc).AddTicks(5085),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 83",
-                            Price = 83f,
-                            Stock = 83,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9c8a48fd-c769-4969-8c31-3d56461de9c1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 58, 752, DateTimeKind.Utc).AddTicks(5086),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 84",
-                            Price = 84f,
-                            Stock = 84,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e5b24113-e31e-4cf4-b874-b6e9496a884c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 54, 59, 752, DateTimeKind.Utc).AddTicks(5088),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 85",
-                            Price = 85f,
-                            Stock = 85,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bea020c4-a79d-4225-9406-767ec0bb2b9d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 0, 752, DateTimeKind.Utc).AddTicks(5091),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 86",
-                            Price = 86f,
-                            Stock = 86,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("04312a11-beb8-4c87-9817-9806e529e196"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 1, 752, DateTimeKind.Utc).AddTicks(5093),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 87",
-                            Price = 87f,
-                            Stock = 87,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4112c2ce-e054-4e9d-85db-4064dacd2b12"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 2, 752, DateTimeKind.Utc).AddTicks(5094),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 88",
-                            Price = 88f,
-                            Stock = 88,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a32ea384-65c8-437e-9b17-dfaa80652dc8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 3, 752, DateTimeKind.Utc).AddTicks(5096),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 89",
-                            Price = 89f,
-                            Stock = 89,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("16bf85c0-f326-4984-9fe5-b19502a077fa"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 4, 752, DateTimeKind.Utc).AddTicks(5097),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 90",
-                            Price = 90f,
-                            Stock = 90,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e90ba93f-a60b-48bc-accc-8dfe5f94deec"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 5, 752, DateTimeKind.Utc).AddTicks(5099),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 91",
-                            Price = 91f,
-                            Stock = 91,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("27ae275b-98b0-494b-b07a-ee6b664b9ad7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 6, 752, DateTimeKind.Utc).AddTicks(5101),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 92",
-                            Price = 92f,
-                            Stock = 92,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5255d3b6-3d27-45c1-852c-fa795809d8d3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 7, 752, DateTimeKind.Utc).AddTicks(5102),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 93",
-                            Price = 93f,
-                            Stock = 93,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a8c1ca59-9aa0-48e3-8cb6-6d0ad9ed75b1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 8, 752, DateTimeKind.Utc).AddTicks(5105),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 94",
-                            Price = 94f,
-                            Stock = 94,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4cb6f234-3320-4856-b6d1-129415a1778a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 9, 752, DateTimeKind.Utc).AddTicks(5107),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 95",
-                            Price = 95f,
-                            Stock = 95,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3e706efd-943b-4cf8-8df1-31c4773782ec"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 10, 752, DateTimeKind.Utc).AddTicks(5109),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 96",
-                            Price = 96f,
-                            Stock = 96,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a17de991-a6dd-48ca-9f34-856da8072853"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 11, 752, DateTimeKind.Utc).AddTicks(5110),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 97",
-                            Price = 97f,
-                            Stock = 97,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("181bf7ab-6091-43f8-a2b6-e7988793ecd1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 12, 752, DateTimeKind.Utc).AddTicks(5151),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 98",
-                            Price = 98f,
-                            Stock = 98,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0a6d0319-e588-4a4b-acac-6cf23206ebb9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 13, 752, DateTimeKind.Utc).AddTicks(5153),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 99",
-                            Price = 99f,
-                            Stock = 99,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("94dfe24e-ac36-4009-aa1e-a8f2a599d520"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 14, 752, DateTimeKind.Utc).AddTicks(5154),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 100",
-                            Price = 100f,
-                            Stock = 100,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("385f280e-c55f-471c-bdce-af57a0d6f1d1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 15, 752, DateTimeKind.Utc).AddTicks(5156),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 101",
-                            Price = 101f,
-                            Stock = 101,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("be2f7995-9bab-4ef9-8099-6bf0159132af"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 16, 752, DateTimeKind.Utc).AddTicks(5159),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 102",
-                            Price = 102f,
-                            Stock = 102,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bcbd0d30-7bd3-4763-9846-3cf277948c5d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 17, 752, DateTimeKind.Utc).AddTicks(5161),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 103",
-                            Price = 103f,
-                            Stock = 103,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("20102f29-1f1a-4bb3-bc07-d3d1ab263b40"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 18, 752, DateTimeKind.Utc).AddTicks(5163),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 104",
-                            Price = 104f,
-                            Stock = 104,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d4634301-b787-41b8-90f5-199ced7b063c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 19, 752, DateTimeKind.Utc).AddTicks(5164),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 105",
-                            Price = 105f,
-                            Stock = 105,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a97cce92-b2b8-45be-a0e1-ab11918ddf58"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 20, 752, DateTimeKind.Utc).AddTicks(5166),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 106",
-                            Price = 106f,
-                            Stock = 106,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("45b37ef0-0179-4ad5-a88e-2ccb9458359c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 21, 752, DateTimeKind.Utc).AddTicks(5167),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 107",
-                            Price = 107f,
-                            Stock = 107,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c0dedec1-e249-475c-a4c9-bafbd5a79451"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 22, 752, DateTimeKind.Utc).AddTicks(5169),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 108",
-                            Price = 108f,
-                            Stock = 108,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0859a4ff-2602-4d0f-8237-d9ac5162737e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 23, 752, DateTimeKind.Utc).AddTicks(5171),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 109",
-                            Price = 109f,
-                            Stock = 109,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("aaafbc39-a343-4bd2-a18b-d7a09cb899b8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 24, 752, DateTimeKind.Utc).AddTicks(5174),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 110",
-                            Price = 110f,
-                            Stock = 110,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d36c3c25-3949-46ac-a0ab-7cefb07c4e8b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 25, 752, DateTimeKind.Utc).AddTicks(5175),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 111",
-                            Price = 111f,
-                            Stock = 111,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("83d27ef1-4604-45ae-b2e4-8f619eb73c94"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 26, 752, DateTimeKind.Utc).AddTicks(5177),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 112",
-                            Price = 112f,
-                            Stock = 112,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a5cd3766-679d-4fc3-babc-a629b2120da8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 27, 752, DateTimeKind.Utc).AddTicks(5179),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 113",
-                            Price = 113f,
-                            Stock = 113,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("de7544ac-b76c-453d-9c1c-0f5768904539"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 28, 752, DateTimeKind.Utc).AddTicks(5180),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 114",
-                            Price = 114f,
-                            Stock = 114,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("292fcaae-e5e0-457a-8fdb-ee1f8824c82e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 29, 752, DateTimeKind.Utc).AddTicks(5182),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 115",
-                            Price = 115f,
-                            Stock = 115,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("62f165d5-e7d0-4798-ac9c-24f45d0d6f20"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 30, 752, DateTimeKind.Utc).AddTicks(5184),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 116",
-                            Price = 116f,
-                            Stock = 116,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5aa6f29a-4ffb-4bbe-bb10-c2a3d5f967f7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 31, 752, DateTimeKind.Utc).AddTicks(5185),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 117",
-                            Price = 117f,
-                            Stock = 117,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("70ce954c-0c3e-4967-958c-abecbefffc94"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 32, 752, DateTimeKind.Utc).AddTicks(5188),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 118",
-                            Price = 118f,
-                            Stock = 118,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("369a0910-7982-42d2-873c-83aeedbacaa6"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 33, 752, DateTimeKind.Utc).AddTicks(5190),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 119",
-                            Price = 119f,
-                            Stock = 119,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("570b8a2f-5f63-4973-9ba2-3bac71443c77"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 34, 752, DateTimeKind.Utc).AddTicks(5192),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 120",
-                            Price = 120f,
-                            Stock = 120,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b76bd2ea-8d1b-4116-9dcf-db373ee843e2"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 35, 752, DateTimeKind.Utc).AddTicks(5193),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 121",
-                            Price = 121f,
-                            Stock = 121,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("db740233-6d3f-4d36-816e-c43125969bff"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 36, 752, DateTimeKind.Utc).AddTicks(5195),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 122",
-                            Price = 122f,
-                            Stock = 122,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e4fafa24-5769-42cc-96ce-0b8597c2e46e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 37, 752, DateTimeKind.Utc).AddTicks(5196),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 123",
-                            Price = 123f,
-                            Stock = 123,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d165cb63-095d-42e9-bb5a-d7536e6a2b4e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 38, 752, DateTimeKind.Utc).AddTicks(5198),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 124",
-                            Price = 124f,
-                            Stock = 124,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("dd19c454-6465-48aa-bfc8-b9d18d95acfc"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 39, 752, DateTimeKind.Utc).AddTicks(5200),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 125",
-                            Price = 125f,
-                            Stock = 125,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("980b6eb0-8c6c-436e-aae5-a213609f9f0c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 40, 752, DateTimeKind.Utc).AddTicks(5203),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 126",
-                            Price = 126f,
-                            Stock = 126,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a35553b2-3029-467d-ab5d-32865d8cd632"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 41, 752, DateTimeKind.Utc).AddTicks(5205),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 127",
-                            Price = 127f,
-                            Stock = 127,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("13176b06-079e-4a9c-99cd-ed40c7355b7e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 42, 752, DateTimeKind.Utc).AddTicks(5206),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 128",
-                            Price = 128f,
-                            Stock = 128,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("19bc8fdb-1242-410d-aca8-211abcc0254c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 43, 752, DateTimeKind.Utc).AddTicks(5208),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 129",
-                            Price = 129f,
-                            Stock = 129,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ab8f6832-9d58-4154-b8d5-5365c460ca07"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 44, 752, DateTimeKind.Utc).AddTicks(5209),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 130",
-                            Price = 130f,
-                            Stock = 130,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1a0ed4a6-8b08-4a2f-9fda-ddfc8a1ac416"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 45, 752, DateTimeKind.Utc).AddTicks(5211),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 131",
-                            Price = 131f,
-                            Stock = 131,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("188e6752-9134-454a-b589-3b586713dc6f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 46, 752, DateTimeKind.Utc).AddTicks(5213),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 132",
-                            Price = 132f,
-                            Stock = 132,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("16a91a90-1efa-43bc-84c3-de7eda2b5f5d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 47, 752, DateTimeKind.Utc).AddTicks(5214),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 133",
-                            Price = 133f,
-                            Stock = 133,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("85f42138-6589-43ee-9dba-d7d0539fc864"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 48, 752, DateTimeKind.Utc).AddTicks(5217),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 134",
-                            Price = 134f,
-                            Stock = 134,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a6c18730-f231-4f9c-864b-60a650a1b835"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 49, 752, DateTimeKind.Utc).AddTicks(5219),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 135",
-                            Price = 135f,
-                            Stock = 135,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4b018d1b-282d-42da-ac10-a4a297a4db22"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 50, 752, DateTimeKind.Utc).AddTicks(5221),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 136",
-                            Price = 136f,
-                            Stock = 136,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("624e9de3-f5c0-45ac-94e6-5dd52081d5ea"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 51, 752, DateTimeKind.Utc).AddTicks(5222),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 137",
-                            Price = 137f,
-                            Stock = 137,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("da637cf4-3cf6-477c-98f2-b8bf42f86ff3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 52, 752, DateTimeKind.Utc).AddTicks(5224),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 138",
-                            Price = 138f,
-                            Stock = 138,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1ea2b5d1-e130-4385-93f6-3094afe792a5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 53, 752, DateTimeKind.Utc).AddTicks(5226),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 139",
-                            Price = 139f,
-                            Stock = 139,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b05e348b-f109-4d1f-8dba-4b897a753079"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 54, 752, DateTimeKind.Utc).AddTicks(5227),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 140",
-                            Price = 140f,
-                            Stock = 140,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("6a52a9a3-247c-4daa-acec-56cca62e8e97"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 55, 752, DateTimeKind.Utc).AddTicks(5229),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 141",
-                            Price = 141f,
-                            Stock = 141,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("882ec2e1-ca61-4afc-8eee-077a5009769b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 56, 752, DateTimeKind.Utc).AddTicks(5232),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 142",
-                            Price = 142f,
-                            Stock = 142,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a535fe3e-db48-4f43-baed-70b4a703f625"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 57, 752, DateTimeKind.Utc).AddTicks(5234),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 143",
-                            Price = 143f,
-                            Stock = 143,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c4fa2e5d-cdb7-4992-9c7e-cb46ebabdf6e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 58, 752, DateTimeKind.Utc).AddTicks(5235),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 144",
-                            Price = 144f,
-                            Stock = 144,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a1977831-7ce6-43d0-96f3-6242b95e6e1b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 55, 59, 752, DateTimeKind.Utc).AddTicks(5237),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 145",
-                            Price = 145f,
-                            Stock = 145,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a309c8fa-b85c-46cf-a1c6-4c4f66f70386"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 0, 752, DateTimeKind.Utc).AddTicks(5239),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 146",
-                            Price = 146f,
-                            Stock = 146,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("543d5c23-d35a-4bf2-aa38-4714e5827ac6"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 1, 752, DateTimeKind.Utc).AddTicks(5240),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 147",
-                            Price = 147f,
-                            Stock = 147,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8ea608a4-2ac9-4c35-befc-411ff73e613b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 2, 752, DateTimeKind.Utc).AddTicks(5242),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 148",
-                            Price = 148f,
-                            Stock = 148,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("118d1a36-1b61-47bd-a687-c26664eef127"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 3, 752, DateTimeKind.Utc).AddTicks(5243),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 149",
-                            Price = 149f,
-                            Stock = 149,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bf341310-d153-45f5-93ee-3e5968380ca2"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 4, 752, DateTimeKind.Utc).AddTicks(5247),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 150",
-                            Price = 150f,
-                            Stock = 150,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8fac44ac-3332-4c63-859d-dbe4d2db5be5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 5, 752, DateTimeKind.Utc).AddTicks(5248),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 151",
-                            Price = 151f,
-                            Stock = 151,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("80859da7-a841-4705-bce2-e18c87e2d904"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 6, 752, DateTimeKind.Utc).AddTicks(5250),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 152",
-                            Price = 152f,
-                            Stock = 152,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("20a2ada8-2dfb-4407-80fd-079d196a7a0a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 7, 752, DateTimeKind.Utc).AddTicks(5251),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 153",
-                            Price = 153f,
-                            Stock = 153,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ef58a141-4a73-4f76-8af7-b1d5d2c98e38"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 8, 752, DateTimeKind.Utc).AddTicks(5253),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 154",
-                            Price = 154f,
-                            Stock = 154,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4847c196-9e38-4fa2-8bdc-1e0c85b93ac9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 9, 752, DateTimeKind.Utc).AddTicks(5292),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 155",
-                            Price = 155f,
-                            Stock = 155,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("fac1b36b-ee2a-4b69-a882-4dd1e11fecb8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 10, 752, DateTimeKind.Utc).AddTicks(5294),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 156",
-                            Price = 156f,
-                            Stock = 156,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0cde1687-16c0-458e-9b72-f9ac8f3b034e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 11, 752, DateTimeKind.Utc).AddTicks(5296),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 157",
-                            Price = 157f,
-                            Stock = 157,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c831266f-6d60-4a95-b6d7-108d93ad3ed2"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 12, 752, DateTimeKind.Utc).AddTicks(5299),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 158",
-                            Price = 158f,
-                            Stock = 158,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2a2bcdc8-6645-4bca-8d7e-628e72fe6b23"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 13, 752, DateTimeKind.Utc).AddTicks(5301),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 159",
-                            Price = 159f,
-                            Stock = 159,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("26389e91-2876-4397-843f-68f4ac1bf88f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 14, 752, DateTimeKind.Utc).AddTicks(5302),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 160",
-                            Price = 160f,
-                            Stock = 160,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8ed1bfca-73b1-4f18-9113-4cc9abb8a4db"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 15, 752, DateTimeKind.Utc).AddTicks(5304),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 161",
-                            Price = 161f,
-                            Stock = 161,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3487590c-fbec-4c4f-bcee-0b6ab18fbcfa"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 16, 752, DateTimeKind.Utc).AddTicks(5305),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 162",
-                            Price = 162f,
-                            Stock = 162,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("41b220e2-b389-4b11-b3c1-137eeab45275"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 17, 752, DateTimeKind.Utc).AddTicks(5307),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 163",
-                            Price = 163f,
-                            Stock = 163,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("400c5608-280d-427e-9e33-92dec0e5dc5e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 18, 752, DateTimeKind.Utc).AddTicks(5309),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 164",
-                            Price = 164f,
-                            Stock = 164,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("43834f0a-0b67-4847-bfce-243ebbf34c68"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 19, 752, DateTimeKind.Utc).AddTicks(5310),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 165",
-                            Price = 165f,
-                            Stock = 165,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("33a90c8c-5e90-49e1-aba5-6e4ea3e8aa82"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 20, 752, DateTimeKind.Utc).AddTicks(5314),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 166",
-                            Price = 166f,
-                            Stock = 166,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5d9060cb-3b4a-4812-91e8-f6d2b920ad79"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 21, 752, DateTimeKind.Utc).AddTicks(5315),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 167",
-                            Price = 167f,
-                            Stock = 167,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4b8dafaf-9ff7-4c8a-a55f-ccd9a904a003"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 22, 752, DateTimeKind.Utc).AddTicks(5317),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 168",
-                            Price = 168f,
-                            Stock = 168,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5dfe6665-55cc-40e5-ab33-2f129d8a0ced"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 23, 752, DateTimeKind.Utc).AddTicks(5318),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 169",
-                            Price = 169f,
-                            Stock = 169,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0ee94554-89f3-4012-9b79-5376c0f2ede1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 24, 752, DateTimeKind.Utc).AddTicks(5320),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 170",
-                            Price = 170f,
-                            Stock = 170,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d5f294bd-ebbe-4d3f-bb3c-e5ac8537a161"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 25, 752, DateTimeKind.Utc).AddTicks(5322),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 171",
-                            Price = 171f,
-                            Stock = 171,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("47545e2a-7ecd-4b3b-95cb-feaeaadc02d5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 26, 752, DateTimeKind.Utc).AddTicks(5323),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 172",
-                            Price = 172f,
-                            Stock = 172,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("91baf564-14f7-4c69-891f-96b2b76c3a84"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 27, 752, DateTimeKind.Utc).AddTicks(5325),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 173",
-                            Price = 173f,
-                            Stock = 173,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5ee30341-449d-493d-a492-27417769e6d8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 28, 752, DateTimeKind.Utc).AddTicks(5328),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 174",
-                            Price = 174f,
-                            Stock = 174,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4ee0c79d-340b-4a9b-b93b-d3ec285b7862"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 29, 752, DateTimeKind.Utc).AddTicks(5330),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 175",
-                            Price = 175f,
-                            Stock = 175,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("30ba7e03-7b73-497f-9308-ef7c3fad9e3f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 30, 752, DateTimeKind.Utc).AddTicks(5331),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 176",
-                            Price = 176f,
-                            Stock = 176,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("dae70b6d-a458-4bde-916c-5d87048f03d3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 31, 752, DateTimeKind.Utc).AddTicks(5333),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 177",
-                            Price = 177f,
-                            Stock = 177,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("aa490b6b-8ba8-4818-89b8-1bef3177ef01"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 32, 752, DateTimeKind.Utc).AddTicks(5335),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 178",
-                            Price = 178f,
-                            Stock = 178,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("805b4cb8-28c6-4b30-a156-11590b3c492d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 33, 752, DateTimeKind.Utc).AddTicks(5336),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 179",
-                            Price = 179f,
-                            Stock = 179,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("23bb2f5b-833e-4ca0-957a-cb3d90733bd9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 34, 752, DateTimeKind.Utc).AddTicks(5338),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 180",
-                            Price = 180f,
-                            Stock = 180,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d8e53c25-0b2b-4f24-b266-d80f01af6900"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 35, 752, DateTimeKind.Utc).AddTicks(5339),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 181",
-                            Price = 181f,
-                            Stock = 181,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("89f240b7-3ca8-4a62-b408-21ff779a1fa7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 36, 752, DateTimeKind.Utc).AddTicks(5343),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 182",
-                            Price = 182f,
-                            Stock = 182,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c3ef2731-4c2b-4a01-926f-8f515168c361"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 37, 752, DateTimeKind.Utc).AddTicks(5344),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 183",
-                            Price = 183f,
-                            Stock = 183,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1cfb1915-efc7-45bd-8a78-02c5985f167d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 38, 752, DateTimeKind.Utc).AddTicks(5346),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 184",
-                            Price = 184f,
-                            Stock = 184,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bf5ac678-8761-4a22-a055-b154fe8f633d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 39, 752, DateTimeKind.Utc).AddTicks(5347),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 185",
-                            Price = 185f,
-                            Stock = 185,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8674657d-cc9d-4ecd-8563-37f5d99f2749"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 40, 752, DateTimeKind.Utc).AddTicks(5349),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 186",
-                            Price = 186f,
-                            Stock = 186,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9db2a465-b4b0-462c-9fab-8d7c4a976021"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 41, 752, DateTimeKind.Utc).AddTicks(5351),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 187",
-                            Price = 187f,
-                            Stock = 187,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9b623d96-c9ea-4286-9471-7159f4e61f12"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 42, 752, DateTimeKind.Utc).AddTicks(5352),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 188",
-                            Price = 188f,
-                            Stock = 188,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9a8c08da-5d11-4217-9b7a-3c7a3bfee12c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 43, 752, DateTimeKind.Utc).AddTicks(5354),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 189",
-                            Price = 189f,
-                            Stock = 189,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d9ef26d2-71d4-4590-9818-711a36d3876c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 44, 752, DateTimeKind.Utc).AddTicks(5357),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 190",
-                            Price = 190f,
-                            Stock = 190,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("f98cafb8-a16f-4e83-b03c-c812aa91b44f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 45, 752, DateTimeKind.Utc).AddTicks(5359),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 191",
-                            Price = 191f,
-                            Stock = 191,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("841187f0-121d-476a-a5da-4d3c192e9c66"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 46, 752, DateTimeKind.Utc).AddTicks(5360),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 192",
-                            Price = 192f,
-                            Stock = 192,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bc19de89-c066-4271-b71b-0cf13e0dfc10"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 47, 752, DateTimeKind.Utc).AddTicks(5362),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 193",
-                            Price = 193f,
-                            Stock = 193,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("fcd19aef-e312-4be1-9850-db1b109767bd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 48, 752, DateTimeKind.Utc).AddTicks(5364),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 194",
-                            Price = 194f,
-                            Stock = 194,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d36f8075-9023-4697-aceb-8f3dd7294203"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 49, 752, DateTimeKind.Utc).AddTicks(5365),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 195",
-                            Price = 195f,
-                            Stock = 195,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c493d7c6-1224-4c22-bfbb-7680f78240cf"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 50, 752, DateTimeKind.Utc).AddTicks(5367),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 196",
-                            Price = 196f,
-                            Stock = 196,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e7fc2c00-9e17-4e91-85f3-b339c2148067"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 51, 752, DateTimeKind.Utc).AddTicks(5368),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 197",
-                            Price = 197f,
-                            Stock = 197,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8f33c317-252b-4c6f-a379-ac3f2103f040"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 52, 752, DateTimeKind.Utc).AddTicks(5372),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 198",
-                            Price = 198f,
-                            Stock = 198,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2a096b28-22d5-48c4-a2a8-a52e25c23012"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 53, 752, DateTimeKind.Utc).AddTicks(5373),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 199",
-                            Price = 199f,
-                            Stock = 199,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("422f7f27-ecd6-417e-9381-c462bc90be8b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 54, 752, DateTimeKind.Utc).AddTicks(5375),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 200",
-                            Price = 200f,
-                            Stock = 200,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("54da77da-afd1-4d2f-9d87-94c3d09c2de9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 55, 752, DateTimeKind.Utc).AddTicks(5377),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 201",
-                            Price = 201f,
-                            Stock = 201,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3b6f5cb2-7aee-4bb2-985c-7fbea295d5e5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 56, 752, DateTimeKind.Utc).AddTicks(5378),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 202",
-                            Price = 202f,
-                            Stock = 202,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("959a4772-c63d-4237-ad2e-e24ea55b7f25"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 57, 752, DateTimeKind.Utc).AddTicks(5380),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 203",
-                            Price = 203f,
-                            Stock = 203,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("f28874c7-83ae-4466-922e-7dc6804045e3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 58, 752, DateTimeKind.Utc).AddTicks(5381),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 204",
-                            Price = 204f,
-                            Stock = 204,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("90134f69-f7bf-4edb-9040-3cff9de3bec1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 56, 59, 752, DateTimeKind.Utc).AddTicks(5383),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 205",
-                            Price = 205f,
-                            Stock = 205,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("bb68c06f-46e6-4677-b8f1-3dfed7bf15e4"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 0, 752, DateTimeKind.Utc).AddTicks(5386),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 206",
-                            Price = 206f,
-                            Stock = 206,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("08bd05ee-aa56-42a8-adc0-0a4ac44714bf"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 1, 752, DateTimeKind.Utc).AddTicks(5388),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 207",
-                            Price = 207f,
-                            Stock = 207,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("093dd07f-4f6f-46b3-aefb-7d89f888e1d1"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 2, 752, DateTimeKind.Utc).AddTicks(5389),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 208",
-                            Price = 208f,
-                            Stock = 208,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d10c63e4-01b2-44cc-8e85-d43c8bf0b70b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 3, 752, DateTimeKind.Utc).AddTicks(5391),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 209",
-                            Price = 209f,
-                            Stock = 209,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("cae59d49-1b0f-40d9-911b-6448735fe1ff"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 4, 752, DateTimeKind.Utc).AddTicks(5393),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 210",
-                            Price = 210f,
-                            Stock = 210,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("037d79bb-9e16-4a67-a8d6-b2ee1c622eea"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 5, 752, DateTimeKind.Utc).AddTicks(5419),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 211",
-                            Price = 211f,
-                            Stock = 211,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("717e8d9e-9251-4729-928b-62d952466bcd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 6, 752, DateTimeKind.Utc).AddTicks(5421),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 212",
-                            Price = 212f,
-                            Stock = 212,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b684d432-eae0-4c2b-8f9c-a43031b4fd02"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 7, 752, DateTimeKind.Utc).AddTicks(5423),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 213",
-                            Price = 213f,
-                            Stock = 213,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c4d936cd-f24b-4381-8c42-0142681e501d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 8, 752, DateTimeKind.Utc).AddTicks(5426),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 214",
-                            Price = 214f,
-                            Stock = 214,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ab2ae9f6-f9f9-446a-b0a5-f7c7332f8a39"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 9, 752, DateTimeKind.Utc).AddTicks(5428),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 215",
-                            Price = 215f,
-                            Stock = 215,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("51af9dd2-f25b-4c9c-8669-64db96310f58"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 10, 752, DateTimeKind.Utc).AddTicks(5429),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 216",
-                            Price = 216f,
-                            Stock = 216,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a0e76eb2-fd7d-46d5-987b-6cba4f0dcc01"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 11, 752, DateTimeKind.Utc).AddTicks(5431),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 217",
-                            Price = 217f,
-                            Stock = 217,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2a34d734-5aa2-40b7-827f-caaa78539718"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 12, 752, DateTimeKind.Utc).AddTicks(5432),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 218",
-                            Price = 218f,
-                            Stock = 218,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("28a272fc-af01-4ef6-8eb7-8ef7b8465e77"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 13, 752, DateTimeKind.Utc).AddTicks(5434),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 219",
-                            Price = 219f,
-                            Stock = 219,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0dfb22f5-1f30-48fd-a008-62e2f80eb92e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 14, 752, DateTimeKind.Utc).AddTicks(5436),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 220",
-                            Price = 220f,
-                            Stock = 220,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("280e09fb-5143-4b10-b27a-dc357aa8723f"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 15, 752, DateTimeKind.Utc).AddTicks(5437),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 221",
-                            Price = 221f,
-                            Stock = 221,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("5f2223ff-09a8-4acb-b86b-613ca235062c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 16, 752, DateTimeKind.Utc).AddTicks(5440),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 222",
-                            Price = 222f,
-                            Stock = 222,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4a758591-4d57-4a02-922a-8621cb7913cc"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 17, 752, DateTimeKind.Utc).AddTicks(5442),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 223",
-                            Price = 223f,
-                            Stock = 223,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3146c545-cf49-48a0-b1d5-d76c98ec66e5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 18, 752, DateTimeKind.Utc).AddTicks(5444),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 224",
-                            Price = 224f,
-                            Stock = 224,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("f70fa9df-4650-4727-8f27-7e67abfce02e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 19, 752, DateTimeKind.Utc).AddTicks(5445),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 225",
-                            Price = 225f,
-                            Stock = 225,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("7b763f0a-7322-47d6-b1e3-e79ce973333c"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 20, 752, DateTimeKind.Utc).AddTicks(5447),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 226",
-                            Price = 226f,
-                            Stock = 226,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("39b81ada-bffd-4caf-a3f7-44e22ad809a4"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 21, 752, DateTimeKind.Utc).AddTicks(5449),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 227",
-                            Price = 227f,
-                            Stock = 227,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("21c604dd-9b4d-41a0-b0e3-ff8ca330e834"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 22, 752, DateTimeKind.Utc).AddTicks(5450),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 228",
-                            Price = 228f,
-                            Stock = 228,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("76d7b96a-5275-46cb-a07f-3c796a3abc1e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 23, 752, DateTimeKind.Utc).AddTicks(5452),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 229",
-                            Price = 229f,
-                            Stock = 229,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("073400fe-acc1-462a-baaf-06396b6aacd7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 24, 752, DateTimeKind.Utc).AddTicks(5455),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 230",
-                            Price = 230f,
-                            Stock = 230,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("6f589cbc-e376-4866-9be6-b191fb88ad2a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 25, 752, DateTimeKind.Utc).AddTicks(5457),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 231",
-                            Price = 231f,
-                            Stock = 231,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c1112a75-761f-4fcd-95bf-733b4d1c26b0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 26, 752, DateTimeKind.Utc).AddTicks(5458),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 232",
-                            Price = 232f,
-                            Stock = 232,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("688340f0-3a44-490a-b60b-e94be4cd3b62"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 27, 752, DateTimeKind.Utc).AddTicks(5460),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 233",
-                            Price = 233f,
-                            Stock = 233,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2b859682-1ee7-4c83-b307-5b73c365e71b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 28, 752, DateTimeKind.Utc).AddTicks(5462),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 234",
-                            Price = 234f,
-                            Stock = 234,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("425b396d-c5e2-4c94-b6b3-8f5e3a0b599e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 29, 752, DateTimeKind.Utc).AddTicks(5463),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 235",
-                            Price = 235f,
-                            Stock = 235,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("908ebe81-aae6-4647-a304-9ee302dcc9d2"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 30, 752, DateTimeKind.Utc).AddTicks(5465),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 236",
-                            Price = 236f,
-                            Stock = 236,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c9bb65c0-d708-4e28-8be4-4105fc55ac02"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 31, 752, DateTimeKind.Utc).AddTicks(5467),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 237",
-                            Price = 237f,
-                            Stock = 237,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("55a18b73-655e-4df3-9e82-9534f61f2ed8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 32, 752, DateTimeKind.Utc).AddTicks(5470),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 238",
-                            Price = 238f,
-                            Stock = 238,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4476be83-9256-47d9-a3be-089e2659ab3a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 33, 752, DateTimeKind.Utc).AddTicks(5471),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 239",
-                            Price = 239f,
-                            Stock = 239,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("351f8cf1-0291-48bf-b674-8c33baa9f42b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 34, 752, DateTimeKind.Utc).AddTicks(5473),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 240",
-                            Price = 240f,
-                            Stock = 240,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("710f12ec-5d45-49ef-8f96-520a44ac28f9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 35, 752, DateTimeKind.Utc).AddTicks(5475),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 241",
-                            Price = 241f,
-                            Stock = 241,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8d0341e7-548a-46d6-882e-fab6b22f3bd0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 36, 752, DateTimeKind.Utc).AddTicks(5476),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 242",
-                            Price = 242f,
-                            Stock = 242,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1b181d17-e1ae-43eb-9e9b-57f9b1ebdcca"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 37, 752, DateTimeKind.Utc).AddTicks(5478),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 243",
-                            Price = 243f,
-                            Stock = 243,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("ef65640d-7523-4750-a15a-c7b218072b41"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 38, 752, DateTimeKind.Utc).AddTicks(5480),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 244",
-                            Price = 244f,
-                            Stock = 244,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("701350aa-41e5-4593-956c-2df3606c0e1d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 39, 752, DateTimeKind.Utc).AddTicks(5481),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 245",
-                            Price = 245f,
-                            Stock = 245,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("06c30251-75f2-4ad6-87b8-842b0a4459e0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 40, 752, DateTimeKind.Utc).AddTicks(5484),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 246",
-                            Price = 246f,
-                            Stock = 246,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("dea61a4f-70c6-4c58-8eea-9072d8fc73ea"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 41, 752, DateTimeKind.Utc).AddTicks(5486),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 247",
-                            Price = 247f,
-                            Stock = 247,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("db635281-69d9-4271-b7ec-d848a2c1f71b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 42, 752, DateTimeKind.Utc).AddTicks(5488),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 248",
-                            Price = 248f,
-                            Stock = 248,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("069215c3-641a-4d0c-8394-1981be93dd7d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 43, 752, DateTimeKind.Utc).AddTicks(5489),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 249",
-                            Price = 249f,
-                            Stock = 249,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9551f69f-f453-401e-addd-5854ea506878"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 44, 752, DateTimeKind.Utc).AddTicks(5491),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 250",
-                            Price = 250f,
-                            Stock = 250,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("2f5c2e3d-9d58-4c48-846e-7b5acd2e3a91"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 45, 752, DateTimeKind.Utc).AddTicks(5493),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 251",
-                            Price = 251f,
-                            Stock = 251,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("26a46dc9-9f22-4016-a4e2-2cf5be4cc094"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 46, 752, DateTimeKind.Utc).AddTicks(5494),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 252",
-                            Price = 252f,
-                            Stock = 252,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("cc2712d9-99fe-44e0-bc89-d9a1d169e200"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 47, 752, DateTimeKind.Utc).AddTicks(5496),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 253",
-                            Price = 253f,
-                            Stock = 253,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("cc354f07-2903-47aa-a814-a4050838e2d0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 48, 752, DateTimeKind.Utc).AddTicks(5499),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 254",
-                            Price = 254f,
-                            Stock = 254,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1f1f7917-cae0-44ec-a24f-0c94c51e49ff"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 49, 752, DateTimeKind.Utc).AddTicks(5501),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 255",
-                            Price = 255f,
-                            Stock = 255,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a3717177-6207-4649-9c58-f37eec732c1a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 50, 752, DateTimeKind.Utc).AddTicks(5502),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 256",
-                            Price = 256f,
-                            Stock = 256,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e1a65f43-8c74-48b7-8e1d-2215ea4c082b"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 51, 752, DateTimeKind.Utc).AddTicks(5504),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 257",
-                            Price = 257f,
-                            Stock = 257,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("6b7658ce-d156-46ff-816e-22793b883446"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 52, 752, DateTimeKind.Utc).AddTicks(5506),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 258",
-                            Price = 258f,
-                            Stock = 258,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("646f8e72-f9a9-4dfb-a0c7-4778ede1f425"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 53, 752, DateTimeKind.Utc).AddTicks(5507),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 259",
-                            Price = 259f,
-                            Stock = 259,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("34b68c98-9437-4b22-82c4-4a19fbe527da"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 54, 752, DateTimeKind.Utc).AddTicks(5509),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 260",
-                            Price = 260f,
-                            Stock = 260,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8cb011c4-25c5-4da4-8930-f871ba24d246"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 55, 752, DateTimeKind.Utc).AddTicks(5510),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 261",
-                            Price = 261f,
-                            Stock = 261,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3f0c652e-d9c0-4578-b5c4-4cf108f198c8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 56, 752, DateTimeKind.Utc).AddTicks(5514),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 262",
-                            Price = 262f,
-                            Stock = 262,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c60d8b38-5077-43e1-9819-8494326f7dc9"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 57, 752, DateTimeKind.Utc).AddTicks(5515),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 263",
-                            Price = 263f,
-                            Stock = 263,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0f125e49-eae7-4f88-bcee-4440c4fccd00"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 58, 752, DateTimeKind.Utc).AddTicks(5517),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 264",
-                            Price = 264f,
-                            Stock = 264,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("42f35bab-8a77-463c-a451-0e11e827adf7"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 57, 59, 752, DateTimeKind.Utc).AddTicks(5519),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 265",
-                            Price = 265f,
-                            Stock = 265,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("03dd034a-c48d-4b68-8708-a625a81d8992"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 0, 752, DateTimeKind.Utc).AddTicks(5520),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 266",
-                            Price = 266f,
-                            Stock = 266,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d2486869-4964-4a5b-91b9-a9827ab1ea99"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 1, 752, DateTimeKind.Utc).AddTicks(5522),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 267",
-                            Price = 267f,
-                            Stock = 267,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("92011647-09bc-4909-9a57-021012384e60"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 2, 752, DateTimeKind.Utc).AddTicks(5548),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 268",
-                            Price = 268f,
-                            Stock = 268,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("91f5f699-fb2b-49ad-b995-a19d5f117461"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 3, 752, DateTimeKind.Utc).AddTicks(5550),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 269",
-                            Price = 269f,
-                            Stock = 269,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d324b675-e839-40e9-9ef6-08f73375a825"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 4, 752, DateTimeKind.Utc).AddTicks(5553),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 270",
-                            Price = 270f,
-                            Stock = 270,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("8b942ea2-b1df-447e-96d6-beb1e465d1b3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 5, 752, DateTimeKind.Utc).AddTicks(5555),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 271",
-                            Price = 271f,
-                            Stock = 271,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("003b5592-78ae-4dbe-aa9e-258a1228921a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 6, 752, DateTimeKind.Utc).AddTicks(5556),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 272",
-                            Price = 272f,
-                            Stock = 272,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("274d563d-54c1-4b00-b4d5-d6f77cc81516"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 7, 752, DateTimeKind.Utc).AddTicks(5558),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 273",
-                            Price = 273f,
-                            Stock = 273,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("92f14550-d4cd-4e54-92e7-52265765901a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 8, 752, DateTimeKind.Utc).AddTicks(5559),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 274",
-                            Price = 274f,
-                            Stock = 274,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3cc7fda3-b6a8-421d-b27e-8f0bf2ec806d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 9, 752, DateTimeKind.Utc).AddTicks(5561),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 275",
-                            Price = 275f,
-                            Stock = 275,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9bfd5284-2973-4be3-aff5-472c1fda0164"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 10, 752, DateTimeKind.Utc).AddTicks(5563),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 276",
-                            Price = 276f,
-                            Stock = 276,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4615fdaa-aa95-4f05-ba86-b118e8c86093"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 11, 752, DateTimeKind.Utc).AddTicks(5564),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 277",
-                            Price = 277f,
-                            Stock = 277,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4dc23270-c150-497a-b1db-9f1561f0a1da"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 12, 752, DateTimeKind.Utc).AddTicks(5568),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 278",
-                            Price = 278f,
-                            Stock = 278,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3910dc66-69cc-4ce0-a424-4f63b3cfa116"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 13, 752, DateTimeKind.Utc).AddTicks(5569),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 279",
-                            Price = 279f,
-                            Stock = 279,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a26378bb-5a70-4c2c-b792-cc292363e8f2"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 14, 752, DateTimeKind.Utc).AddTicks(5571),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 280",
-                            Price = 280f,
-                            Stock = 280,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b54086de-1377-428a-b38d-32f4c2d41c71"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 15, 752, DateTimeKind.Utc).AddTicks(5572),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 281",
-                            Price = 281f,
-                            Stock = 281,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("db526fab-7ed5-40b6-9d18-d749feb651dd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 16, 752, DateTimeKind.Utc).AddTicks(5574),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 282",
-                            Price = 282f,
-                            Stock = 282,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a41db110-25e7-4491-bc3f-15e01f496c10"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 17, 752, DateTimeKind.Utc).AddTicks(5576),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 283",
-                            Price = 283f,
-                            Stock = 283,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0f7f95d0-8df5-47b2-ab75-a41a8ec1dccd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 18, 752, DateTimeKind.Utc).AddTicks(5577),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 284",
-                            Price = 284f,
-                            Stock = 284,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b7a07a9b-ea0c-4980-be27-b1b6187e44fa"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 19, 752, DateTimeKind.Utc).AddTicks(5579),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 285",
-                            Price = 285f,
-                            Stock = 285,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("06dce404-8399-4a58-abab-42079a126a82"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 20, 752, DateTimeKind.Utc).AddTicks(5582),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 286",
-                            Price = 286f,
-                            Stock = 286,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("47439d1d-1f67-4d92-a463-79fe542699cd"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 21, 752, DateTimeKind.Utc).AddTicks(5584),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 287",
-                            Price = 287f,
-                            Stock = 287,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("a9785e4b-1c1c-45f1-beb8-4b70e8a76c09"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 22, 752, DateTimeKind.Utc).AddTicks(5585),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 288",
-                            Price = 288f,
-                            Stock = 288,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("91453e70-342f-4a2f-a958-4fecb2a88a6d"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 23, 752, DateTimeKind.Utc).AddTicks(5587),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 289",
-                            Price = 289f,
-                            Stock = 289,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e0c5bf15-13de-4a0d-a121-5be0a572503a"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 24, 752, DateTimeKind.Utc).AddTicks(5589),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 290",
-                            Price = 290f,
-                            Stock = 290,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("b2fc5313-82d3-4152-9d9c-32fe1c7415e0"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 25, 752, DateTimeKind.Utc).AddTicks(5590),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 291",
-                            Price = 291f,
-                            Stock = 291,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("84348cfd-931d-420b-a5aa-e95499a1836e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 26, 752, DateTimeKind.Utc).AddTicks(5592),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 292",
-                            Price = 292f,
-                            Stock = 292,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("0c9a9338-ee6d-4fe9-a447-a051367bf616"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 27, 752, DateTimeKind.Utc).AddTicks(5594),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 293",
-                            Price = 293f,
-                            Stock = 293,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("26f6b66f-12fc-4def-8c86-b4d3fb952db3"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 28, 752, DateTimeKind.Utc).AddTicks(5597),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 294",
-                            Price = 294f,
-                            Stock = 294,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("43cb8e24-222d-4ca7-bdc8-26d73a2c85a8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 29, 752, DateTimeKind.Utc).AddTicks(5599),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 295",
-                            Price = 295f,
-                            Stock = 295,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c36f36a5-4254-4436-bf0d-e49417a42c96"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 30, 752, DateTimeKind.Utc).AddTicks(5601),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 296",
-                            Price = 296f,
-                            Stock = 296,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("9a386205-f4e9-4bdf-baca-39791e40d90e"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 31, 752, DateTimeKind.Utc).AddTicks(5602),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 297",
-                            Price = 297f,
-                            Stock = 297,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("1f889427-6174-49d7-a732-8d07492ff0b8"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 32, 752, DateTimeKind.Utc).AddTicks(5604),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 298",
-                            Price = 298f,
-                            Stock = 298,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("e73fad1d-6d54-4ccb-9abb-9b571cd871a5"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 33, 752, DateTimeKind.Utc).AddTicks(5606),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 299",
-                            Price = 299f,
-                            Stock = 299,
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("873e7043-fe49-45a1-83ed-5a5299e52024"),
-                            CreatedDate = new DateTime(2024, 12, 6, 17, 58, 34, 752, DateTimeKind.Utc).AddTicks(5607),
-                            Description = "A brief description of the product, highlighting its key features and benefits.",
-                            Name = "Product 300",
-                            Price = 300f,
-                            Stock = 300,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -3454,6 +1038,21 @@ namespace ETicaretAPI.Persistence.Migrations
                     b.HasDiscriminator().HasValue("ProductImageFile");
                 });
 
+            modelBuilder.Entity("AppRoleEndpoint", b =>
+                {
+                    b.HasOne("ETicaretAPI.Domain.Entities.Endpoint", null)
+                        .WithMany()
+                        .HasForeignKey("EndpointsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ETicaretAPI.Domain.Entities.Identity.AppRole", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Basket", b =>
                 {
                     b.HasOne("ETicaretAPI.Domain.Entities.Identity.AppUser", "User")
@@ -3493,6 +1092,17 @@ namespace ETicaretAPI.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("ETicaretAPI.Domain.Entities.Endpoint", b =>
+                {
+                    b.HasOne("ETicaretAPI.Domain.Entities.Menu", "Menu")
+                        .WithMany("Endpoints")
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Order", b =>
@@ -3583,6 +1193,11 @@ namespace ETicaretAPI.Persistence.Migrations
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Identity.AppUser", b =>
                 {
                     b.Navigation("Baskets");
+                });
+
+            modelBuilder.Entity("ETicaretAPI.Domain.Entities.Menu", b =>
+                {
+                    b.Navigation("Endpoints");
                 });
 
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.Order", b =>

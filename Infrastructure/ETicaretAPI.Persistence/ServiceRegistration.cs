@@ -35,7 +35,6 @@ namespace ETicaretAPI.Persistence
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
-                
             })
                 .AddEntityFrameworkStores<ETicaretAPIDbContext>()
                 .AddDefaultTokenProviders();
@@ -76,11 +75,17 @@ namespace ETicaretAPI.Persistence
             services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
             services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
 
-
-
             // User
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IRoleService, RoleService>();
+
+            // Authorization Endpoint
+            services.AddScoped<IAuthorizationEndpointService, AuthorizationEndpointService>();
+            services.AddScoped<IEndpointReadRepository, EndpointReadRepository>();
+            services.AddScoped<IEndpointWriteRepository, EndpointWriteRepository>();
+            services.AddScoped<IMenuReadRepository, MenuReadRepository>();
+            services.AddScoped<IMenuWriteRepository, MenuWriteRepository>();
 
             services.Configure<FormOptions>(options =>
             {
